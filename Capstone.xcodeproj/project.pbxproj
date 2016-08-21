@@ -54,14 +54,22 @@
 		4EB1ACA71D66BF7D00742261 /* Capstone */ = {
 			isa = PBXGroup;
 			children = (
+				4EC93FCD1D6A4AB800F850B9 /* Assets */,
 				4EB1ACA81D66BF7D00742261 /* AppDelegate.swift */,
 				4EB1ACAA1D66BF7D00742261 /* ViewController.swift */,
-				4EB1ACAC1D66BF7D00742261 /* Main.storyboard */,
-				4EB1ACAF1D66BF7D00742261 /* Assets.xcassets */,
-				4EB1ACB11D66BF7D00742261 /* LaunchScreen.storyboard */,
 				4EB1ACB41D66BF7D00742261 /* Info.plist */,
 			);
 			path = Capstone;
+			sourceTree = "<group>";
+		};
+		4EC93FCD1D6A4AB800F850B9 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				4EB1ACAC1D66BF7D00742261 /* Main.storyboard */,
+				4EB1ACB11D66BF7D00742261 /* LaunchScreen.storyboard */,
+				4EB1ACAF1D66BF7D00742261 /* Assets.xcassets */,
+			);
+			name = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,6 +295,7 @@
 				4EB1ACB91D66BF7D00742261 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

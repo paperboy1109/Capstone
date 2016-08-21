@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Calculator-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Capstone" customModuleProvider="target" sceneMemberID="viewController">
@@ -34,13 +34,13 @@
                             <constraint firstItem="Gbm-yJ-zGf" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Q8u-RN-Q7p"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="SOx-UQ-yRr"/>
+                    <tabBarItem key="tabBarItem" title="Calculator" image="notifications_btn" selectedImage="notifications_btn" id="SOx-UQ-yRr"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="340" y="-376"/>
         </scene>
-        <!--Item-->
+        <!--Utilities-->
         <scene sceneID="1P2-Lh-zBd">
             <objects>
                 <viewController id="5hk-iF-7ic" sceneMemberID="viewController">
@@ -69,13 +69,13 @@
                             <constraint firstItem="7OR-pj-kw2" firstAttribute="centerX" secondItem="7k6-WS-E5X" secondAttribute="centerX" id="RRm-pM-LF3"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="zK0-14-fvy"/>
+                    <tabBarItem key="tabBarItem" title="Utilities" image="hotitems" selectedImage="hotitems" id="zK0-14-fvy"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nxW-AC-6g6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1138" y="342"/>
         </scene>
-        <!--Item-->
+        <!--Random Numbers-->
         <scene sceneID="V4k-ej-jlo">
             <objects>
                 <viewController id="oAb-Z4-kg0" sceneMemberID="viewController">
@@ -104,7 +104,7 @@
                             <constraint firstItem="tok-hS-LVL" firstAttribute="centerX" secondItem="EXq-jT-Xh3" secondAttribute="centerX" id="Yyf-lW-M2q"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="nG6-re-kyB"/>
+                    <tabBarItem key="tabBarItem" title="Random Numbers" image="confirm_button" selectedImage="confirm_button" id="nG6-re-kyB"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7gi-hY-Duw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -130,4 +130,9 @@
             <point key="canvasLocation" x="340" y="342"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="confirm_button" width="45" height="30"/>
+        <image name="hotitems" width="15" height="21"/>
+        <image name="notifications_btn" width="15" height="28"/>
+    </resources>
 </document>

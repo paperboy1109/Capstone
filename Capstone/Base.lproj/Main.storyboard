@@ -288,8 +288,39 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="MmN-7p-39N">
+                                <rect key="frame" x="20" y="120" width="121" height="29"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUx-Pa-MWT">
+                                <rect key="frame" x="20" y="188" width="173" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="2Ge-TH-Mq6">
+                                <rect key="frame" x="18" y="271" width="229" height="31"/>
+                                <connections>
+                                    <action selector="sliderMoved:" destination="VFt-ja-Gv3" eventType="valueChanged" id="jNy-WD-YbA"/>
+                                </connections>
+                            </slider>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="5ds-Ih-o7W">
+                                <rect key="frame" x="20" y="343" width="94" height="29"/>
+                                <connections>
+                                    <action selector="stepperTapped:" destination="VFt-ja-Gv3" eventType="valueChanged" id="wJu-3S-n2d"/>
+                                </connections>
+                            </stepper>
                         </subviews>
+                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="lookupValueLabel" destination="yUx-Pa-MWT" id="ySg-Tb-HQZ"/>
+                        <outlet property="slider" destination="2Ge-TH-Mq6" id="msU-uV-5HG"/>
+                        <outlet property="stepper" destination="5ds-Ih-o7W" id="PrB-eY-B9e"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jgv-6K-RdI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

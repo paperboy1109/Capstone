@@ -208,7 +208,7 @@
         <!--Utilities-->
         <scene sceneID="1P2-Lh-zBd">
             <objects>
-                <viewController id="5hk-iF-7ic" sceneMemberID="viewController">
+                <viewController id="5hk-iF-7ic" customClass="UtilitiesVC" customModule="Capstone" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="z5A-LI-wAw"/>
                         <viewControllerLayoutGuide type="bottom" id="kK9-aF-TyY"/>
@@ -230,6 +230,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="5hk-iF-7ic" id="ZE6-DK-rKj"/>
+                                    <outlet property="delegate" destination="5hk-iF-7ic" id="2ot-md-R1g"/>
+                                </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YSV-fh-bmU">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
@@ -249,6 +253,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Utilities" image="hotitems" selectedImage="hotitems" id="zK0-14-fvy"/>
+                    <connections>
+                        <outlet property="statUtilityTableView" destination="hze-dA-XW7" id="FAd-P8-J68"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nxW-AC-6g6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -252,7 +252,8 @@
                             <constraint firstAttribute="trailing" secondItem="hze-dA-XW7" secondAttribute="trailing" id="wmY-uo-MWe"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Utilities" image="hotitems" selectedImage="hotitems" id="zK0-14-fvy"/>
+                    <tabBarItem key="tabBarItem" title="Utilities" image="hotitems" id="aec-cT-Hp6"/>
+                    <navigationItem key="navigationItem" id="wu3-E9-nUa"/>
                     <connections>
                         <outlet property="statUtilityTableView" destination="hze-dA-XW7" id="FAd-P8-J68"/>
                         <segue destination="VFt-ja-Gv3" kind="presentation" identifier="ToErsatzStatTables" id="ynm-aj-wni"/>
@@ -260,12 +261,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nxW-AC-6g6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1138" y="342"/>
+            <point key="canvasLocation" x="1284" y="342"/>
         </scene>
-        <!--View Controller-->
+        <!--Ersatz Stat TablesVC-->
         <scene sceneID="eWq-Mj-B5a">
             <objects>
-                <viewController id="VFt-ja-Gv3" sceneMemberID="viewController">
+                <viewController id="VFt-ja-Gv3" customClass="ErsatzStatTablesVC" customModule="Capstone" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ivK-cv-bCt"/>
                         <viewControllerLayoutGuide type="bottom" id="91i-pC-Cb2"/>
@@ -273,12 +274,26 @@
                     <view key="view" contentMode="scaleToFill" id="sE3-Dy-xWn">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DIc-rT-PHL">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="c1H-c8-mnY">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="5Uz-G4-8Fh">
+                                            <connections>
+                                                <segue destination="5hk-iF-7ic" kind="show" id="E6n-yx-jTL"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
                         <color key="backgroundColor" red="0.58345191997545731" green="1" blue="0.76295332800859694" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jgv-6K-RdI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1881" y="342"/>
+            <point key="canvasLocation" x="2027" y="342"/>
         </scene>
         <!--Random Numbers-->
         <scene sceneID="V4k-ej-jlo">
@@ -326,7 +341,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="yWa-c6-ect"/>
-                        <segue destination="5hk-iF-7ic" kind="relationship" relationship="viewControllers" id="nUP-mV-Ayf"/>
+                        <segue destination="5hk-iF-7ic" kind="relationship" relationship="viewControllers" id="B8U-gC-xGg"/>
                         <segue destination="oAb-Z4-kg0" kind="relationship" relationship="viewControllers" id="U0q-7P-Bb2"/>
                     </connections>
                 </tabBarController>
@@ -340,4 +355,7 @@
         <image name="hotitems" width="15" height="21"/>
         <image name="notifications_btn" width="15" height="28"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="E6n-yx-jTL"/>
+    </inferredMetricsTieBreakers>
 </document>

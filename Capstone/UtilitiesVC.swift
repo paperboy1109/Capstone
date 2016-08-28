@@ -18,7 +18,7 @@ class UtilitiesVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+                
         statUtilityTableView.delegate = self
     }
 

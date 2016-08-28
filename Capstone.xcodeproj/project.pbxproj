@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E27EB511D7294A80044B428 /* CalculatorNumberButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E27EB501D7294A80044B428 /* CalculatorNumberButton.swift */; };
 		4EB1ACA91D66BF7D00742261 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1ACA81D66BF7D00742261 /* AppDelegate.swift */; };
 		4EB1ACAB1D66BF7D00742261 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1ACAA1D66BF7D00742261 /* ViewController.swift */; };
 		4EB1ACAE1D66BF7D00742261 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EB1ACAC1D66BF7D00742261 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E27EB501D7294A80044B428 /* CalculatorNumberButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorNumberButton.swift; sourceTree = "<group>"; };
 		4EB1ACA51D66BF7D00742261 /* Capstone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Capstone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EB1ACA81D66BF7D00742261 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EB1ACAA1D66BF7D00742261 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +37,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E27EB4F1D7293500044B428 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4E27EB501D7294A80044B428 /* CalculatorNumberButton.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		4EB1AC9C1D66BF7D00742261 = {
 			isa = PBXGroup;
 			children = (
@@ -54,6 +64,7 @@
 		4EB1ACA71D66BF7D00742261 /* Capstone */ = {
 			isa = PBXGroup;
 			children = (
+				4E27EB4F1D7293500044B428 /* View */,
 				4EC93FCD1D6A4AB800F850B9 /* Assets */,
 				4EB1ACA81D66BF7D00742261 /* AppDelegate.swift */,
 				4EB1ACAA1D66BF7D00742261 /* ViewController.swift */,
@@ -146,6 +157,7 @@
 			files = (
 				4EB1ACAB1D66BF7D00742261 /* ViewController.swift in Sources */,
 				4EB1ACA91D66BF7D00742261 /* AppDelegate.swift in Sources */,
+				4E27EB511D7294A80044B428 /* CalculatorNumberButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

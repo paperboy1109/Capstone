@@ -79,6 +79,7 @@ extension UtilitiesVC: UITableViewDelegate, UITableViewDataSource {
         // let selectedTableCell = tableView.cellForRowAtIndexPath(tableView.indexPathForSelectedRow!)
         
         //TODO: Segue to the corresponding statistics tool
+        self.performSegueWithIdentifier("ToErsatzStatTables", sender: nil)
         
         
     }

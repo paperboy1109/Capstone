@@ -10,17 +10,22 @@ import UIKit
 
 class ErsatzStatTablesVC: UIViewController {
     
+    // MARK: - Properties
+    
+    
     // MARK: - Outlets
     
     @IBOutlet var lookupValueLabel: UILabel!
     @IBOutlet var slider: UISlider!
     @IBOutlet var stepper: UIStepper!
+    @IBOutlet var modeControl: UISegmentedControl!
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /* Configure the controls that will allow the user to input a value */
         slider.minimumValue = -6.0
         slider.maximumValue = 6.0
         slider.value = 0.0
@@ -29,6 +34,11 @@ class ErsatzStatTablesVC: UIViewController {
         stepper.maximumValue = Double(slider.maximumValue)
         stepper.value = Double(slider.value)
         stepper.stepValue = 0.01
+        
+        /* Configure the segmented control */
+        modeControl.setTitle(ErsatzStatTableOptions.pVal.rawValue, forSegmentAtIndex: ErsatzStatTableOptions.allOptions.indexOf(ErsatzStatTableOptions.pVal)!)
+        modeControl.setTitle(ErsatzStatTableOptions.zScore.rawValue, forSegmentAtIndex: ErsatzStatTableOptions.allOptions.indexOf(ErsatzStatTableOptions.zScore)!)
+        modeControl.setTitle(ErsatzStatTableOptions.tScore.rawValue, forSegmentAtIndex: ErsatzStatTableOptions.allOptions.indexOf(ErsatzStatTableOptions.tScore)!)
         
         
         
@@ -61,7 +71,7 @@ class ErsatzStatTablesVC: UIViewController {
     
     
     
-    @IBAction func stepperTapped(sender: UIStepper) {        
+    @IBAction func stepperTapped(sender: UIStepper) {
         slider.value = Float(sender.value)
         lookupValueLabel.text = "\(slider.value)"
     }

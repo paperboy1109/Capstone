@@ -289,10 +289,11 @@
                                 </items>
                             </navigationBar>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="MmN-7p-39N">
-                                <rect key="frame" x="20" y="120" width="121" height="29"/>
+                                <rect key="frame" x="20" y="120" width="248" height="29"/>
                                 <segments>
                                     <segment title="First"/>
                                     <segment title="Second"/>
+                                    <segment title="Third"/>
                                 </segments>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUx-Pa-MWT">
@@ -318,6 +319,7 @@
                     </view>
                     <connections>
                         <outlet property="lookupValueLabel" destination="yUx-Pa-MWT" id="ySg-Tb-HQZ"/>
+                        <outlet property="modeControl" destination="MmN-7p-39N" id="04o-Gn-1TE"/>
                         <outlet property="slider" destination="2Ge-TH-Mq6" id="msU-uV-5HG"/>
                         <outlet property="stepper" destination="5ds-Ih-o7W" id="PrB-eY-B9e"/>
                     </connections>

@@ -295,6 +295,9 @@
                                     <segment title="Second"/>
                                     <segment title="Third"/>
                                 </segments>
+                                <connections>
+                                    <action selector="modeChangedByTap:" destination="VFt-ja-Gv3" eventType="valueChanged" id="XXy-H9-CUt"/>
+                                </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUx-Pa-MWT">
                                 <rect key="frame" x="20" y="188" width="173" height="21"/>

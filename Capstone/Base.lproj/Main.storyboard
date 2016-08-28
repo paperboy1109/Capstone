@@ -252,7 +252,7 @@
                             <constraint firstAttribute="trailing" secondItem="hze-dA-XW7" secondAttribute="trailing" id="wmY-uo-MWe"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Utilities" image="hotitems" id="aec-cT-Hp6"/>
+                    <tabBarItem key="tabBarItem" title="Utilities" image="hotitems" selectedImage="hotitems" id="aec-cT-Hp6"/>
                     <navigationItem key="navigationItem" id="wu3-E9-nUa"/>
                     <connections>
                         <outlet property="statUtilityTableView" destination="hze-dA-XW7" id="FAd-P8-J68"/>
@@ -280,15 +280,15 @@
                                 <items>
                                     <navigationItem title="Title" id="c1H-c8-mnY">
                                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="5Uz-G4-8Fh">
+                                            <color key="tintColor" red="0.58345192000000001" green="1" blue="0.76295332800000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
-                                                <segue destination="5hk-iF-7ic" kind="show" id="E6n-yx-jTL"/>
+                                                <action selector="doneTapped:" destination="VFt-ja-Gv3" id="xhB-DX-Ofm"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" red="0.58345191997545731" green="1" blue="0.76295332800859694" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jgv-6K-RdI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -355,7 +355,4 @@
         <image name="hotitems" width="15" height="21"/>
         <image name="notifications_btn" width="15" height="28"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="E6n-yx-jTL"/>
-    </inferredMetricsTieBreakers>
 </document>

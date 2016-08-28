@@ -9,6 +9,11 @@
 import UIKit
 
 class ErsatzStatTablesVC: UIViewController {
+    
+    // MARK: - Outlets
+    
+    
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,5 +35,18 @@ class ErsatzStatTablesVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: - Actions
+    @IBAction func doneTapped(sender: AnyObject) {
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 
+}
+
+extension ErsatzStatTablesVC {
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
 }

@@ -14,6 +14,8 @@ class ErsatzStatTablesVC: UIViewController {
     
     var currentMode: ErsatzStatTableOptions!
     
+    let calculationHelper = StatisticsFunctions()
+    
     // MARK: - Outlets
     
     @IBOutlet var lookupValueLabel: UILabel!
@@ -42,30 +44,6 @@ class ErsatzStatTablesVC: UIViewController {
         updateInputControlsByMode(currentMode)
         
         answerValueLabel.text = ""
-        
-        
-        
-//        switch currentMode! {
-//        case .pVal :
-//            slider.minimumValue = 0.0
-//            slider.maximumValue = 1.0
-//        case .tScore, .zScore:
-//            print("The current mode is pval")
-//            slider.minimumValue = -6.0
-//            slider.maximumValue = 6.0
-//        }
-//        
-//        /* Configure the controls that will allow the user to input a value */
-////        slider.minimumValue = -6.0
-////        slider.maximumValue = 6.0
-////        slider.value = 0.0
-//        
-//        stepper.minimumValue = Double(slider.minimumValue)
-//        stepper.maximumValue = Double(slider.maximumValue)
-//        stepper.value = Double(slider.value)
-//        stepper.stepValue = 0.01
-//        
-//        lookupValueLabel.text = "\(slider.value)"
         
         
     }
@@ -113,7 +91,13 @@ class ErsatzStatTablesVC: UIViewController {
         print("The current mode is: ")
         print(self.currentMode.rawValue)
         
-        answerValueLabel.text = "\(slider.value)"
+        if self.currentMode == .zScore {
+            answerValueLabel.text = "\(calculationHelper.swift_pnorm(Double(slider.value), mean: 0.0, standardDev: 1.0, n: 500))"
+        } else {
+            // TODO: Calculate a p-value or t-score
+            answerValueLabel.text = "\(slider.value)"
+        }
+        
     }
     
     // MARK: - Helpers

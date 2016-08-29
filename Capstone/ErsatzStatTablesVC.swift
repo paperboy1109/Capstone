@@ -17,9 +17,12 @@ class ErsatzStatTablesVC: UIViewController {
     // MARK: - Outlets
     
     @IBOutlet var lookupValueLabel: UILabel!
+    @IBOutlet var answerValueLabel: UILabel!
+    
     @IBOutlet var slider: UISlider!
     @IBOutlet var stepper: UIStepper!
     @IBOutlet var modeControl: UISegmentedControl!
+    @IBOutlet var calculateButton: UIButton!
     
     // MARK: - Lifecycle
     
@@ -34,8 +37,11 @@ class ErsatzStatTablesVC: UIViewController {
         /* Configure the step size for the stepper control */
         stepper.stepValue = 0.01
         
+        /* Set the UI according to the current mode */
         currentMode = ErsatzStatTableOptions.allOptions[modeControl.selectedSegmentIndex]
         updateInputControlsByMode(currentMode)
+        
+        answerValueLabel.text = ""
         
         
         
@@ -82,6 +88,7 @@ class ErsatzStatTablesVC: UIViewController {
     
     
     @IBAction func sliderMoved(sender: UISlider) {
+        answerValueLabel.text = ""
         lookupValueLabel.text = "\(sender.value)"
         stepper.value = Double(sender.value)
     }
@@ -89,21 +96,30 @@ class ErsatzStatTablesVC: UIViewController {
     
     
     @IBAction func stepperTapped(sender: UIStepper) {
+        answerValueLabel.text = ""
         slider.value = Float(sender.value)
         lookupValueLabel.text = "\(slider.value)"
     }
     
     
     @IBAction func modeChangedByTap(sender: UISegmentedControl) {
-        print(sender)
-        print(ErsatzStatTableOptions.allOptions[sender.selectedSegmentIndex])
         
         self.currentMode = ErsatzStatTableOptions.allOptions[sender.selectedSegmentIndex]
         updateInputControlsByMode(self.currentMode)
     }
     
+    @IBAction func calculateTapped(sender: AnyObject) {
+        
+        print("The current mode is: ")
+        print(self.currentMode.rawValue)
+        
+        answerValueLabel.text = "\(slider.value)"
+    }
+    
     // MARK: - Helpers
     func updateInputControlsByMode(updatedMode: ErsatzStatTableOptions!) {
+        
+        answerValueLabel.text = ""
         
         switch updatedMode! {
         case .pVal :
@@ -111,7 +127,6 @@ class ErsatzStatTablesVC: UIViewController {
             slider.maximumValue = 1.0
             slider.value = 0.5
         case .tScore, .zScore:
-            print("The current mode is pval")
             slider.minimumValue = -6.0
             slider.maximumValue = 6.0
             slider.value = 0.0
@@ -122,6 +137,8 @@ class ErsatzStatTablesVC: UIViewController {
         stepper.value = Double(slider.value)
         
         lookupValueLabel.text = "\(slider.value)"
+        // calculateButton.titleLabel = "\(updatedMode.rawValue)"
+        calculateButton.setTitle("Calculate \(updatedMode.rawValue)", forState: .Normal)
         
     }
     

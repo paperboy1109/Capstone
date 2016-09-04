@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import NumberMorphView
 
 class CalculatorVC: UIViewController {
+    
+    // MARK: - Outlets
+    
+    @IBOutlet var resultView: NumberMorphView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        resultView.currentDigit = 0
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,6 +36,13 @@ class CalculatorVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: - Actions
+    
+    @IBAction func numberTapped(sender: CalculatorNumberButton) {
+        
+        resultView.nextDigit = sender.tag
+    }
 
 }
 

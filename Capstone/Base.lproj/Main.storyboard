@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -40,20 +41,40 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VoQ-Dm-mCW">
                                 <rect key="frame" x="8" y="0.0" width="584" height="118"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9l-eY-f4e">
-                                        <rect key="frame" x="0.0" y="0.0" width="584" height="118"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Vgd-u4-gUK" customClass="NumberMorphView" customModule="NumberMorphView">
+                                        <rect key="frame" x="512" y="0.0" width="64" height="118"/>
+                                        <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Vgd-u4-gUK" secondAttribute="height" multiplier="13:24" id="1Cg-5J-oq2"/>
+                                            <constraint firstAttribute="width" constant="234" id="4M0-At-TuW"/>
+                                            <constraint firstAttribute="width" constant="240" id="G7b-WM-mDT"/>
+                                            <constraint firstAttribute="height" constant="128" id="dqW-jA-7zt"/>
+                                            <constraint firstAttribute="height" constant="432" id="gL8-mv-WHg"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="4M0-At-TuW"/>
+                                                <exclude reference="G7b-WM-mDT"/>
+                                                <exclude reference="dqW-jA-7zt"/>
+                                                <exclude reference="gL8-mv-WHg"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="R9l-eY-f4e" secondAttribute="trailing" id="Bvx-d2-ecp"/>
-                                    <constraint firstAttribute="bottom" secondItem="R9l-eY-f4e" secondAttribute="bottom" id="O6v-Bh-53i"/>
-                                    <constraint firstItem="R9l-eY-f4e" firstAttribute="leading" secondItem="VoQ-Dm-mCW" secondAttribute="leading" id="l7E-Qb-ztc"/>
-                                    <constraint firstItem="R9l-eY-f4e" firstAttribute="top" secondItem="VoQ-Dm-mCW" secondAttribute="top" id="ytJ-5u-33w"/>
+                                    <constraint firstItem="Vgd-u4-gUK" firstAttribute="height" secondItem="VoQ-Dm-mCW" secondAttribute="height" id="UXr-5b-xkp"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vgd-u4-gUK" secondAttribute="trailing" constant="8" id="b7l-fQ-Zrf"/>
+                                    <constraint firstItem="Vgd-u4-gUK" firstAttribute="leading" secondItem="VoQ-Dm-mCW" secondAttribute="leading" constant="8" id="qBS-Ma-m1E"/>
+                                    <constraint firstAttribute="bottom" secondItem="Vgd-u4-gUK" secondAttribute="bottom" constant="8" id="sdE-KJ-ZRr"/>
+                                    <constraint firstItem="Vgd-u4-gUK" firstAttribute="top" secondItem="VoQ-Dm-mCW" secondAttribute="top" id="uc8-PL-9GE"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="qBS-Ma-m1E"/>
+                                        <exclude reference="sdE-KJ-ZRr"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQL-Fk-JOI">
                                 <rect key="frame" x="8" y="128" width="584" height="415"/>
@@ -87,17 +108,26 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="SmM-x4-GY5">
                                                 <rect key="frame" x="0.0" y="83" width="584" height="83"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WP8-Jd-ZbQ" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
+                                                    <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WP8-Jd-ZbQ" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="146" height="83"/>
                                                         <state key="normal" title="7"/>
+                                                        <connections>
+                                                            <action selector="numberTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vjH-XG-gzf"/>
+                                                        </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BMG-0d-3Ox" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
+                                                    <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BMG-0d-3Ox" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
                                                         <rect key="frame" x="146" y="0.0" width="146" height="83"/>
                                                         <state key="normal" title="8"/>
+                                                        <connections>
+                                                            <action selector="numberTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="InY-Ey-C4S"/>
+                                                        </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Zm-CJ-mkl" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
+                                                    <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Zm-CJ-mkl" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
                                                         <rect key="frame" x="292" y="0.0" width="146" height="83"/>
                                                         <state key="normal" title="9"/>
+                                                        <connections>
+                                                            <action selector="numberTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f9x-Tr-XF5"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qJN-k2-GrU">
                                                         <rect key="frame" x="438" y="0.0" width="146" height="83"/>
@@ -109,17 +139,26 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="fSu-hT-whd">
                                                 <rect key="frame" x="0.0" y="166" width="584" height="83"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y91-C7-RzH" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
+                                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y91-C7-RzH" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="146" height="83"/>
                                                         <state key="normal" title="4"/>
+                                                        <connections>
+                                                            <action selector="numberTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ven-kE-WzM"/>
+                                                        </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBO-PL-sCg" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
+                                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBO-PL-sCg" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
                                                         <rect key="frame" x="146" y="0.0" width="146" height="83"/>
                                                         <state key="normal" title="5"/>
+                                                        <connections>
+                                                            <action selector="numberTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="txu-mL-Stm"/>
+                                                        </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PdE-m4-aNf" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
+                                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PdE-m4-aNf" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
                                                         <rect key="frame" x="292" y="0.0" width="146" height="83"/>
                                                         <state key="normal" title="6"/>
+                                                        <connections>
+                                                            <action selector="numberTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pxo-C6-2Bw"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHi-7j-jhr">
                                                         <rect key="frame" x="438" y="0.0" width="146" height="83"/>
@@ -131,17 +170,26 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="h7V-ta-aEw">
                                                 <rect key="frame" x="0.0" y="249" width="584" height="83"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rP3-Ux-LzX" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
+                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rP3-Ux-LzX" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="146" height="83"/>
                                                         <state key="normal" title="1"/>
+                                                        <connections>
+                                                            <action selector="numberTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DGO-Sv-YoM"/>
+                                                        </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TRN-jH-TPu" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
+                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TRN-jH-TPu" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
                                                         <rect key="frame" x="146" y="0.0" width="146" height="83"/>
                                                         <state key="normal" title="2"/>
+                                                        <connections>
+                                                            <action selector="numberTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="W09-Du-rk6"/>
+                                                        </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hyq-Ne-j5k" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
+                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hyq-Ne-j5k" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
                                                         <rect key="frame" x="292" y="0.0" width="146" height="83"/>
                                                         <state key="normal" title="3"/>
+                                                        <connections>
+                                                            <action selector="numberTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xf0-2C-5sa"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5b-Zq-fZk">
                                                         <rect key="frame" x="438" y="0.0" width="146" height="83"/>
@@ -156,6 +204,9 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qk-6w-Gta" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="292" height="83"/>
                                                         <state key="normal" title="0"/>
+                                                        <connections>
+                                                            <action selector="numberTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6cc-dW-FlV"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hqu-0H-Lgx" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
                                                         <rect key="frame" x="292" y="0.0" width="146" height="83"/>
@@ -219,8 +270,27 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Calculator" image="notifications_btn" selectedImage="notifications_btn" id="SOx-UQ-yRr"/>
+                    <connections>
+                        <outlet property="resultView" destination="Vgd-u4-gUK" id="nQh-ai-jAy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Ek2-SA-wWf" customClass="NumberMorphView" customModule="NumberMorphView">
+                    <rect key="frame" x="0.0" y="0.0" width="234" height="432"/>
+                    <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="234" id="G9N-2L-nsN"/>
+                        <constraint firstAttribute="height" constant="128" id="Qk8-sd-Grb"/>
+                        <constraint firstAttribute="height" constant="432" id="dj2-V3-sPt"/>
+                        <constraint firstAttribute="width" constant="240" id="vxD-6c-MjI"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="vxD-6c-MjI"/>
+                            <exclude reference="Qk8-sd-Grb"/>
+                        </mask>
+                    </variation>
+                </view>
             </objects>
             <point key="canvasLocation" x="1284" y="-382"/>
         </scene>
@@ -321,7 +391,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUx-Pa-MWT">
                                 <rect key="frame" x="20" y="188" width="173" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="2Ge-TH-Mq6">
@@ -340,7 +410,7 @@
                                 <rect key="frame" x="20" y="480" width="192" height="21"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ais-Ta-5kz">
@@ -385,7 +455,7 @@
                                     <constraint firstAttribute="width" constant="216" id="yNK-1E-Y6r"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>

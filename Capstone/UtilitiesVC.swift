@@ -20,6 +20,10 @@ class UtilitiesVC: UIViewController {
         super.viewDidLoad()
                 
         statUtilityTableView.delegate = self
+        
+        /* Have Auto Layout determine the height of the table view cells */
+        statUtilityTableView.rowHeight = UITableViewAutomaticDimension
+        statUtilityTableView.estimatedRowHeight = 64
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,31 +52,27 @@ extension UtilitiesVC: UITableViewDelegate, UITableViewDataSource {
         
         let cellReuseIdentifier = "StatUtilityCell"
         
-        if var cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell! {
+        if let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! StatUtilitiesTableViewCell? {
             
-            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: cellReuseIdentifier)
-            
-            cell.textLabel!.text = "textLabel"
-            
-            cell.detailTextLabel!.text = "detailTextLabel"
+            cell.titleLabel.text = "Calculate ALL the p-values!"
             
             return cell
             
         } else {
-            /* Make updates here when working with a custom cell */
+            
             return UITableViewCell()
         }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 3
         
     }
     
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 68
-    }
+//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        return 68
+//    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         

@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -309,8 +310,8 @@
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="vxD-6c-MjI"/>
                             <exclude reference="Qk8-sd-Grb"/>
+                            <exclude reference="vxD-6c-MjI"/>
                         </mask>
                     </variation>
                 </view>
@@ -333,13 +334,30 @@
                                 <rect key="frame" x="0.0" y="133" width="600" height="447"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StatUtilityCell" id="nbM-ey-QM2">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StatUtilityCell" id="nbM-ey-QM2" customClass="StatUtilitiesTableViewCell" customModule="Capstone" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nbM-ey-QM2" id="NCs-v2-ksX">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uTc-Lo-Mlw">
+                                                    <rect key="frame" x="16" y="8" width="568" height="27"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="uTc-Lo-Mlw" firstAttribute="leading" secondItem="NCs-v2-ksX" secondAttribute="leadingMargin" constant="8" id="2SZ-cc-e9V"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="uTc-Lo-Mlw" secondAttribute="bottom" id="KEU-3G-lUY"/>
+                                                <constraint firstItem="uTc-Lo-Mlw" firstAttribute="top" secondItem="NCs-v2-ksX" secondAttribute="topMargin" id="o7A-Da-WY2"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="uTc-Lo-Mlw" secondAttribute="trailing" constant="8" id="rb4-uj-lV0"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="uTc-Lo-Mlw" id="uzL-dp-aii"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

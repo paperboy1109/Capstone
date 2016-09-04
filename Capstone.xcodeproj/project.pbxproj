@@ -14,6 +14,7 @@
 		4E27EB5D1D735C3E0044B428 /* CalculatorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E27EB5C1D735C3E0044B428 /* CalculatorVC.swift */; };
 		4E27EB651D7397020044B428 /* ErsatzStatTableOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E27EB641D7397020044B428 /* ErsatzStatTableOptions.swift */; };
 		4E6CB3761D7C662B00C12F23 /* HomeSceneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6CB3751D7C662B00C12F23 /* HomeSceneVC.swift */; };
+		4E6CB37A1D7CD2FD00C12F23 /* StatUtilitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6CB3791D7CD2FD00C12F23 /* StatUtilitiesTableViewCell.swift */; };
 		4E9D69361D748169002021E3 /* StatisticsFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9D69351D748169002021E3 /* StatisticsFunctions.swift */; };
 		4EB1ACA91D66BF7D00742261 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1ACA81D66BF7D00742261 /* AppDelegate.swift */; };
 		4EB1ACAB1D66BF7D00742261 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1ACAA1D66BF7D00742261 /* ViewController.swift */; };
@@ -30,6 +31,7 @@
 		4E27EB5C1D735C3E0044B428 /* CalculatorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorVC.swift; sourceTree = "<group>"; };
 		4E27EB641D7397020044B428 /* ErsatzStatTableOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErsatzStatTableOptions.swift; sourceTree = "<group>"; };
 		4E6CB3751D7C662B00C12F23 /* HomeSceneVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSceneVC.swift; sourceTree = "<group>"; };
+		4E6CB3791D7CD2FD00C12F23 /* StatUtilitiesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatUtilitiesTableViewCell.swift; sourceTree = "<group>"; };
 		4E9D69351D748169002021E3 /* StatisticsFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsFunctions.swift; sourceTree = "<group>"; };
 		4EB1ACA51D66BF7D00742261 /* Capstone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Capstone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EB1ACA81D66BF7D00742261 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				4E27EB501D7294A80044B428 /* CalculatorNumberButton.swift */,
+				4E6CB3791D7CD2FD00C12F23 /* StatUtilitiesTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E6CB37A1D7CD2FD00C12F23 /* StatUtilitiesTableViewCell.swift in Sources */,
 				4E9D69361D748169002021E3 /* StatisticsFunctions.swift in Sources */,
 				4E6CB3761D7C662B00C12F23 /* HomeSceneVC.swift in Sources */,
 				4EB1ACAB1D66BF7D00742261 /* ViewController.swift in Sources */,

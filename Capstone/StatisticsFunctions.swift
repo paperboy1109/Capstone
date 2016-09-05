@@ -13,7 +13,7 @@ public class StatisticsFunctions {
     
     // MARK: - Helpers
     
-    func swift_dorm(x: Double, mean: Double, standardDev: Double) -> Double {
+    static func swift_dorm(x: Double, mean: Double, standardDev: Double) -> Double {
         
         let variance = standardDev*standardDev
         let coef = ( 1/(sqrt(2.0 * M_PI * variance)) )
@@ -23,12 +23,12 @@ public class StatisticsFunctions {
     }
     
     
-    func swift_standardizedScore(x: Double, mean: Double, standardDev: Double) -> Double {
+    static func swift_standardizedScore(x: Double, mean: Double, standardDev: Double) -> Double {
         
         return (x - mean) / standardDev
     }
     
-    func simpsonCoefsArray(k: Int) -> [Double] {
+    static func simpsonCoefsArray(k: Int) -> [Double] {
         
         var coefArray: [Double] = [1.0]
         
@@ -50,7 +50,7 @@ public class StatisticsFunctions {
     }
     
     
-    func swift_pnorm(x: Double, mean: Double, standardDev: Double, n: Int) -> Double {
+    static func swift_pnorm(x: Double, mean: Double, standardDev: Double, n: Int) -> Double {
                 
         let zScore = swift_standardizedScore(x, mean: mean, standardDev: standardDev)
         let a, b : Double

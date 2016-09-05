@@ -28,7 +28,7 @@ class HomeSceneVC: UIViewController {
         let xValuesAsStrings = xValues.map { String(format: "%.2f", $0) }
         var yValues: [ChartDataEntry] = []
         for i in 0..<xValues.count {
-            let dataEntry = ChartDataEntry(value: calculationHelper.swift_dorm(xValues[i], mean: 0, standardDev: 1), xIndex: i)
+            let dataEntry = ChartDataEntry(value: StatisticsFunctions.swift_dorm(xValues[i], mean: 0, standardDev: 1), xIndex: i)
             yValues.append(dataEntry)
         }
         

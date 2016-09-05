@@ -10,6 +10,10 @@ import UIKit
 
 class UtilitiesVC: UIViewController {
     
+    // MARK: - Properties
+    
+    let statUtilities = StatUtility.getUtilitiesFromBundle()
+    
     // MARK: - Outlets
     
     @IBOutlet var statUtilityTableView: UITableView!
@@ -18,6 +22,10 @@ class UtilitiesVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        for item in statUtilities {
+            print(item)
+        }
                 
         statUtilityTableView.delegate = self
         
@@ -52,9 +60,11 @@ extension UtilitiesVC: UITableViewDelegate, UITableViewDataSource {
         
         let cellReuseIdentifier = "StatUtilityCell"
         
+        let utilityForCell = statUtilities[indexPath.row]
+        
         if let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! StatUtilitiesTableViewCell? {
             
-            cell.titleLabel.text = "Calculate ALL the p-values!"
+            cell.titleLabel.text = utilityForCell.title//"Calculate ALL the p-values!"
             
             return cell
             
@@ -65,7 +75,7 @@ extension UtilitiesVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return statUtilities.count
         
     }
     
@@ -77,6 +87,7 @@ extension UtilitiesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         // let selectedTableCell = tableView.cellForRowAtIndexPath(tableView.indexPathForSelectedRow!)
+        print(statUtilities[indexPath.row].utilityID)
         
         //TODO: Segue to the corresponding statistics tool
         self.performSegueWithIdentifier("ToErsatzStatTables", sender: nil)

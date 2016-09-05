@@ -1,0 +1,24 @@
+{
+  "statUtilities" : [
+    {
+      "title" : "z- and t-tables",
+      "moreInfo" : "Describe the utility here ...",
+      "id" : 0
+    },
+    {
+      "title" : "Standard Normal Distribution",
+      "moreInfo" : "Describe the utility here ...",
+      "id" : 1
+     },
+     {
+       "title" : "t-distribution",
+       "moreInfo" : "Describe the utility here ...",
+       "id" : 2
+     },
+     {
+       "title" : "Chi-Square Distribution",
+       "moreInfo" : "Describe the utility here ...",
+       "id" : 3
+     }
+  ]
+}

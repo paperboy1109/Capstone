@@ -406,6 +406,10 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9po-8x-X4O">
                                 <rect key="frame" x="543" y="20" width="37" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="37" id="Kr1-NR-LVi"/>
+                                    <constraint firstAttribute="height" constant="30" id="Wbn-fR-rAg"/>
+                                </constraints>
                                 <state key="normal" title="Done"/>
                                 <connections>
                                     <action selector="doneTapped:" destination="SbL-kf-lNG" eventType="touchUpInside" id="5Py-Mt-86p"/>
@@ -425,12 +429,79 @@
                                             <action selector="plotTapped:" destination="SbL-kf-lNG" eventType="touchUpInside" id="Pma-5Q-4t7"/>
                                         </connections>
                                     </button>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Mjg-bJ-doB">
+                                        <rect key="frame" x="14" y="76" width="572" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="v9M-71-qja"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="sliderMoved:" destination="SbL-kf-lNG" eventType="valueChanged" id="syI-HH-Wx0"/>
+                                        </connections>
+                                    </slider>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gAV-zu-JG8">
+                                        <rect key="frame" x="70" y="8" width="522" height="60"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="cVM-1K-EPE" customClass="NumberMorphView" customModule="NumberMorphView">
+                                                <rect key="frame" x="2" y="2" width="30" height="56"/>
+                                                <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="cVM-1K-EPE" secondAttribute="height" multiplier="13:24" id="2LM-dX-ujW"/>
+                                                    <constraint firstAttribute="height" constant="432" id="N6J-o6-plt"/>
+                                                    <constraint firstAttribute="height" constant="128" id="feG-tS-3Pb"/>
+                                                    <constraint firstAttribute="width" constant="240" id="jQZ-xi-1Ol"/>
+                                                    <constraint firstAttribute="width" constant="234" id="pMd-8I-eNh"/>
+                                                </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="pMd-8I-eNh"/>
+                                                        <exclude reference="jQZ-xi-1Ol"/>
+                                                        <exclude reference="feG-tS-3Pb"/>
+                                                        <exclude reference="N6J-o6-plt"/>
+                                                    </mask>
+                                                </variation>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="tempLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iie-4f-7ts">
+                                                <rect key="frame" x="394" y="23" width="81" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="Iie-4f-7ts" firstAttribute="top" secondItem="gAV-zu-JG8" secondAttribute="top" constant="23" id="Bwx-LE-XFU"/>
+                                            <constraint firstAttribute="bottom" secondItem="Iie-4f-7ts" secondAttribute="bottom" constant="24" id="NLP-4S-2DX"/>
+                                            <constraint firstItem="cVM-1K-EPE" firstAttribute="leading" secondItem="gAV-zu-JG8" secondAttribute="leading" constant="2" id="NqD-vV-uxi"/>
+                                            <constraint firstAttribute="bottom" secondItem="cVM-1K-EPE" secondAttribute="bottom" constant="2" id="O7c-Gv-JS7"/>
+                                            <constraint firstAttribute="trailing" secondItem="Iie-4f-7ts" secondAttribute="trailing" constant="47" id="YE5-bm-sf3"/>
+                                            <constraint firstItem="cVM-1K-EPE" firstAttribute="top" secondItem="gAV-zu-JG8" secondAttribute="top" constant="2" id="s9v-wV-2g3"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="Mjg-bJ-doB" firstAttribute="leading" secondItem="Egb-sS-cCT" secondAttribute="leadingMargin" constant="8" id="8o2-uN-uWb"/>
                                     <constraint firstItem="QCh-sg-1jz" firstAttribute="top" secondItem="Egb-sS-cCT" secondAttribute="top" constant="8" id="9LF-bv-s9N"/>
+                                    <constraint firstItem="gAV-zu-JG8" firstAttribute="leading" secondItem="QCh-sg-1jz" secondAttribute="trailing" constant="8" id="L3g-4b-ngy"/>
+                                    <constraint firstItem="gAV-zu-JG8" firstAttribute="top" secondItem="Egb-sS-cCT" secondAttribute="top" constant="8" id="Lam-Il-IQ4"/>
+                                    <constraint firstAttribute="trailing" secondItem="gAV-zu-JG8" secondAttribute="trailing" constant="8" id="QzB-zt-l6t"/>
+                                    <constraint firstItem="Mjg-bJ-doB" firstAttribute="top" secondItem="gAV-zu-JG8" secondAttribute="bottom" constant="8" id="VzB-8j-Rvb"/>
+                                    <constraint firstItem="Mjg-bJ-doB" firstAttribute="top" secondItem="gAV-zu-JG8" secondAttribute="bottom" constant="2" id="XAn-Dj-6vA"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="Mjg-bJ-doB" secondAttribute="trailing" constant="8" id="ZL6-EY-5O7"/>
+                                    <constraint firstAttribute="trailing" secondItem="gAV-zu-JG8" secondAttribute="trailing" constant="8" id="dki-MA-gU0"/>
                                     <constraint firstItem="QCh-sg-1jz" firstAttribute="leading" secondItem="Egb-sS-cCT" secondAttribute="leading" constant="8" id="j3y-R5-rXp"/>
+                                    <constraint firstItem="gAV-zu-JG8" firstAttribute="leading" secondItem="QCh-sg-1jz" secondAttribute="trailing" constant="32" id="k5M-FS-K3L"/>
+                                    <constraint firstItem="gAV-zu-JG8" firstAttribute="top" secondItem="Egb-sS-cCT" secondAttribute="top" constant="8" id="vQt-LS-Bgb"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="Mjg-bJ-doB" secondAttribute="bottom" constant="14" id="vjZ-ys-PTw"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="L3g-4b-ngy"/>
+                                        <exclude reference="QzB-zt-l6t"/>
+                                        <exclude reference="vQt-LS-Bgb"/>
+                                        <exclude reference="XAn-Dj-6vA"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -448,7 +519,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="leadingDigit" destination="cVM-1K-EPE" id="e3S-Am-mUb"/>
                         <outlet property="plotView" destination="e2z-FG-8Fr" id="U13-89-kEg"/>
+                        <outlet property="slider" destination="Mjg-bJ-doB" id="faG-rg-TdD"/>
+                        <outlet property="tempLabel" destination="Iie-4f-7ts" id="1az-K0-AnF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TiP-VI-phY" userLabel="First Responder" sceneMemberID="firstResponder"/>

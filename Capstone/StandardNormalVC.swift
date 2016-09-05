@@ -8,6 +8,7 @@
 
 import UIKit
 import Charts
+import NumberMorphView
 
 class StandardNormalVC: UIViewController {
     
@@ -17,14 +18,31 @@ class StandardNormalVC: UIViewController {
     let defaultEndingPoint = 3.0
     let defaultStepsPerLine = 99
     
+    let numberFormatter = NSNumberFormatter()
+    
+    
     // MARK: - Outlets
     
+    @IBOutlet var leadingDigit: NumberMorphView!
+    
+    @IBOutlet var tempLabel: UILabel!
+    
     @IBOutlet var plotView: LineChartView!
+    @IBOutlet var slider: UISlider!
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configurePlotView()
+        
+        numberFormatter.maximumFractionDigits = 3
+        
+        slider.minimumValue = -3.0
+        slider.maximumValue = 3.0
+        
+        leadingDigit.currentDigit = 0
     }
     
     override func didReceiveMemoryWarning() {
@@ -74,6 +92,26 @@ class StandardNormalVC: UIViewController {
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    @IBAction func sliderMoved(sender: UISlider) {
+        
+        print(numberFormatter.stringFromNumber(sender.value))
+        tempLabel.text = numberFormatter.stringFromNumber(2.12345)
+        
+//        guard let numberText = numberFormatter.stringFromNumber(abs(sender.value)) else {
+//            return
+//        }
+        
+        let newLeadingDigitAsString = String(sender.value.description[sender.value.description.startIndex])
+        
+        guard let newLeadingDigit = Int(newLeadingDigitAsString) else {
+            return
+        }
+        
+        leadingDigit.nextDigit = newLeadingDigit
+
+    }
+    
     
     
 }

@@ -321,7 +321,7 @@
         <!--Utilities-->
         <scene sceneID="1P2-Lh-zBd">
             <objects>
-                <viewController id="5hk-iF-7ic" customClass="UtilitiesVC" customModule="Capstone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UtilitiesMenu" id="5hk-iF-7ic" customClass="UtilitiesVC" customModule="Capstone" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="z5A-LI-wAw"/>
                         <viewControllerLayoutGuide type="bottom" id="kK9-aF-TyY"/>
@@ -386,17 +386,47 @@
                     <navigationItem key="navigationItem" id="wu3-E9-nUa"/>
                     <connections>
                         <outlet property="statUtilityTableView" destination="hze-dA-XW7" id="FAd-P8-J68"/>
-                        <segue destination="VFt-ja-Gv3" kind="presentation" identifier="ToErsatzStatTables" id="ynm-aj-wni"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nxW-AC-6g6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1284" y="342"/>
         </scene>
+        <!--Standard NormalVC-->
+        <scene sceneID="cLR-sn-mfZ">
+            <objects>
+                <viewController storyboardIdentifier="StandardNormal" id="SbL-kf-lNG" customClass="StandardNormalVC" customModule="Capstone" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Yj7-M8-EIZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="i3A-KB-oZK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Lt5-Q7-gOf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9po-8x-X4O">
+                                <rect key="frame" x="543" y="20" width="37" height="30"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="doneTapped:" destination="SbL-kf-lNG" eventType="touchUpInside" id="5Py-Mt-86p"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="9po-8x-X4O" firstAttribute="top" secondItem="Yj7-M8-EIZ" secondAttribute="bottom" id="LwF-Vn-SFc"/>
+                            <constraint firstItem="9po-8x-X4O" firstAttribute="trailing" secondItem="Lt5-Q7-gOf" secondAttribute="trailingMargin" id="ZIw-vm-CKL"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TiP-VI-phY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2335" y="342"/>
+        </scene>
         <!--Ersatz Stat TablesVC-->
         <scene sceneID="eWq-Mj-B5a">
             <objects>
-                <viewController id="VFt-ja-Gv3" customClass="ErsatzStatTablesVC" customModule="Capstone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StatTables" id="VFt-ja-Gv3" customClass="ErsatzStatTablesVC" customModule="Capstone" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ivK-cv-bCt"/>
                         <viewControllerLayoutGuide type="bottom" id="91i-pC-Cb2"/>
@@ -405,19 +435,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DIc-rT-PHL">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <items>
-                                    <navigationItem title="Title" id="c1H-c8-mnY">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="5Uz-G4-8Fh">
-                                            <color key="tintColor" red="0.58345192000000001" green="1" blue="0.76295332800000004" alpha="1" colorSpace="calibratedRGB"/>
-                                            <connections>
-                                                <action selector="doneTapped:" destination="VFt-ja-Gv3" id="xhB-DX-Ofm"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="MmN-7p-39N">
                                 <rect key="frame" x="20" y="120" width="248" height="29"/>
                                 <segments>
@@ -461,8 +478,19 @@
                                     <action selector="calculateTapped:" destination="VFt-ja-Gv3" eventType="touchUpInside" id="YRN-3z-OiM"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m8m-Qt-EA2">
+                                <rect key="frame" x="543" y="20" width="37" height="30"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="doneTapped:" destination="VFt-ja-Gv3" eventType="touchUpInside" id="c7j-co-xT2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="m8m-Qt-EA2" firstAttribute="top" secondItem="ivK-cv-bCt" secondAttribute="bottom" id="jMv-1I-VHp"/>
+                            <constraint firstItem="m8m-Qt-EA2" firstAttribute="trailing" secondItem="sE3-Dy-xWn" secondAttribute="trailingMargin" id="vLQ-xf-HGD"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="answerValueLabel" destination="Mtk-hW-8SK" id="gVn-mi-thS"/>
@@ -475,7 +503,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jgv-6K-RdI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2027" y="342"/>
+            <point key="canvasLocation" x="2335" y="-336"/>
         </scene>
         <!--Random Numbers-->
         <scene sceneID="V4k-ej-jlo">

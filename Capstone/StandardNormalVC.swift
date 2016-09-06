@@ -68,18 +68,30 @@ class StandardNormalVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     
     // MARK: - Actions
     
-    @IBAction func plotTapped(sender: AnyObject) {
+    @IBAction func plotTapped(sender: UIButton) {
         
         plotView.data = nil
         plotView.setNeedsLayout()
         
         let xValues = SequenceGenerator.createSequenceWithStartingPoint(defaultStartingPoint, end: defaultEndingPoint, numberOfSteps: defaultStepsPerLine)
         let yValues = xValues.map() { StatisticsFunctions.swift_dorm($0, mean: 0, standardDev: 1)}
-        let maskFillValues = lineDataForMaskingFill(xValues, targetValue: zScore, maskingValue: yValues.maxElement()!, leftTail: true)
+        
+        switch sender.tag {
+        case 0:
+            let maskFillValues = lineDataForMaskingFill(xValues, targetValue: zScore, maskingValue: yValues.maxElement()!, leftTail: true)
+            pNormWithFill(xValues, dataCollections: [yValues, maskFillValues])
+        case 1:
+            let maskFillValues = lineDataForMaskingFill(xValues, targetValue: zScore, maskingValue: yValues.maxElement()!, leftTail: false)
+            pNormWithFill(xValues, dataCollections: [yValues, maskFillValues])
+        default:
+            let maskFillValues = lineDataForMaskingFill(xValues, targetValue: 3.0, maskingValue: yValues.maxElement()!, leftTail: false)
+            pNormWithFill(xValues, dataCollections: [yValues, maskFillValues])
+            
+        }
         
         let plotVerticalLimit = yValues.maxElement()! * 1.1
         
@@ -87,8 +99,6 @@ class StandardNormalVC: UIViewController {
         plotView.leftAxis.axisMaxValue = plotVerticalLimit
         plotView.rightAxis.axisMaxValue = plotVerticalLimit
         plotView.setNeedsLayout()
-        
-        pNormWithFill(xValues, dataCollections: [yValues, maskFillValues], shadeLeftTail: false)
         
         plotView.animate(yAxisDuration: 1.5, easingOption: .EaseInOutQuart)
         
@@ -121,48 +131,6 @@ class StandardNormalVC: UIViewController {
         
         setMorphNumbers(sender.value)
         
-        
-//        tempLabel.text = numberFormatter.stringFromNumber(sender.value)
-//        
-//        guard var numberText = numberFormatter.stringFromNumber(abs(sender.value)) else {
-//            return
-//        }
-//        
-//        guard !numberText.isEmpty else {
-//            return
-//        }
-//        
-//        
-//        
-//        /* Add a leading zero */
-//        if numberText[numberText.startIndex] == "." {
-//            numberText = "0" + numberText
-//        }
-//        
-//        //        print(numberText[numberText.startIndex])
-//        //        print("Here is the number: \(numberText)")
-//        //        print("The length of the number is: \(String(numberText).characters.count)")
-//        
-//        if numberText.characters.count == 5 {
-//            
-//            let leadingDigitAsString = String(numberText[numberText.startIndex])
-//            let firstDecimalAsString = String(numberText[numberText.startIndex.advancedBy(2)])
-//            let secondDecimalAsString = String(numberText[numberText.startIndex.advancedBy(3)])
-//            let thirdDecimalAsString = String(numberText[numberText.startIndex.advancedBy(4)])
-//            
-//            guard let newLeadingDigit = Int(leadingDigitAsString),
-//                newFirstDecimal = Int(firstDecimalAsString),
-//                newSecondDecimal = Int(secondDecimalAsString),
-//                newThirdDecimal = Int(thirdDecimalAsString) else {
-//                    return
-//            }
-//            
-//            leadingDigit.nextDigit = newLeadingDigit
-//            decimal1.nextDigit = newFirstDecimal
-//            decimal2.nextDigit = newSecondDecimal
-//            decimal3.nextDigit = newThirdDecimal
-//        }
-        
     }
     
     
@@ -177,24 +145,6 @@ class StandardNormalVC: UIViewController {
         
         
     }
-    
-    // MARK: - Helpers
-    
-//    func updateZScore() {
-//        
-//        zScore = Double(leadingDigit.currentDigit) //  + (0.1 * decimal1.currentDigit) + (0.01 * decimal2.currentDigit) + (0.001 * decimal3.currentDigit)  -- compiler error?
-//        zScore = zScore +  (0.1 * Double(decimal1.currentDigit))
-//        zScore = zScore +  (0.01 * Double(decimal2.currentDigit))
-//        zScore = zScore +  (0.001 * Double(decimal3.currentDigit))
-//        
-//        if slider.value < 0 {
-//            zScore = (-1.0) * abs(zScore)
-//        }
-//        let displayedValue = "\(leadingDigit.currentDigit)" + "." + "\(decimal1.currentDigit)"
-//        
-//        tempLabel2.text = String(zScore)
-//        
-//    }
     
     func updateZScore(leadingDigit: Int, firstDecimal: Int, secondDecimal: Int, thirdDecimal: Int) {
         
@@ -330,7 +280,7 @@ extension StandardNormalVC {
         return maskingArray
     }
     
-    func pNormWithFill(xValues: [Double], dataCollections: [[Double]], shadeLeftTail: Bool) {
+    func pNormWithFill(xValues: [Double], dataCollections: [[Double]]) {
         
         let xValuesAsStrings = xValues.map { String(format: "%.2f", $0) }
         

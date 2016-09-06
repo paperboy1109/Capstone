@@ -423,7 +423,7 @@
                                 <rect key="frame" x="0.0" y="380" width="600" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tempLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iie-4f-7ts">
-                                        <rect key="frame" x="81" y="12" width="81" height="21"/>
+                                        <rect key="frame" x="122" y="12" width="81" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="fph-IN-Tii"/>
                                             <constraint firstAttribute="width" constant="81" id="k4e-0f-IiL"/>
@@ -432,9 +432,19 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tempLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ja5-yP-6Fa" userLabel="tempLabel2">
+                                        <rect key="frame" x="224" y="12" width="81" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="81" id="3dz-7z-ku8"/>
+                                            <constraint firstAttribute="height" constant="21" id="tNM-pk-N51"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QCh-sg-1jz">
-                                        <rect key="frame" x="8" y="8" width="30" height="30"/>
-                                        <state key="normal" title="Plot"/>
+                                        <rect key="frame" x="8" y="8" width="71" height="30"/>
+                                        <state key="normal" title="Left-tailed"/>
                                         <connections>
                                             <action selector="plotTapped:" destination="SbL-kf-lNG" eventType="touchUpInside" id="Pma-5Q-4t7"/>
                                         </connections>
@@ -633,19 +643,17 @@
                                             <action selector="stepperTapped:" destination="SbL-kf-lNG" eventType="valueChanged" id="cjd-RE-NZL"/>
                                         </connections>
                                     </stepper>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tempLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ja5-yP-6Fa" userLabel="tempLabel2">
-                                        <rect key="frame" x="183" y="12" width="81" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="81" id="3dz-7z-ku8"/>
-                                            <constraint firstAttribute="height" constant="21" id="tNM-pk-N51"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PkT-rL-viv">
+                                        <rect key="frame" x="8" y="38" width="80" height="30"/>
+                                        <state key="normal" title="Right-tailed"/>
+                                        <connections>
+                                            <action selector="plotTapped:" destination="SbL-kf-lNG" eventType="touchUpInside" id="7V0-Zv-ub8"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="PkT-rL-viv" firstAttribute="leading" secondItem="Egb-sS-cCT" secondAttribute="leading" constant="8" id="0Jw-r0-n0T"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="e8T-2X-Qv1" secondAttribute="trailing" constant="12" id="0cl-hC-rYc"/>
                                     <constraint firstItem="Iie-4f-7ts" firstAttribute="leading" secondItem="QCh-sg-1jz" secondAttribute="trailing" constant="43" id="1yc-Ls-mXA"/>
                                     <constraint firstAttribute="bottom" secondItem="gAV-zu-JG8" secondAttribute="bottom" constant="21" id="20B-es-kuh"/>
@@ -673,6 +681,7 @@
                                     <constraint firstItem="gAV-zu-JG8" firstAttribute="leading" secondItem="QCh-sg-1jz" secondAttribute="trailing" constant="32" id="k5M-FS-K3L"/>
                                     <constraint firstAttribute="trailing" secondItem="gAV-zu-JG8" secondAttribute="trailing" constant="220" id="m0f-fj-mcv"/>
                                     <constraint firstItem="gAV-zu-JG8" firstAttribute="top" secondItem="Egb-sS-cCT" secondAttribute="top" constant="8" id="vQt-LS-Bgb"/>
+                                    <constraint firstItem="PkT-rL-viv" firstAttribute="top" secondItem="QCh-sg-1jz" secondAttribute="bottom" id="w9Z-MG-Ezg"/>
                                     <constraint firstItem="gAV-zu-JG8" firstAttribute="centerX" secondItem="Egb-sS-cCT" secondAttribute="centerX" id="zS5-P9-1Kw"/>
                                 </constraints>
                                 <variation key="default">

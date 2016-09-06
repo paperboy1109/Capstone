@@ -34,6 +34,7 @@ class StandardNormalVC: UIViewController {
     
     @IBOutlet var stepper: UIStepper!
     
+    @IBOutlet var pValueLabel: UILabel!
     
     
     @IBOutlet var tempLabel: UILabel!
@@ -81,12 +82,27 @@ class StandardNormalVC: UIViewController {
         let yValues = xValues.map() { StatisticsFunctions.swift_dorm($0, mean: 0, standardDev: 1)}
         
         switch sender.tag {
+            
         case 0:
             let maskFillValues = lineDataForMaskingFill(xValues, targetValue: zScore, maskingValue: yValues.maxElement()!, leftTail: true)
             pNormWithFill(xValues, dataCollections: [yValues, maskFillValues])
+            /* Display the p-value */
+            if zScore > 0 {
+                // Show the larger area (left-tailed, above the mean)
+                pValueLabel.text = "\(1 - StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))"
+            } else {
+                pValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))"
+            }
         case 1:
             let maskFillValues = lineDataForMaskingFill(xValues, targetValue: zScore, maskingValue: yValues.maxElement()!, leftTail: false)
             pNormWithFill(xValues, dataCollections: [yValues, maskFillValues])
+            /* Display the p-value */
+            if zScore < 0 {
+                // Show the larger area (right-tailed, below the mean)
+                pValueLabel.text = "\(1 - StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))"
+            } else {
+                pValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))"
+            }
         default:
             let maskFillValues = lineDataForMaskingFill(xValues, targetValue: 3.0, maskingValue: yValues.maxElement()!, leftTail: false)
             pNormWithFill(xValues, dataCollections: [yValues, maskFillValues])

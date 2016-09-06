@@ -90,7 +90,7 @@ class ErsatzStatTablesVC: UIViewController {
         print(self.currentMode.rawValue)
         
         if self.currentMode == .zScore {
-            answerValueLabel.text = "\(StatisticsFunctions.swift_pnorm(Double(slider.value), mean: 0.0, standardDev: 1.0, n: 500))"
+            answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(Double(slider.value), mean: 0.0, standardDev: 1.0, n: 500))"
         } else {
             // TODO: Calculate a p-value or t-score
             answerValueLabel.text = "\(slider.value)"

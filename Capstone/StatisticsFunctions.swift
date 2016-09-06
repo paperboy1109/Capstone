@@ -50,25 +50,36 @@ public class StatisticsFunctions {
     }
     
     
-    static func swift_pnorm(x: Double, mean: Double, standardDev: Double, n: Int) -> Double {
-                
+    static func swift_pnormFewestSteps(x: Double, mean: Double, standardDev: Double, n: Int) -> Double {
+        
         let zScore = swift_standardizedScore(x, mean: mean, standardDev: standardDev)
         let a, b : Double
         let delta_x: Double
         let rangeLimit: Double = 6.0
         
         /* Constrain calculations to be within rangeLimit standard scores of the mean */
+        //        if (abs(zScore) >= rangeLimit) {
+        //            a = 0; b = 0
+        //            delta_x = 0.0
+        //        } else if (zScore <= 0.0) {
+        //            a = (-1.0) * rangeLimit
+        //            b = zScore
+        //            delta_x = (b - a) / Double(n)
+        //        } else {
+        //            a = zScore
+        //            b = rangeLimit
+        //            delta_x = (b - a) / Double(n)
+        //        }
         
-        if (abs(zScore) >= rangeLimit) {
-            a = 0; b = 0
+        if abs(zScore) >= rangeLimit {
+            a = 0.0; b = 0.0
             delta_x = 0.0
-        } else if (zScore <= 0.0) {
-            a = (-1.0) * rangeLimit
-            b = zScore
+            
+        } else if zScore <= 0.0 {
+            a = (-1.0) * rangeLimit; b = zScore
             delta_x = (b - a) / Double(n)
         } else {
-            a = zScore
-            b = rangeLimit
+            a = (-1.0) * rangeLimit; b = (-1) * zScore
             delta_x = (b - a) / Double(n)
         }
         
@@ -86,6 +97,6 @@ public class StatisticsFunctions {
         
         return (delta_x / 3) * zip(coefs, funcionValuesArray).map(*).reduce(0) {$0 + $1}
     }
-
+    
     
 }

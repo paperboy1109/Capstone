@@ -449,6 +449,13 @@
                                             <action selector="plotTapped:" destination="SbL-kf-lNG" eventType="touchUpInside" id="Pma-5Q-4t7"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PkT-rL-viv">
+                                        <rect key="frame" x="8" y="38" width="80" height="30"/>
+                                        <state key="normal" title="Right-tailed"/>
+                                        <connections>
+                                            <action selector="plotTapped:" destination="SbL-kf-lNG" eventType="touchUpInside" id="7V0-Zv-ub8"/>
+                                        </connections>
+                                    </button>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Mjg-bJ-doB">
                                         <rect key="frame" x="14" y="76" width="572" height="31"/>
                                         <constraints>
@@ -643,13 +650,27 @@
                                             <action selector="stepperTapped:" destination="SbL-kf-lNG" eventType="valueChanged" id="cjd-RE-NZL"/>
                                         </connections>
                                     </stepper>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PkT-rL-viv">
-                                        <rect key="frame" x="8" y="38" width="80" height="30"/>
-                                        <state key="normal" title="Right-tailed"/>
-                                        <connections>
-                                            <action selector="plotTapped:" destination="SbL-kf-lNG" eventType="touchUpInside" id="7V0-Zv-ub8"/>
-                                        </connections>
-                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOS-hv-KSu">
+                                        <rect key="frame" x="97" y="33" width="179" height="35"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydy-cy-1P1">
+                                                <rect key="frame" x="2" y="2" width="175" height="31"/>
+                                                <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Ydy-cy-1P1" secondAttribute="trailing" constant="2" id="BYN-2P-kEE"/>
+                                            <constraint firstAttribute="height" constant="35" id="GRP-4p-Aib"/>
+                                            <constraint firstItem="Ydy-cy-1P1" firstAttribute="leading" secondItem="fOS-hv-KSu" secondAttribute="leading" constant="2" id="Nqt-mo-reu"/>
+                                            <constraint firstAttribute="bottom" secondItem="Ydy-cy-1P1" secondAttribute="bottom" constant="2" id="VXP-aO-SSe"/>
+                                            <constraint firstAttribute="width" constant="179" id="g08-2u-ki9"/>
+                                            <constraint firstItem="Ydy-cy-1P1" firstAttribute="top" secondItem="fOS-hv-KSu" secondAttribute="top" constant="2" id="gU1-sk-1hu"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -664,6 +685,8 @@
                                     <constraint firstItem="wVs-Qb-7ps" firstAttribute="top" secondItem="Mjg-bJ-doB" secondAttribute="bottom" constant="13" id="GCQ-Es-jO4"/>
                                     <constraint firstItem="gAV-zu-JG8" firstAttribute="leading" secondItem="wVs-Qb-7ps" secondAttribute="trailing" constant="4" id="HuL-3R-W3E"/>
                                     <constraint firstItem="wVs-Qb-7ps" firstAttribute="leading" secondItem="Egb-sS-cCT" secondAttribute="leading" constant="8" id="Irq-lQ-QT0"/>
+                                    <constraint firstItem="fOS-hv-KSu" firstAttribute="leading" secondItem="PkT-rL-viv" secondAttribute="trailing" constant="9" id="J4d-t2-JhP"/>
+                                    <constraint firstItem="Mjg-bJ-doB" firstAttribute="top" secondItem="fOS-hv-KSu" secondAttribute="bottom" constant="8" id="Khs-eL-GeF"/>
                                     <constraint firstItem="gAV-zu-JG8" firstAttribute="leading" secondItem="QCh-sg-1jz" secondAttribute="trailing" constant="8" id="L3g-4b-ngy"/>
                                     <constraint firstItem="gAV-zu-JG8" firstAttribute="centerX" secondItem="wVs-Qb-7ps" secondAttribute="centerX" id="Lo0-CZ-eh5"/>
                                     <constraint firstItem="e8T-2X-Qv1" firstAttribute="centerY" secondItem="YlZ-YL-7g2" secondAttribute="centerY" id="Q8D-bL-cF3"/>
@@ -725,6 +748,7 @@
                         <outlet property="decimal2" destination="s8e-0W-OEM" id="1WS-Yb-8CH"/>
                         <outlet property="decimal3" destination="vKZ-vR-zSH" id="abP-Rx-tHy"/>
                         <outlet property="leadingDigit" destination="cVM-1K-EPE" id="e3S-Am-mUb"/>
+                        <outlet property="pValueLabel" destination="Ydy-cy-1P1" id="7TW-3G-H2r"/>
                         <outlet property="plotView" destination="e2z-FG-8Fr" id="U13-89-kEg"/>
                         <outlet property="plusMinusLabel" destination="fai-V5-8K2" id="Uzi-s2-Ps7"/>
                         <outlet property="slider" destination="Mjg-bJ-doB" id="faG-rg-TdD"/>

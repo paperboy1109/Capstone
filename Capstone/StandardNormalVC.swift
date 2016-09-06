@@ -110,6 +110,11 @@ class StandardNormalVC: UIViewController {
     
     @IBAction func sliderMoved(sender: UISlider) {
         
+        /* Synchronize with the stepper value */
+        stepper.value = Double(slider.value)
+        
+        print("Slider was moved")
+        
         if sender.value < 0 {
             plusMinusLabel.text = "-"
         } else {
@@ -118,9 +123,74 @@ class StandardNormalVC: UIViewController {
         
         print(numberFormatter.stringFromNumber(sender.value))
         //tempLabel.text = numberFormatter.stringFromNumber(2.12345)
-        tempLabel.text = numberFormatter.stringFromNumber(sender.value)
         
-        guard var numberText = numberFormatter.stringFromNumber(abs(sender.value)) else {
+        
+        setMorphNumbers(sender.value)
+        
+        
+//        tempLabel.text = numberFormatter.stringFromNumber(sender.value)
+//        
+//        guard var numberText = numberFormatter.stringFromNumber(abs(sender.value)) else {
+//            return
+//        }
+//        
+//        guard !numberText.isEmpty else {
+//            return
+//        }
+//        
+//        
+//        
+//        /* Add a leading zero */
+//        if numberText[numberText.startIndex] == "." {
+//            numberText = "0" + numberText
+//        }
+//        
+//        //        print(numberText[numberText.startIndex])
+//        //        print("Here is the number: \(numberText)")
+//        //        print("The length of the number is: \(String(numberText).characters.count)")
+//        
+//        if numberText.characters.count == 5 {
+//            
+//            let leadingDigitAsString = String(numberText[numberText.startIndex])
+//            let firstDecimalAsString = String(numberText[numberText.startIndex.advancedBy(2)])
+//            let secondDecimalAsString = String(numberText[numberText.startIndex.advancedBy(3)])
+//            let thirdDecimalAsString = String(numberText[numberText.startIndex.advancedBy(4)])
+//            
+//            guard let newLeadingDigit = Int(leadingDigitAsString),
+//                newFirstDecimal = Int(firstDecimalAsString),
+//                newSecondDecimal = Int(secondDecimalAsString),
+//                newThirdDecimal = Int(thirdDecimalAsString) else {
+//                    return
+//            }
+//            
+//            leadingDigit.nextDigit = newLeadingDigit
+//            decimal1.nextDigit = newFirstDecimal
+//            decimal2.nextDigit = newSecondDecimal
+//            decimal3.nextDigit = newThirdDecimal
+//        }
+        
+    }
+    
+    
+    @IBAction func stepperTapped(sender: UIStepper) {
+        
+        print("Stepper was tapped: ")
+        print(sender.value)
+        
+        slider.value = Float(stepper.value)
+        
+        setMorphNumbers(slider.value)
+        
+        
+    }
+    
+    // MARK: - Helpers
+    
+    func setMorphNumbers(newValue: Float) {
+        
+        tempLabel.text = numberFormatter.stringFromNumber(newValue)
+        
+        guard var numberText = numberFormatter.stringFromNumber(abs(newValue)) else {
             return
         }
         
@@ -132,10 +202,6 @@ class StandardNormalVC: UIViewController {
         if numberText[numberText.startIndex] == "." {
             numberText = "0" + numberText
         }
-        
-//        print(numberText[numberText.startIndex])
-//        print("Here is the number: \(numberText)")
-//        print("The length of the number is: \(String(numberText).characters.count)")
         
         if numberText.characters.count == 5 {
             
@@ -156,16 +222,7 @@ class StandardNormalVC: UIViewController {
             decimal2.nextDigit = newSecondDecimal
             decimal3.nextDigit = newThirdDecimal
         }
-        
     }
-    
-    
-    @IBAction func stepperTapped(sender: UIStepper) {
-        
-        print("Stepper was tapped: ")
-        print(sender.value)
-    }
-    
     
     
 }

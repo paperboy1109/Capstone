@@ -17,13 +17,21 @@ class StandardNormalVC: UIViewController {
     let defaultStartingPoint = -3.0
     let defaultEndingPoint = 3.0
     let defaultStepsPerLine = 99
+    let defaultDecimalPlacesToShow = 3
     
     let numberFormatter = NSNumberFormatter()
     
     
     // MARK: - Outlets
     
+    @IBOutlet var plusMinusLabel: UILabel!
     @IBOutlet var leadingDigit: NumberMorphView!
+    @IBOutlet var decimal1: NumberMorphView!
+    @IBOutlet var decimal2: NumberMorphView!
+    @IBOutlet var decimal3: NumberMorphView!
+    
+    
+    
     
     @IBOutlet var tempLabel: UILabel!
     
@@ -37,12 +45,14 @@ class StandardNormalVC: UIViewController {
         
         configurePlotView()
         
-        numberFormatter.maximumFractionDigits = 3
+        numberFormatter.maximumFractionDigits = defaultDecimalPlacesToShow
+        numberFormatter.minimumFractionDigits = defaultDecimalPlacesToShow
         
         slider.minimumValue = -3.0
         slider.maximumValue = 3.0
         
         leadingDigit.currentDigit = 0
+        decimal1.currentDigit = 0
     }
     
     override func didReceiveMemoryWarning() {
@@ -95,21 +105,53 @@ class StandardNormalVC: UIViewController {
     
     @IBAction func sliderMoved(sender: UISlider) {
         
+        if sender.value < 0 {
+            plusMinusLabel.text = "-"
+        } else {
+            plusMinusLabel.text = ""
+        }
+        
         print(numberFormatter.stringFromNumber(sender.value))
-        tempLabel.text = numberFormatter.stringFromNumber(2.12345)
+        //tempLabel.text = numberFormatter.stringFromNumber(2.12345)
+        tempLabel.text = numberFormatter.stringFromNumber(sender.value)
         
-//        guard let numberText = numberFormatter.stringFromNumber(abs(sender.value)) else {
-//            return
-//        }
-        
-        let newLeadingDigitAsString = String(sender.value.description[sender.value.description.startIndex])
-        
-        guard let newLeadingDigit = Int(newLeadingDigitAsString) else {
+        guard var numberText = numberFormatter.stringFromNumber(abs(sender.value)) else {
             return
         }
         
-        leadingDigit.nextDigit = newLeadingDigit
-
+        guard !numberText.isEmpty else {
+            return
+        }
+        
+        /* Add a leading zero */
+        if numberText[numberText.startIndex] == "." {
+            numberText = "0" + numberText
+        }
+        
+//        print(numberText[numberText.startIndex])
+//        print("Here is the number: \(numberText)")
+//        print("The length of the number is: \(String(numberText).characters.count)")
+        
+        if numberText.characters.count == 5 {
+            
+            let leadingDigitAsString = String(numberText[numberText.startIndex])
+            let firstDecimalAsString = String(numberText[numberText.startIndex.advancedBy(2)])
+            let secondDecimalAsString = String(numberText[numberText.startIndex.advancedBy(3)])
+            let thirdDecimalAsString = String(numberText[numberText.startIndex.advancedBy(4)])
+            
+            guard let newLeadingDigit = Int(leadingDigitAsString),
+                newFirstDecimal = Int(firstDecimalAsString),
+                newSecondDecimal = Int(secondDecimalAsString),
+                newThirdDecimal = Int(thirdDecimalAsString) else {
+                    return
+            }
+            
+            leadingDigit.nextDigit = newLeadingDigit
+            decimal1.nextDigit = newFirstDecimal
+            decimal2.nextDigit = newSecondDecimal
+            decimal3.nextDigit = newThirdDecimal
+        }
+        
     }
     
     
@@ -259,6 +301,6 @@ extension StandardNormalVC {
         plotView.leftAxis.axisMinValue = dataCollections[0].minElement()!
         plotView.rightAxis.axisMinValue = dataCollections[0].minElement()!
     }
-
+    
     
 }

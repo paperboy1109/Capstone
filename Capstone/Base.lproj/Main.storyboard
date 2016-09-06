@@ -633,12 +633,24 @@
                                             <action selector="stepperTapped:" destination="SbL-kf-lNG" eventType="valueChanged" id="cjd-RE-NZL"/>
                                         </connections>
                                     </stepper>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tempLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ja5-yP-6Fa" userLabel="tempLabel2">
+                                        <rect key="frame" x="183" y="12" width="81" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="81" id="3dz-7z-ku8"/>
+                                            <constraint firstAttribute="height" constant="21" id="tNM-pk-N51"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="e8T-2X-Qv1" secondAttribute="trailing" constant="12" id="0cl-hC-rYc"/>
                                     <constraint firstItem="Iie-4f-7ts" firstAttribute="leading" secondItem="QCh-sg-1jz" secondAttribute="trailing" constant="43" id="1yc-Ls-mXA"/>
                                     <constraint firstAttribute="bottom" secondItem="gAV-zu-JG8" secondAttribute="bottom" constant="21" id="20B-es-kuh"/>
+                                    <constraint firstItem="Iie-4f-7ts" firstAttribute="leading" secondItem="QCh-sg-1jz" secondAttribute="trailing" constant="43" id="5Vp-mX-9kk"/>
+                                    <constraint firstItem="ja5-yP-6Fa" firstAttribute="centerY" secondItem="Iie-4f-7ts" secondAttribute="centerY" id="85z-0D-rj6"/>
                                     <constraint firstItem="Mjg-bJ-doB" firstAttribute="leading" secondItem="Egb-sS-cCT" secondAttribute="leadingMargin" constant="8" id="8o2-uN-uWb"/>
                                     <constraint firstItem="QCh-sg-1jz" firstAttribute="top" secondItem="Egb-sS-cCT" secondAttribute="top" constant="8" id="9LF-bv-s9N"/>
                                     <constraint firstItem="wVs-Qb-7ps" firstAttribute="top" secondItem="Mjg-bJ-doB" secondAttribute="bottom" constant="13" id="GCQ-Es-jO4"/>
@@ -652,6 +664,7 @@
                                     <constraint firstItem="Mjg-bJ-doB" firstAttribute="top" secondItem="gAV-zu-JG8" secondAttribute="bottom" constant="2" id="XAn-Dj-6vA"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="Mjg-bJ-doB" secondAttribute="trailing" constant="8" id="ZL6-EY-5O7"/>
                                     <constraint firstAttribute="height" constant="200" id="bcU-pg-xfC"/>
+                                    <constraint firstItem="ja5-yP-6Fa" firstAttribute="leading" secondItem="Iie-4f-7ts" secondAttribute="trailing" constant="21" id="cmt-aJ-nl2"/>
                                     <constraint firstItem="e8T-2X-Qv1" firstAttribute="leading" secondItem="gAV-zu-JG8" secondAttribute="trailing" constant="2" id="cpu-Nj-wSf"/>
                                     <constraint firstAttribute="trailing" secondItem="gAV-zu-JG8" secondAttribute="trailing" constant="8" id="dki-MA-gU0"/>
                                     <constraint firstItem="Iie-4f-7ts" firstAttribute="top" secondItem="Egb-sS-cCT" secondAttribute="top" constant="12" id="fEN-9P-YPB"/>
@@ -708,6 +721,7 @@
                         <outlet property="slider" destination="Mjg-bJ-doB" id="faG-rg-TdD"/>
                         <outlet property="stepper" destination="e8T-2X-Qv1" id="WOA-Ot-OFp"/>
                         <outlet property="tempLabel" destination="Iie-4f-7ts" id="1az-K0-AnF"/>
+                        <outlet property="tempLabel2" destination="ja5-yP-6Fa" id="Ckf-1Y-eko"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TiP-VI-phY" userLabel="First Responder" sceneMemberID="firstResponder"/>

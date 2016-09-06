@@ -21,6 +21,8 @@ class StandardNormalVC: UIViewController {
     
     let numberFormatter = NSNumberFormatter()
     
+    var zScore: Double!
+    
     
     // MARK: - Outlets
     
@@ -35,6 +37,7 @@ class StandardNormalVC: UIViewController {
     
     
     @IBOutlet var tempLabel: UILabel!
+    @IBOutlet var tempLabel2: UILabel!
     
     @IBOutlet var plotView: LineChartView!
     @IBOutlet var slider: UISlider!
@@ -58,23 +61,14 @@ class StandardNormalVC: UIViewController {
         
         leadingDigit.currentDigit = 0
         decimal1.currentDigit = 0
+        zScore = 0.0
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+
     
     // MARK: - Actions
     
@@ -85,7 +79,7 @@ class StandardNormalVC: UIViewController {
         
         let xValues = SequenceGenerator.createSequenceWithStartingPoint(defaultStartingPoint, end: defaultEndingPoint, numberOfSteps: defaultStepsPerLine)
         let yValues = xValues.map() { StatisticsFunctions.swift_dorm($0, mean: 0, standardDev: 1)}
-        let maskFillValues = lineDataForMaskingFill(xValues, targetValue: -1.0, maskingValue: yValues.maxElement()!, leftTail: true)
+        let maskFillValues = lineDataForMaskingFill(xValues, targetValue: zScore, maskingValue: yValues.maxElement()!, leftTail: true)
         
         let plotVerticalLimit = yValues.maxElement()! * 1.1
         
@@ -186,6 +180,38 @@ class StandardNormalVC: UIViewController {
     
     // MARK: - Helpers
     
+//    func updateZScore() {
+//        
+//        zScore = Double(leadingDigit.currentDigit) //  + (0.1 * decimal1.currentDigit) + (0.01 * decimal2.currentDigit) + (0.001 * decimal3.currentDigit)  -- compiler error?
+//        zScore = zScore +  (0.1 * Double(decimal1.currentDigit))
+//        zScore = zScore +  (0.01 * Double(decimal2.currentDigit))
+//        zScore = zScore +  (0.001 * Double(decimal3.currentDigit))
+//        
+//        if slider.value < 0 {
+//            zScore = (-1.0) * abs(zScore)
+//        }
+//        let displayedValue = "\(leadingDigit.currentDigit)" + "." + "\(decimal1.currentDigit)"
+//        
+//        tempLabel2.text = String(zScore)
+//        
+//    }
+    
+    func updateZScore(leadingDigit: Int, firstDecimal: Int, secondDecimal: Int, thirdDecimal: Int) {
+        
+        let zScoreText = "\(leadingDigit)" + "." + "\(firstDecimal)\(secondDecimal)\(thirdDecimal)"
+        tempLabel2.text = zScoreText
+        // tempLabel2.text = String(zScore)
+        
+        zScore = Double(zScoreText)
+        
+        if plusMinusLabel.text == "-" {
+            zScore = (-1.0) * zScore
+        }
+        
+        print("zScore to use in plot: \(zScore)")
+        
+    }
+    
     func setMorphNumbers(newValue: Float) {
         
         tempLabel.text = numberFormatter.stringFromNumber(newValue)
@@ -221,6 +247,9 @@ class StandardNormalVC: UIViewController {
             decimal1.nextDigit = newFirstDecimal
             decimal2.nextDigit = newSecondDecimal
             decimal3.nextDigit = newThirdDecimal
+            
+            /* The zScore and displayed value must be an exact match */
+            updateZScore(newLeadingDigit, firstDecimal: newFirstDecimal, secondDecimal: newSecondDecimal, thirdDecimal: newThirdDecimal)
         }
     }
     

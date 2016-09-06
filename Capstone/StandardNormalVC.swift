@@ -30,6 +30,7 @@ class StandardNormalVC: UIViewController {
     @IBOutlet var decimal2: NumberMorphView!
     @IBOutlet var decimal3: NumberMorphView!
     
+    @IBOutlet var stepper: UIStepper!
     
     
     
@@ -50,6 +51,10 @@ class StandardNormalVC: UIViewController {
         
         slider.minimumValue = -3.0
         slider.maximumValue = 3.0
+        
+        stepper.stepValue = 0.001
+        stepper.minimumValue = Double(slider.minimumValue)
+        stepper.maximumValue = Double(slider.maximumValue)
         
         leadingDigit.currentDigit = 0
         decimal1.currentDigit = 0
@@ -152,6 +157,13 @@ class StandardNormalVC: UIViewController {
             decimal3.nextDigit = newThirdDecimal
         }
         
+    }
+    
+    
+    @IBAction func stepperTapped(sender: UIStepper) {
+        
+        print("Stepper was tapped: ")
+        print(sender.value)
     }
     
     

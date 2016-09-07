@@ -15,7 +15,7 @@ public class StatisticsFunctions {
     
     static func swift_dorm(x: Double, mean: Double, standardDev: Double) -> Double {
         
-        let variance = standardDev*standardDev
+        let variance = standardDev * standardDev
         let coef = ( 1/(sqrt(2.0 * M_PI * variance)) )
         let exponent = (-1) * ( pow(x - mean, 2) / (2 * variance) )
         
@@ -57,20 +57,6 @@ public class StatisticsFunctions {
         let delta_x: Double
         let rangeLimit: Double = 6.0
         
-        /* Constrain calculations to be within rangeLimit standard scores of the mean */
-        //        if (abs(zScore) >= rangeLimit) {
-        //            a = 0; b = 0
-        //            delta_x = 0.0
-        //        } else if (zScore <= 0.0) {
-        //            a = (-1.0) * rangeLimit
-        //            b = zScore
-        //            delta_x = (b - a) / Double(n)
-        //        } else {
-        //            a = zScore
-        //            b = rangeLimit
-        //            delta_x = (b - a) / Double(n)
-        //        }
-        
         if abs(zScore) >= rangeLimit {
             a = 0.0; b = 0.0
             delta_x = 0.0
@@ -97,6 +83,59 @@ public class StatisticsFunctions {
         
         return (delta_x / 3) * zip(coefs, funcionValuesArray).map(*).reduce(0) {$0 + $1}
     }
+    
+    /* Implements the approximation method of Beasley, Springer, and Moro */
+    static func swift_qNorm(targetPval: Double) -> Double {
+        
+        if (targetPval > 0.08) && (targetPval < 0.92) {
+            
+            let y = targetPval - 0.5
+            let z = pow(y,2)
+            
+            let numeratorCoeffArray = [2.50662823884, -18.61500062529, 41.39119773534, -25.44106049637]
+            var numeratorTermsArray: [Double] = []
+            for index in 0...(numeratorCoeffArray.count - 1) {
+                numeratorTermsArray.append(pow(z, Double(index)))
+            }
+            let numerator = zip(numeratorCoeffArray, numeratorTermsArray).map(*).reduce(0, combine: +)
+            
+            let denomCoeffArray = [1.0, -8.47351093090, 23.08336743743, -21.06224101826, 3.13082909833]
+            var denomTermsArray: [Double] = []
+            for index in 0...(denomCoeffArray.count - 1) {
+                denomTermsArray.append(pow(z, Double(index)))
+            }
+            let denom = zip(denomCoeffArray, denomTermsArray).map(*).reduce(0, combine: +)
+            
+            return y * numerator / denom
+            
+            /* For p-values close to the extremes, 0 or 1*/
+        } else {
+            
+            let quantile_y = targetPval - 0.5
+            let quantile_z: Double!
+            if quantile_y > 0 {
+                quantile_z = 1 - targetPval
+            } else {
+                quantile_z = targetPval
+            }
+            
+            let kappa = log( (-1.0) * log(quantile_z) )
+            
+            let coeffArray = [0.3374754822726147, 0.9761690190917186, 0.1607979714918209, 0.0276438810333863, 0.0038405729373609, 0.0003951896511919, 0.0000321767881768, 0.0000002888167364, 0.0000003960315187]
+            var kappaSeriesArray: [Double] = []
+            
+            for index in 0...(coeffArray.count - 1) {
+                kappaSeriesArray.append(pow(kappa, Double(index)))
+            }
+            
+            if quantile_y < 0 {
+                return (-1) * zip(coeffArray, kappaSeriesArray).map(*).reduce(0, combine: +)
+            } else {
+                return zip(coeffArray, kappaSeriesArray).map(*).reduce(0, combine: +)
+            }
+        }
+    }
+
     
     
 }

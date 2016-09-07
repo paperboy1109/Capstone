@@ -96,6 +96,15 @@ class ErsatzStatTablesVC: UIViewController {
             answerValueLabel.text = "\(slider.value)"
         }
         
+        switch currentMode! {
+        case .zScore :
+            answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(Double(slider.value), mean: 0.0, standardDev: 1.0, n: 500))"
+        case .tScore :
+            answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(Double(slider.value), mean: 0.0, standardDev: 1.0, n: 500))"
+        case .pVal :
+            answerValueLabel.text = "\(StatisticsFunctions.swift_qNorm(Double(slider.value)))"
+        }
+        
     }
     
     // MARK: - Helpers
@@ -104,14 +113,16 @@ class ErsatzStatTablesVC: UIViewController {
         answerValueLabel.text = ""
         
         switch updatedMode! {
+        case  .tScore, .zScore :
+            slider.minimumValue = -6.0
+            slider.maximumValue = 6.0
+            slider.value = 0.0
+            calculateButton.setTitle("Calculate p-value", forState: .Normal)
         case .pVal :
             slider.minimumValue = 0.0
             slider.maximumValue = 1.0
             slider.value = 0.5
-        case .tScore, .zScore:
-            slider.minimumValue = -6.0
-            slider.maximumValue = 6.0
-            slider.value = 0.0
+            calculateButton.setTitle("Calculate z-score", forState: .Normal)
         }
         
         stepper.minimumValue = Double(slider.minimumValue)
@@ -120,7 +131,7 @@ class ErsatzStatTablesVC: UIViewController {
         
         lookupValueLabel.text = "\(slider.value)"
         // calculateButton.titleLabel = "\(updatedMode.rawValue)"
-        calculateButton.setTitle("Calculate \(updatedMode.rawValue)", forState: .Normal)
+        //calculateButton.setTitle("Calculate \(updatedMode.rawValue)", forState: .Normal)
         
     }
     

@@ -22,6 +22,10 @@ class ErsatzStatTablesVC: UIViewController {
     // MARK: - Outlets
     
     @IBOutlet var lookupValueTextField: UITextField!
+    
+    
+    @IBOutlet var plusMinusButton: UIButton!
+    
     @IBOutlet var lookupValueLabel: UILabel!
     @IBOutlet var answerValueLabel: UILabel!
     @IBOutlet var entryTypeLabel: UILabel!
@@ -145,7 +149,7 @@ class ErsatzStatTablesVC: UIViewController {
         case .zScore :
             removeSecondaryButton()
             removeDfEntry()
-            
+            removePlusMinusButton()
             entryTypeLabel.text = "p-value (left tail): "
             
             calculateButton.setTitle("Calculate z-score", forState: .Normal)
@@ -154,6 +158,7 @@ class ErsatzStatTablesVC: UIViewController {
             removeSecondaryButton()
             addDfEntry()
             dfLabel2.hidden = true
+            removePlusMinusButton()
             
             entryTypeLabel.text = "p-value (left tail): "
             
@@ -162,6 +167,7 @@ class ErsatzStatTablesVC: UIViewController {
         case .pVal :
             addSecondaryButton()
             addDfEntry()
+            addPlusMinusButton()
             
             entryTypeLabel.text = "z or t: "
             
@@ -209,6 +215,16 @@ class ErsatzStatTablesVC: UIViewController {
         dfPickerView.hidden = true
         dfLabel1.hidden = true
         dfLabel2.hidden = true
+    }
+    
+    func addPlusMinusButton() {
+        plusMinusButton.hidden = false
+        plusMinusButton.enabled = true
+    }
+    
+    func removePlusMinusButton() {
+        plusMinusButton.hidden = true
+        plusMinusButton.enabled = false
     }
     
     

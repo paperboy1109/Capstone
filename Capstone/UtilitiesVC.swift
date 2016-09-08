@@ -91,10 +91,10 @@ extension UtilitiesVC: UITableViewDelegate, UITableViewDataSource {
         
         let utilityID = statUtilities[indexPath.row].utilityID
         
-//        if utilityID == 1 {
-//            let selectedUtility = self.storyboard!.instantiateViewControllerWithIdentifier("StandardNormal") as! StandardNormalVC
-//            self.presentViewController(selectedUtility, animated: true, completion: nil)
-//        }
+        //        if utilityID == 1 {
+        //            let selectedUtility = self.storyboard!.instantiateViewControllerWithIdentifier("StandardNormal") as! StandardNormalVC
+        //            self.presentViewController(selectedUtility, animated: true, completion: nil)
+        //        }
         
         //TODO: Segue to the corresponding statistics tool
         //self.performSegueWithIdentifier("ToErsatzStatTables", sender: nil)
@@ -104,6 +104,12 @@ extension UtilitiesVC: UITableViewDelegate, UITableViewDataSource {
             self.presentViewController(selectedUtility, animated: true, completion: nil)
         case 1:
             let selectedUtility = self.storyboard!.instantiateViewControllerWithIdentifier("StandardNormal") as! StandardNormalVC
+            self.presentViewController(selectedUtility, animated: true, completion: nil)
+        case 2:
+            let selectedUtility = self.storyboard!.instantiateViewControllerWithIdentifier("ConfidenceIntervals")
+            self.presentViewController(selectedUtility, animated: true, completion: nil)
+        case 3:
+            let selectedUtility = self.storyboard!.instantiateViewControllerWithIdentifier("StandardDeviation") as! StandardDeviationVC
             self.presentViewController(selectedUtility, animated: true, completion: nil)
         default: break
             

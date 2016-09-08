@@ -19,6 +19,7 @@
 		4E6CB3801D7DEBBF00C12F23 /* StatUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6CB37F1D7DEBBF00C12F23 /* StatUtility.swift */; };
 		4E6CB3821D7DFF6600C12F23 /* StandardNormalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6CB3811D7DFF6600C12F23 /* StandardNormalVC.swift */; };
 		4E6CB3841D7E07CB00C12F23 /* SequenceGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6CB3831D7E07CB00C12F23 /* SequenceGenerator.swift */; };
+		4E6F37991D821B7B0029DC71 /* StandardDeviationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6F37981D821B7B0029DC71 /* StandardDeviationVC.swift */; };
 		4E9D69361D748169002021E3 /* StatisticsFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9D69351D748169002021E3 /* StatisticsFunctions.swift */; };
 		4EB1ACA91D66BF7D00742261 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1ACA81D66BF7D00742261 /* AppDelegate.swift */; };
 		4EB1ACAB1D66BF7D00742261 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1ACAA1D66BF7D00742261 /* ViewController.swift */; };
@@ -40,6 +41,7 @@
 		4E6CB37F1D7DEBBF00C12F23 /* StatUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatUtility.swift; sourceTree = "<group>"; };
 		4E6CB3811D7DFF6600C12F23 /* StandardNormalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardNormalVC.swift; sourceTree = "<group>"; };
 		4E6CB3831D7E07CB00C12F23 /* SequenceGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SequenceGenerator.swift; sourceTree = "<group>"; };
+		4E6F37981D821B7B0029DC71 /* StandardDeviationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardDeviationVC.swift; sourceTree = "<group>"; };
 		4E9D69351D748169002021E3 /* StatisticsFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsFunctions.swift; sourceTree = "<group>"; };
 		4EB1ACA51D66BF7D00742261 /* Capstone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Capstone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EB1ACA81D66BF7D00742261 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				4E27EB5C1D735C3E0044B428 /* CalculatorVC.swift */,
 				4E6CB3751D7C662B00C12F23 /* HomeSceneVC.swift */,
 				4E6CB3811D7DFF6600C12F23 /* StandardNormalVC.swift */,
+				4E6F37981D821B7B0029DC71 /* StandardDeviationVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				4E6CB3801D7DEBBF00C12F23 /* StatUtility.swift in Sources */,
 				4E27EB5D1D735C3E0044B428 /* CalculatorVC.swift in Sources */,
 				4EB1ACA91D66BF7D00742261 /* AppDelegate.swift in Sources */,
+				4E6F37991D821B7B0029DC71 /* StandardDeviationVC.swift in Sources */,
 				4E27EB561D72A1710044B428 /* ErsatzStatTablesVC.swift in Sources */,
 				4E27EB511D7294A80044B428 /* CalculatorNumberButton.swift in Sources */,
 			);

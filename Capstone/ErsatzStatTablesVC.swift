@@ -17,6 +17,7 @@ class ErsatzStatTablesVC: UIViewController {
     let dfPickerViewDataSource = 1...100
     var lookupValue: Double!
     var selectedDf: Int!
+    let numberFormatter = NSNumberFormatter()
     
     // MARK: - Outlets
     
@@ -59,17 +60,26 @@ class ErsatzStatTablesVC: UIViewController {
         
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     // MARK: - Actions
+    
+    @IBAction func plusMinusTapped(sender: AnyObject) {
+        
+        numberFormatter.minimumFractionDigits = 0
+        numberFormatter.maximumFractionDigits = 10
+        
+        if let numberText = lookupValueTextField.text {
+            if let currentNSNumber = numberFormatter.numberFromString(numberText) {
+                var currentNumberFloat = Double(currentNSNumber)
+                currentNumberFloat = (-1.0) * currentNumberFloat
+                
+                lookupValueTextField.text = numberFormatter.stringFromNumber(currentNumberFloat)
+            }
+            
+        }
+    }
+    
+    
     @IBAction func doneTapped(sender: AnyObject) {
         
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -87,13 +97,15 @@ class ErsatzStatTablesVC: UIViewController {
         print("The current mode is: ")
         print(self.currentMode.rawValue)
         
+        var result: Double = 0.0
+        
         if let newUserEntry = lookupValueTextField.text {
             
             if let unformattedNewValue = Double(newUserEntry) {
                 lookupValue = unformattedNewValue
             }
         }
-
+        
         
         /* Verify that the value entered by the user is valid */
         guard lookupValue != nil else {
@@ -103,12 +115,22 @@ class ErsatzStatTablesVC: UIViewController {
         
         switch currentMode! {
         case .zScore :
-            answerValueLabel.text = "\(StatisticsFunctions.swift_qNorm(lookupValue))"
+            // answerValueLabel.text = "\(StatisticsFunctions.swift_qNorm(lookupValue))"
+            result = StatisticsFunctions.swift_qNorm(lookupValue)
+            answerValueLabel.text = roundDoubleToNDecimals(result, n: 3)
         case .tScore :
-            answerValueLabel.text = "\(StatisticsFunctions.swift_qt(lookupValue, df: selectedDf))"
+            //answerValueLabel.text = "\(StatisticsFunctions.swift_qt(lookupValue, df: selectedDf))"
+            result = StatisticsFunctions.swift_qt(lookupValue, df: selectedDf)
+            answerValueLabel.text = roundDoubleToNDecimals(result, n: 3)
         case .pVal :
             if sender.tag == 0 {
-                answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(lookupValue, mean: 0.0, standardDev: 1.0, n: integrationStepCount))"
+                // answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(lookupValue, mean: 0.0, standardDev: 1.0, n: integrationStepCount))"
+                result = StatisticsFunctions.swift_pnormFewestSteps(lookupValue, mean: 0.0, standardDev: 1.0, n: integrationStepCount)
+                answerValueLabel.text = roundDoubleToNDecimals(result, n: 4)
+            } else if sender.tag == 1 {
+                // answerValueLabel.text = "\(StatisticsFunctions.swift_pt(lookupValue, df: selectedDf))"
+                result = StatisticsFunctions.swift_pt(lookupValue, df: selectedDf)
+                answerValueLabel.text = roundDoubleToNDecimals(result, n: 4)
             }
         }
         
@@ -189,6 +211,18 @@ class ErsatzStatTablesVC: UIViewController {
         dfLabel2.hidden = true
     }
     
+    
+    func roundDoubleToNDecimals(fullNumber: Double, n: Int) -> String {
+        numberFormatter.minimumFractionDigits = n
+        numberFormatter.maximumFractionDigits = n
+        
+        if let roundedNumberAsString = numberFormatter.stringFromNumber(fullNumber) {
+            return roundedNumberAsString
+        } else {
+            return ""
+        }
+        
+    }
 }
 
 extension ErsatzStatTablesVC: UIPickerViewDataSource, UIPickerViewDelegate {

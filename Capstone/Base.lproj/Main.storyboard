@@ -902,6 +902,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="geP-ho-JVb">
+                                <rect key="frame" x="211" y="180" width="30" height="45"/>
+                                <state key="normal" title="+/-"/>
+                                <connections>
+                                    <action selector="plusMinusTapped:" destination="VFt-ja-Gv3" eventType="touchUpInside" id="9tw-iF-ZXh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -914,7 +921,9 @@
                             <constraint firstItem="MmN-7p-39N" firstAttribute="top" secondItem="1BC-LX-GG7" secondAttribute="bottom" constant="15" id="71u-Gc-qgO"/>
                             <constraint firstItem="J9U-gP-kbn" firstAttribute="centerX" secondItem="sE3-Dy-xWn" secondAttribute="centerX" id="7g5-cx-7ma"/>
                             <constraint firstItem="yUx-Pa-MWT" firstAttribute="centerY" secondItem="Qmc-Tc-zkR" secondAttribute="centerY" id="Bjq-RP-MXf"/>
+                            <constraint firstItem="J9U-gP-kbn" firstAttribute="centerY" secondItem="geP-ho-JVb" secondAttribute="centerY" id="C18-ZD-A37"/>
                             <constraint firstItem="dYl-Op-gVu" firstAttribute="leading" secondItem="bkP-Q1-94D" secondAttribute="trailing" constant="16" id="CNM-lK-KpZ"/>
+                            <constraint firstItem="J9U-gP-kbn" firstAttribute="height" secondItem="geP-ho-JVb" secondAttribute="height" id="Cb6-KD-lim"/>
                             <constraint firstItem="bkP-Q1-94D" firstAttribute="leading" secondItem="sE3-Dy-xWn" secondAttribute="leadingMargin" id="DpU-5i-uZK"/>
                             <constraint firstItem="LZd-8F-8dZ" firstAttribute="centerX" secondItem="bkP-Q1-94D" secondAttribute="centerX" id="H64-an-IDw"/>
                             <constraint firstItem="MmN-7p-39N" firstAttribute="centerX" secondItem="sE3-Dy-xWn" secondAttribute="centerX" id="JuX-Cc-jCm"/>
@@ -926,6 +935,7 @@
                             <constraint firstItem="yUx-Pa-MWT" firstAttribute="top" secondItem="MmN-7p-39N" secondAttribute="bottom" constant="21" id="eiO-FM-VZz"/>
                             <constraint firstItem="LZd-8F-8dZ" firstAttribute="top" secondItem="bkP-Q1-94D" secondAttribute="bottom" id="eya-6E-sv4"/>
                             <constraint firstItem="m8m-Qt-EA2" firstAttribute="top" secondItem="ivK-cv-bCt" secondAttribute="bottom" id="jMv-1I-VHp"/>
+                            <constraint firstItem="J9U-gP-kbn" firstAttribute="leading" secondItem="geP-ho-JVb" secondAttribute="trailing" constant="8" id="lSF-2Y-NWe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1BC-LX-GG7" secondAttribute="trailing" id="mEj-RK-4f4"/>
                             <constraint firstItem="1BC-LX-GG7" firstAttribute="leading" secondItem="sE3-Dy-xWn" secondAttribute="leadingMargin" id="mjj-M5-DE9"/>
                             <constraint firstItem="1BC-LX-GG7" firstAttribute="leading" secondItem="sE3-Dy-xWn" secondAttribute="leadingMargin" id="o9F-lB-kJ8"/>

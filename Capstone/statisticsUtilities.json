@@ -11,12 +11,12 @@
       "id" : 1
      },
      {
-       "title" : "t-distribution",
+       "title" : "Confidence Intervals",
        "moreInfo" : "Describe the utility here ...",
        "id" : 2
      },
      {
-       "title" : "Chi-Square Distribution",
+       "title" : "Standard Deviation",
        "moreInfo" : "Describe the utility here ...",
        "id" : 3
      }

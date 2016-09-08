@@ -97,6 +97,7 @@ class ErsatzStatTablesVC: UIViewController {
         
         /* Verify that the value entered by the user is valid */
         guard lookupValue != nil else {
+            showErrorAlert("Oops!", alertDescription: "Did you forget to enter a number?")
             return
         }
         
@@ -150,6 +151,20 @@ class ErsatzStatTablesVC: UIViewController {
         
         //calculateButton.setTitle("Calculate \(updatedMode.rawValue)", forState: .Normal)
         
+    }
+    
+    func showErrorAlert(alertTitle: String, alertDescription: String) {
+        
+        let alertView = UIAlertController(title: "\(alertTitle)", message: "\(alertDescription)", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alertView.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) in
+            
+            self.lookupValueTextField.text = ""
+            
+        }) )
+        
+        
+        self.presentViewController(alertView, animated: true, completion: nil)
     }
     
     func addSecondaryButton() {

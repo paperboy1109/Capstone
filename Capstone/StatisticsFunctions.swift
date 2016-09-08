@@ -135,7 +135,159 @@ public class StatisticsFunctions {
             }
         }
     }
-
+    
+    static func swift_dt(x: Double, df: Int) -> Double {
+        
+        let numerator: Double = tgamma((Double(df) + 1) / 2)
+        let denominator1: Double = sqrt(M_PI * Double(df)) * tgamma(Double(df)/2)
+        let denominator2: Double =  pow( (1 + ((x * x)/Double(df))), (Double(df)+1)/2 )
+        
+        return numerator / (denominator1 * denominator2)
+    }
+    
+    // MARK: - Formulas relevant to working with the t-distribution
+    // Note: the approximation derives from the work of William T. Shaw
+    // http://www.homepages.ucl.ac.uk/~ucahwts/lgsnotes/JCF_Student.pdf
+    
+    /* Restrict the calculations */
+    static let iterationLimit = 1000
+    static let desiredAccuracy = pow(10.0, -7)
+    
+    /* For readability */
+    typealias SingleVariableFunctionWithDf = (Double, Int) -> (Double)
+    
+    static func estimateRoot(targetValue: Double, minValue: Double, maxValue: Double, df: Int, function: SingleVariableFunctionWithDf ) -> Double {
+        
+        var newApproximation = (minValue + maxValue) / 2.0
+        var y = function(newApproximation, df)
+        var error = y - targetValue
+        var lowerApprox = minValue
+        var upperApprox = maxValue
+        
+        var counter = 0
+        
+        while abs(error) > desiredAccuracy && counter < iterationLimit {
+            
+            if error > 0 {
+                upperApprox = newApproximation
+            } else {
+                lowerApprox = newApproximation
+            }
+            
+            newApproximation = (upperApprox + lowerApprox) / 2.0
+            
+            y = function(newApproximation, df)
+            error = (y - targetValue)
+            
+            counter += 1
+            
+            print("guess: \(newApproximation)")
+        }
+        
+        return newApproximation
+        
+    }
+    
+    /* Beta functions */
+    static func logBeta(p: Double, q: Double) -> Double {
+        
+        guard p > 0.0 && q > 0.0 else {
+            return 0.0
+        }
+        
+        return lgamma(p) + lgamma(q) - lgamma(p + q)
+    }
+    
+    static func betaFraction(x: Double, p: Double, q: Double) -> Double {
+        
+        var delta = 0.0
+        
+        let pqSum = p + q
+        let plusP = 1.0 + p
+        let minusP = p - 1.0
+        var h = 1.0 - (pqSum * x) / plusP
+        
+        h = 1.0 / h
+        var fraction = h
+        var m = 1
+        var c = 1.0
+        
+        while m <= iterationLimit && abs(delta - 1.0) > desiredAccuracy {
+            
+            let m1 = Double(m)
+            let m2 = 2 * Double(m)
+            
+            // d even
+            var d = (m1 * (q - m1) * x) / ( (minusP + m2) * (p + m2) )
+            h = 1.0 + (d * h)
+            h = 1.0 / h
+            c = 1.0 + d / c
+            fraction = fraction * h * c
+            
+            // d odd
+            d = ( (-1.0) * (p + m1) * (pqSum + m1) * x ) / ( (p + m2) * (plusP + m2) )
+            h = 1.0 + d * h
+            h = 1.0 / h
+            c = 1.0 + (d / c)
+            delta = h * c
+            fraction = fraction * delta
+            
+            m += 1
+            
+        }
+        
+        return fraction
+        
+    }
+    
+    static func incompleteBeta(x: Double, p: Double, q: Double) -> Double {
+        
+        guard x >= 0.0 && x <= 1.0 else {
+            return 0.0
+        }
+        
+        guard p > 0.0 && q > 0.0 else {
+            return 0.0
+        }
+        
+        let beta_gam = pow(M_E, -logBeta(p, q: q) + p * log(x) + q * log(1.0 - x) )
+        
+        if x < (p + 1.0) / (p + q + 2.0) {
+            return beta_gam * betaFraction(x, p: p, q: q) / p
+        } else {
+            return 1.0 - ( beta_gam * betaFraction((1.0 - x), p: q, q: p) / q )
+        }
+        
+    }
+    
+    static func swift_pt(tScore: Double, df: Int) -> Double {
+        
+        let x = ( Double(df) / (Double(df) + pow(tScore, 2)) )
+        let p = 0.5 * Double(df)
+        let result = 0.5 * incompleteBeta(x, p: p, q: 0.5)
+        
+        if tScore > 0 {
+            return 1.0 - result
+        } else {
+            return result
+        }
+        
+    }
+    
+    static func swift_qt(pVal: Double, df: Int) -> Double {
+        
+        guard pVal >= 0.0 && pVal <= 1.0 else {
+            return 0.0
+        }
+        
+        if pVal == 0.0 {
+            return Double("inf")!
+        } else if pVal == 1.0 {
+            return Double("-inf")!
+        }
+        
+        return estimateRoot(pVal, minValue: (-1.0) * pow(10.0, 2), maxValue: pow(10.0, 2), df: df, function: swift_pt)
+    }
     
     
 }

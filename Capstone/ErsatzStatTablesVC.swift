@@ -13,6 +13,9 @@ class ErsatzStatTablesVC: UIViewController {
     // MARK: - Properties
     
     var currentMode: ErsatzStatTableOptions!
+    let integrationStepCount = 500
+    let dfPickerViewDataSource = 1...100
+    var selectedDf: Int!
     
     // MARK: - Outlets
     
@@ -23,6 +26,9 @@ class ErsatzStatTablesVC: UIViewController {
     @IBOutlet var stepper: UIStepper!
     @IBOutlet var modeControl: UISegmentedControl!
     @IBOutlet var calculateButton: UIButton!
+    
+    @IBOutlet var dfPickerView: UIPickerView!
+    
     
     // MARK: - Lifecycle
     
@@ -40,6 +46,11 @@ class ErsatzStatTablesVC: UIViewController {
         /* Set the UI according to the current mode */
         currentMode = ErsatzStatTableOptions.allOptions[modeControl.selectedSegmentIndex]
         updateInputControlsByMode(currentMode)
+        
+        /* Set up the pickerView */
+        dfPickerView.dataSource = self;
+        dfPickerView.delegate = self;
+        selectedDf = 1
         
         answerValueLabel.text = ""
         
@@ -90,7 +101,7 @@ class ErsatzStatTablesVC: UIViewController {
         print(self.currentMode.rawValue)
         
         if self.currentMode == .zScore {
-            answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(Double(slider.value), mean: 0.0, standardDev: 1.0, n: 500))"
+            answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(Double(slider.value), mean: 0.0, standardDev: 1.0, n: integrationStepCount))"
         } else {
             // TODO: Calculate a p-value or t-score
             answerValueLabel.text = "\(slider.value)"
@@ -98,11 +109,13 @@ class ErsatzStatTablesVC: UIViewController {
         
         switch currentMode! {
         case .zScore :
-            answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(Double(slider.value), mean: 0.0, standardDev: 1.0, n: 500))"
-        case .tScore :
-            answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(Double(slider.value), mean: 0.0, standardDev: 1.0, n: 500))"
-        case .pVal :
+            // answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(Double(slider.value), mean: 0.0, standardDev: 1.0, n: 500))"
             answerValueLabel.text = "\(StatisticsFunctions.swift_qNorm(Double(slider.value)))"
+        case .tScore :
+            // answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(Double(slider.value), mean: 0.0, standardDev: 1.0, n: 500))"
+            answerValueLabel.text = "\(StatisticsFunctions.swift_qt(Double(slider.value), df: selectedDf))"
+        case .pVal :
+            answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(Double(slider.value), mean: 0.0, standardDev: 1.0, n: integrationStepCount))"
         }
         
     }
@@ -113,16 +126,23 @@ class ErsatzStatTablesVC: UIViewController {
         answerValueLabel.text = ""
         
         switch updatedMode! {
-        case  .tScore, .zScore :
-            slider.minimumValue = -6.0
-            slider.maximumValue = 6.0
-            slider.value = 0.0
-            calculateButton.setTitle("Calculate p-value", forState: .Normal)
-        case .pVal :
+        case .zScore :
             slider.minimumValue = 0.0
             slider.maximumValue = 1.0
             slider.value = 0.5
             calculateButton.setTitle("Calculate z-score", forState: .Normal)
+            
+        case .tScore :
+            slider.minimumValue = 0.0
+            slider.maximumValue = 1.0
+            slider.value = 0.5
+            calculateButton.setTitle("Calculate t-score", forState: .Normal)
+            
+        case .pVal :
+            slider.minimumValue = -6.0
+            slider.maximumValue = 6.0
+            slider.value = 0.0
+            calculateButton.setTitle("Calculate p-value", forState: .Normal)
         }
         
         stepper.minimumValue = Double(slider.minimumValue)
@@ -135,6 +155,28 @@ class ErsatzStatTablesVC: UIViewController {
         
     }
     
+}
+
+extension ErsatzStatTablesVC: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return dfPickerViewDataSource.count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        return String(row + 1)
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedDf = row + 1
+        /* Clear out the answer label if the value for df is changed */
+        answerValueLabel.text = ""
+    }
     
     
     
@@ -146,3 +188,4 @@ extension ErsatzStatTablesVC {
         return true
     }
 }
+

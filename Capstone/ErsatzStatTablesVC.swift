@@ -15,20 +15,25 @@ class ErsatzStatTablesVC: UIViewController {
     var currentMode: ErsatzStatTableOptions!
     let integrationStepCount = 500
     let dfPickerViewDataSource = 1...100
+    var lookupValue: Double!
     var selectedDf: Int!
     
     // MARK: - Outlets
     
+    @IBOutlet var lookupValueTextField: UITextField!
     @IBOutlet var lookupValueLabel: UILabel!
     @IBOutlet var answerValueLabel: UILabel!
+    @IBOutlet var entryTypeLabel: UILabel!
     
-    @IBOutlet var slider: UISlider!
-    @IBOutlet var stepper: UIStepper!
+    
     @IBOutlet var modeControl: UISegmentedControl!
     @IBOutlet var calculateButton: UIButton!
     
-    @IBOutlet var dfPickerView: UIPickerView!
+    @IBOutlet var calculateButton_Secondary: UIButton!
     
+    @IBOutlet var dfPickerView: UIPickerView!
+    @IBOutlet var dfLabel1: UILabel!
+    @IBOutlet var dfLabel2: UILabel!
     
     // MARK: - Lifecycle
     
@@ -39,9 +44,6 @@ class ErsatzStatTablesVC: UIViewController {
         modeControl.setTitle(ErsatzStatTableOptions.pVal.rawValue, forSegmentAtIndex: ErsatzStatTableOptions.allOptions.indexOf(ErsatzStatTableOptions.pVal)!)
         modeControl.setTitle(ErsatzStatTableOptions.zScore.rawValue, forSegmentAtIndex: ErsatzStatTableOptions.allOptions.indexOf(ErsatzStatTableOptions.zScore)!)
         modeControl.setTitle(ErsatzStatTableOptions.tScore.rawValue, forSegmentAtIndex: ErsatzStatTableOptions.allOptions.indexOf(ErsatzStatTableOptions.tScore)!)
-        
-        /* Configure the step size for the stepper control */
-        stepper.stepValue = 0.01
         
         /* Set the UI according to the current mode */
         currentMode = ErsatzStatTableOptions.allOptions[modeControl.selectedSegmentIndex]
@@ -74,48 +76,39 @@ class ErsatzStatTablesVC: UIViewController {
     }
     
     
-    @IBAction func sliderMoved(sender: UISlider) {
-        answerValueLabel.text = ""
-        lookupValueLabel.text = "\(sender.value)"
-        stepper.value = Double(sender.value)
-    }
-    
-    
-    
-    @IBAction func stepperTapped(sender: UIStepper) {
-        answerValueLabel.text = ""
-        slider.value = Float(sender.value)
-        lookupValueLabel.text = "\(slider.value)"
-    }
-    
-    
     @IBAction func modeChangedByTap(sender: UISegmentedControl) {
         
         self.currentMode = ErsatzStatTableOptions.allOptions[sender.selectedSegmentIndex]
         updateInputControlsByMode(self.currentMode)
     }
     
-    @IBAction func calculateTapped(sender: AnyObject) {
+    @IBAction func calculateTapped(sender: UIButton) {
         
         print("The current mode is: ")
         print(self.currentMode.rawValue)
         
-        if self.currentMode == .zScore {
-            answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(Double(slider.value), mean: 0.0, standardDev: 1.0, n: integrationStepCount))"
-        } else {
-            // TODO: Calculate a p-value or t-score
-            answerValueLabel.text = "\(slider.value)"
+        if let newUserEntry = lookupValueTextField.text {
+            
+            if let unformattedNewValue = Double(newUserEntry) {
+                lookupValue = unformattedNewValue
+            }
+        }
+
+        
+        /* Verify that the value entered by the user is valid */
+        guard lookupValue != nil else {
+            return
         }
         
         switch currentMode! {
         case .zScore :
-            // answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(Double(slider.value), mean: 0.0, standardDev: 1.0, n: 500))"
-            answerValueLabel.text = "\(StatisticsFunctions.swift_qNorm(Double(slider.value)))"
+            answerValueLabel.text = "\(StatisticsFunctions.swift_qNorm(lookupValue))"
         case .tScore :
-            // answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(Double(slider.value), mean: 0.0, standardDev: 1.0, n: 500))"
-            answerValueLabel.text = "\(StatisticsFunctions.swift_qt(Double(slider.value), df: selectedDf))"
+            answerValueLabel.text = "\(StatisticsFunctions.swift_qt(lookupValue, df: selectedDf))"
         case .pVal :
-            answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(Double(slider.value), mean: 0.0, standardDev: 1.0, n: integrationStepCount))"
+            if sender.tag == 0 {
+                answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(lookupValue, mean: 0.0, standardDev: 1.0, n: integrationStepCount))"
+            }
         }
         
     }
@@ -127,32 +120,58 @@ class ErsatzStatTablesVC: UIViewController {
         
         switch updatedMode! {
         case .zScore :
-            slider.minimumValue = 0.0
-            slider.maximumValue = 1.0
-            slider.value = 0.5
+            removeSecondaryButton()
+            removeDfEntry()
+            
+            entryTypeLabel.text = "p-value (left tail): "
+            
             calculateButton.setTitle("Calculate z-score", forState: .Normal)
             
         case .tScore :
-            slider.minimumValue = 0.0
-            slider.maximumValue = 1.0
-            slider.value = 0.5
+            removeSecondaryButton()
+            addDfEntry()
+            dfLabel2.hidden = true
+            
+            entryTypeLabel.text = "p-value (left tail): "
+            
             calculateButton.setTitle("Calculate t-score", forState: .Normal)
             
         case .pVal :
-            slider.minimumValue = -6.0
-            slider.maximumValue = 6.0
-            slider.value = 0.0
-            calculateButton.setTitle("Calculate p-value", forState: .Normal)
+            addSecondaryButton()
+            addDfEntry()
+            
+            entryTypeLabel.text = "z or t: "
+            
+            calculateButton.setTitle("Calculate p-value for z", forState: .Normal)
+            calculateButton_Secondary.setTitle("Calculate p-value for t", forState: .Normal)
         }
         
-        stepper.minimumValue = Double(slider.minimumValue)
-        stepper.maximumValue = Double(slider.maximumValue)
-        stepper.value = Double(slider.value)
         
-        lookupValueLabel.text = "\(slider.value)"
-        // calculateButton.titleLabel = "\(updatedMode.rawValue)"
+        
         //calculateButton.setTitle("Calculate \(updatedMode.rawValue)", forState: .Normal)
         
+    }
+    
+    func addSecondaryButton() {
+        calculateButton_Secondary.hidden = false
+        calculateButton_Secondary.enabled = true
+    }
+    
+    func removeSecondaryButton() {
+        calculateButton_Secondary.hidden = true
+        calculateButton_Secondary.enabled = false
+    }
+    
+    func addDfEntry() {
+        dfPickerView.hidden = false
+        dfLabel1.hidden = false
+        dfLabel2.hidden = false
+    }
+    
+    func removeDfEntry() {
+        dfPickerView.hidden = true
+        dfLabel1.hidden = true
+        dfLabel2.hidden = true
     }
     
 }
@@ -180,6 +199,21 @@ extension ErsatzStatTablesVC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     
     
+}
+
+// MARK: - Improve Keyboard behavior
+
+extension ErsatzStatTablesVC {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
+    }
 }
 
 extension ErsatzStatTablesVC {

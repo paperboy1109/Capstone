@@ -837,12 +837,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wBD-SV-Nju">
-                                                    <rect key="frame" x="8" y="7" width="97" height="30"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wBD-SV-Nju">
+                                                    <rect key="frame" x="8" y="8" width="544" height="27"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="wBD-SV-Nju" secondAttribute="bottom" id="eXC-zA-AU3"/>
+                                                <constraint firstItem="wBD-SV-Nju" firstAttribute="leading" secondItem="Xxw-d8-0XL" secondAttribute="leadingMargin" id="iAT-r5-XOo"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="wBD-SV-Nju" secondAttribute="trailing" id="sEj-jq-dYw"/>
+                                                <constraint firstItem="wBD-SV-Nju" firstAttribute="top" secondItem="Xxw-d8-0XL" secondAttribute="topMargin" id="vLr-8w-6dF"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="datumTextField" destination="wBD-SV-Nju" id="daC-XT-KLi"/>

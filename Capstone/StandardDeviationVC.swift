@@ -53,3 +53,17 @@ extension StandardDeviationVC: UITableViewDataSource, UITableViewDelegate {
 
 
 }
+
+
+extension StandardDeviationVC {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+}
+
+extension StandardDeviationVC {
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+}

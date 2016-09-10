@@ -837,22 +837,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COr-6y-E5Z">
-                                                    <rect key="frame" x="8" y="8" width="544" height="27"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wBD-SV-Nju">
+                                                    <rect key="frame" x="8" y="7" width="97" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="COr-6y-E5Z" firstAttribute="leading" secondItem="Xxw-d8-0XL" secondAttribute="leadingMargin" id="0Iu-S1-sPY"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="COr-6y-E5Z" secondAttribute="trailing" id="7Tz-76-aDH"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="COr-6y-E5Z" secondAttribute="bottom" id="B63-gZ-WUp"/>
-                                                <constraint firstItem="COr-6y-E5Z" firstAttribute="top" secondItem="Xxw-d8-0XL" secondAttribute="topMargin" id="MPW-w9-2TM"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="datumCellLabel" destination="COr-6y-E5Z" id="YdW-eV-54z"/>
+                                            <outlet property="datumTextField" destination="wBD-SV-Nju" id="daC-XT-KLi"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

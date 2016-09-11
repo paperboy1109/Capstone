@@ -8,6 +8,13 @@
 
 import UIKit
 
+protocol DataTableViewCellDelegate {
+    
+    func deleteDataTableCell(itemToRemove: DataTableDatum)
+    
+}
+
+
 class DataTableViewCell: UITableViewCell {
     
     // MARK: - Properties
@@ -17,9 +24,21 @@ class DataTableViewCell: UITableViewCell {
     var deleteWhenPanGestureEnds = false
     var changeSignOfDatumValue = false
     
+    var delegate: DataTableViewCellDelegate?
+    
     // MARK: - Outlets
     
     @IBOutlet var datumTextField: UITextField!
+    
+    // MARK: - Observers
+    
+    /* If new text is entered */
+    var datum: DataTableDatum? {
+        /* Update table view cells when the datum is set (previous data has been loaded)*/
+        didSet {
+            datumTextField.text = datum!.datumText
+        }
+    }
     
     
     
@@ -100,7 +119,12 @@ class DataTableViewCell: UITableViewCell {
             if self.deleteWhenPanGestureEnds {
                 datumTextField.backgroundColor = UIColor.redColor()
                 UIView.animateWithDuration(0.4, animations: {self.frame = initialCellFrame})
-                // TODO: create a protocol and delegate to remove the cell from the table view
+                
+                // Create a protocol and delegate to remove the cell from the table view
+                if delegate != nil && datum != nil {
+                    delegate!.deleteDataTableCell(datum!)
+                    datumTextField.backgroundColor = UIColor.orangeColor()
+                }
                 
             } else if self.changeSignOfDatumValue {
                 datumTextField.backgroundColor = UIColor.greenColor()

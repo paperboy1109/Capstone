@@ -1,0 +1,17 @@
+PODS:
+  - Charts (2.2.5):
+    - Charts/Core (= 2.2.5)
+  - Charts/Core (2.2.5)
+  - NumberMorphView (0.1.1)
+
+DEPENDENCIES:
+  - Charts
+  - NumberMorphView
+
+SPEC CHECKSUMS:
+  Charts: b48fcc8d7190de910ff9e9748f5360c8ea7856e5
+  NumberMorphView: c973665c449a7241ed6a9c83d5ff708169531f7c
+
+PODFILE CHECKSUM: c818b9cb1aaafc071626de3ad62321dc90715545
+
+COCOAPODS: 1.0.1

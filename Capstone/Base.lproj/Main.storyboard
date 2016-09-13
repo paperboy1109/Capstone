@@ -838,17 +838,29 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wBD-SV-Nju">
-                                                    <rect key="frame" x="8" y="8" width="544" height="27"/>
+                                                    <rect key="frame" x="8" y="8" width="187" height="27"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="wBD-SV-Nju" firstAttribute="leading" secondItem="Xxw-d8-0XL" secondAttribute="leadingMargin" id="JMy-hC-gSc"/>
+                                                <constraint firstItem="wBD-SV-Nju" firstAttribute="bottom" secondItem="Xxw-d8-0XL" secondAttribute="bottomMargin" id="WEl-tr-7pn"/>
+                                                <constraint firstItem="wBD-SV-Nju" firstAttribute="width" secondItem="Xxw-d8-0XL" secondAttribute="width" multiplier="1:3" id="aYU-MM-HjY"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="wBD-SV-Nju" secondAttribute="bottom" id="eXC-zA-AU3"/>
                                                 <constraint firstItem="wBD-SV-Nju" firstAttribute="leading" secondItem="Xxw-d8-0XL" secondAttribute="leadingMargin" id="iAT-r5-XOo"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="wBD-SV-Nju" secondAttribute="trailing" id="sEj-jq-dYw"/>
                                                 <constraint firstItem="wBD-SV-Nju" firstAttribute="top" secondItem="Xxw-d8-0XL" secondAttribute="topMargin" id="vLr-8w-6dF"/>
+                                                <constraint firstItem="wBD-SV-Nju" firstAttribute="top" secondItem="Xxw-d8-0XL" secondAttribute="topMargin" id="xiZ-4Q-1L6"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="eXC-zA-AU3"/>
+                                                    <exclude reference="iAT-r5-XOo"/>
+                                                    <exclude reference="sEj-jq-dYw"/>
+                                                    <exclude reference="vLr-8w-6dF"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="datumTextField" destination="wBD-SV-Nju" id="daC-XT-KLi"/>

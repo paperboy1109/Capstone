@@ -12,6 +12,10 @@ protocol DataTableViewCellDelegate {
     
     func deleteDataTableCell(itemToRemove: DataTableDatum)
     
+    /* Lifecycle methods */
+    func cellDidBeginEditing(editingCell: DataTableViewCell)
+    func cellDidEndEditing(editingCell: DataTableViewCell)
+    
 }
 
 
@@ -34,7 +38,7 @@ class DataTableViewCell: UITableViewCell {
     
     /* If new text is entered */
     var datum: DataTableDatum? {
-        /* Update table view cells when the datum is set (previous data has been loaded)*/
+        /* Update table view cells when the datum is set (previous app use data has been loaded)*/
         didSet {
             datumTextField.text = datum!.datumText
         }
@@ -113,6 +117,7 @@ class DataTableViewCell: UITableViewCell {
         if recognizer.state == .Ended {
             
             print("Here is deleteWhenPanGestureEnds: \(deleteWhenPanGestureEnds)")
+            print("Here is datum: \(datum)")
             
             let initialCellFrame = CGRect(x: 0, y: frame.origin.y, width: bounds.size.width, height: bounds.size.height)
             
@@ -122,8 +127,7 @@ class DataTableViewCell: UITableViewCell {
                 
                 // Create a protocol and delegate to remove the cell from the table view
                 if delegate != nil && datum != nil {
-                    delegate!.deleteDataTableCell(datum!)
-                    datumTextField.backgroundColor = UIColor.orangeColor()
+                    delegate!.deleteDataTableCell(datum!)                    
                 }
                 
             } else if self.changeSignOfDatumValue {
@@ -142,10 +146,39 @@ class DataTableViewCell: UITableViewCell {
 
 extension DataTableViewCell: UITextFieldDelegate {
     
-    /* Improve keyboard behavior */
+    /* Improve keyboard behavior: close it when the user taps enter */
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return false
+    }
+    
+    /* Prevent edits to the text field here */
+//    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+//        return false
+//    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        
+        guard delegate != nil else {
+            return
+        }
+        
+        /* Invoke the lifecycle protocol: cellDidBeginEditing */
+        delegate!.cellDidBeginEditing(self)
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        guard datum != nil else {
+            return
+        }
+        
+        datum!.datumText = textField.text!
+        
+        guard delegate != nil else {
+            return
+        }
+        
+        delegate!.cellDidEndEditing(self)
     }
     
 }

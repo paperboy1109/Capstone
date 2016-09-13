@@ -13,6 +13,10 @@ class StandardDeviationVC: UIViewController {
     // MARK: - Properties
     var dataTableEntries: [DataTableDatum]!
     
+    let placeholderTableCell = DataTableViewCell()
+    
+    var pullDownGestureActive = false
+    
     // MARK: - Outlets
 
     @IBOutlet var dataTableView: UITableView!
@@ -24,8 +28,24 @@ class StandardDeviationVC: UIViewController {
 
         dataTableView.dataSource = self
         dataTableView.delegate = self
+        dataTableView.rowHeight = 64.0
         
         dataTableEntries = []
+        
+        /* Create some example data */
+        let sampleData = ["1.0", "2.0", "3.0", "4.0", "5.0", "6.0", "7.0"]
+        for item in sampleData {
+            let newDatum = DataTableDatum(textFieldText: item)
+            dataTableEntries.append(newDatum)
+        }
+        
+        print("dataTableEntries includes \(dataTableEntries.count) entries")
+        
+        // TODO: Fix this crash
+        //placeholderTableCell.datumTextField.text = "Hello"
+        //print("Here is placeholderTableCell: \(placeholderTableCell)")
+        
+        
     }
     
     
@@ -37,6 +57,8 @@ class StandardDeviationVC: UIViewController {
 
 }
 
+// MARK: - Delegates for the table view
+
 extension StandardDeviationVC: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -44,14 +66,18 @@ extension StandardDeviationVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return dataTableEntries.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        print("cellForRowAtIndexPath, number of cells: \(dataTableEntries.count)")
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("DatumCell", forIndexPath: indexPath) as! DataTableViewCell
         
         cell.delegate = self
+        // TODO: Add data to the cell
+        cell.datum = dataTableEntries[indexPath.row]
         
         return cell
     }
@@ -59,6 +85,8 @@ extension StandardDeviationVC: UITableViewDataSource, UITableViewDelegate {
 
 
 }
+
+// MARK: - Delegate methods for the custom cell class
 
 extension StandardDeviationVC: DataTableViewCellDelegate {
     
@@ -77,12 +105,88 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
         dataTableView.beginUpdates()
         let indexPathOfItemToDelete = NSIndexPath(forRow: indexOfItemToRemove, inSection: 0)
         dataTableView.deleteRowsAtIndexPaths([indexPathOfItemToDelete], withRowAnimation: .Automatic)
-        dataTableView.endUpdates()
+        dataTableView.endUpdates()        
+    }
+    
+    func cellDidBeginEditing(editingCell: DataTableViewCell) {
+        
+        print("\n *** cellDidBeginEditing *** ")
+        print("dataTableView.contentOffset: \(dataTableView.contentOffset)")
+        print("editingCell.frame.origin.y: \(editingCell.frame.origin.y)")
+        
+        // TODO: Implement this method
+        let offsetWhileEditing = dataTableView.contentOffset.y - editingCell.frame.origin.y as CGFloat
+        let cellsToMove = dataTableView.visibleCells as! [DataTableViewCell]
+        
+        for item in cellsToMove {
+            UIView.animateWithDuration(0.4, animations: {() in
+                /* Move the cell up relative to the scroll position of the table view */
+                item.transform = CGAffineTransformMakeTranslation(0, offsetWhileEditing)
+                if item !== editingCell {
+                    item.alpha = 0.3
+                }
+            })
+        }
+    }
+    
+    func cellDidEndEditing(editingCell: DataTableViewCell) {
+        
+        // TODO: Implement this method
         
         
     }
+    
+    
 }
 
+// MARK: - UIScrollViewDelegate methods
+
+extension StandardDeviationVC {
+    
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        
+        pullDownGestureActive = scrollView.contentOffset.y <= 0.0
+        placeholderTableCell.backgroundColor = UIColor.redColor() // make the placeholder cell distinct for debugging
+        
+        if pullDownGestureActive {
+            /* User has pulled downward at the top of the table, add the placeholder cell */
+            
+            dataTableView.insertSubview(placeholderTableCell, atIndex: 0)
+        }
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        let scrollViewContentOffsetY = scrollView.contentOffset.y
+        
+        if pullDownGestureActive && scrollView.contentOffset.y <= 0.0 {
+            /* Re-position the placeholder cell as the user scrolls */
+            placeholderTableCell.frame = CGRect(x: 0, y: -dataTableView.rowHeight,
+                                           width: dataTableView.frame.size.width, height: dataTableView.rowHeight)
+            
+            // TODO: Fix the crash caused by trying to access datumTextField.text
+            //placeholderTableCell.datumTextField.text = -scrollViewContentOffsetY > dataTableView.rowHeight ? "Release to add the cell" : "Pull to create a data entry cell"
+            placeholderTableCell.alpha = min(1.0, (-1.0) * scrollViewContentOffsetY / dataTableView.rowHeight)
+        } else {
+            pullDownGestureActive = false
+        }
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        /* If the scroll-down gesture was far enough, add the placeholder cell to the collection of items in the table view */
+        if pullDownGestureActive && -scrollView.contentOffset.y > dataTableView.rowHeight {
+            
+            if pullDownGestureActive && -scrollView.contentOffset.y > dataTableView.rowHeight {
+                // toDoItemAdded()
+            }
+        }
+        pullDownGestureActive = false
+        placeholderTableCell.removeFromSuperview()
+    }
+}
+
+// MARK: - Close the keyboard when the user taps outside the editng field
 
 extension StandardDeviationVC {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

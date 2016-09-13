@@ -18,14 +18,14 @@ class StandardDeviationVC: UIViewController {
     var pullDownGestureActive = false
     
     // MARK: - Outlets
-
+    
     @IBOutlet var dataTableView: UITableView!
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         dataTableView.dataSource = self
         dataTableView.delegate = self
         dataTableView.rowHeight = 64.0
@@ -54,7 +54,7 @@ class StandardDeviationVC: UIViewController {
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
 }
 
 // MARK: - Delegates for the table view
@@ -81,9 +81,9 @@ extension StandardDeviationVC: UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
-
-
-
+    
+    
+    
 }
 
 // MARK: - Delegate methods for the custom cell class
@@ -102,10 +102,11 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
         
         /* Update the table view */
         
+        
         dataTableView.beginUpdates()
         let indexPathOfItemToDelete = NSIndexPath(forRow: indexOfItemToRemove, inSection: 0)
         dataTableView.deleteRowsAtIndexPaths([indexPathOfItemToDelete], withRowAnimation: .Automatic)
-        dataTableView.endUpdates()        
+        dataTableView.endUpdates()
     }
     
     func cellDidBeginEditing(editingCell: DataTableViewCell) {
@@ -132,10 +133,18 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
     func cellDidEndEditing(editingCell: DataTableViewCell) {
         
         // TODO: Implement this method
+        let cellsToMove = dataTableView.visibleCells as! [DataTableViewCell]
         
-        
-    }
-    
+        for item in cellsToMove {
+            /* Return cells to their pre-editing position and restore opaque color */
+            UIView.animateWithDuration(0.3, animations: {() in
+                item.transform = CGAffineTransformIdentity
+                if item !== editingCell {
+                    item.alpha = 1.0
+                }
+            })
+        }
+    }    
     
 }
 
@@ -162,7 +171,7 @@ extension StandardDeviationVC {
         if pullDownGestureActive && scrollView.contentOffset.y <= 0.0 {
             /* Re-position the placeholder cell as the user scrolls */
             placeholderTableCell.frame = CGRect(x: 0, y: -dataTableView.rowHeight,
-                                           width: dataTableView.frame.size.width, height: dataTableView.rowHeight)
+                                                width: dataTableView.frame.size.width, height: dataTableView.rowHeight)
             
             // TODO: Fix the crash caused by trying to access datumTextField.text
             //placeholderTableCell.datumTextField.text = -scrollViewContentOffsetY > dataTableView.rowHeight ? "Release to add the cell" : "Pull to create a data entry cell"

@@ -11,6 +11,7 @@ import UIKit
 protocol DataTableViewCellDelegate {
     
     func deleteDataTableCell(itemToRemove: DataTableDatum)
+    func addDataTableCell()
     
     /* Lifecycle methods */
     func cellDidBeginEditing(editingCell: DataTableViewCell)
@@ -26,7 +27,7 @@ class DataTableViewCell: UITableViewCell {
     var initialCellCenter = CGPoint()
     
     var deleteWhenPanGestureEnds = false
-    var changeSignOfDatumValue = false
+    var changeSignOfDatumValue = false        
     
     var delegate: DataTableViewCellDelegate?
     
@@ -61,7 +62,7 @@ class DataTableViewCell: UITableViewCell {
         
         let recognizer = UIPanGestureRecognizer(target: self, action: #selector(DataTableViewCell.panGestureRecognized(_:)))
         recognizer.delegate = self
-        addGestureRecognizer(recognizer)
+        addGestureRecognizer(recognizer)                
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -168,6 +169,7 @@ extension DataTableViewCell: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
+        
         guard datum != nil else {
             return
         }
@@ -182,3 +184,5 @@ extension DataTableViewCell: UITextFieldDelegate {
     }
     
 }
+
+

@@ -15,6 +15,14 @@ class StandardDeviationVC: UIViewController {
     
     let placeholderTableCell = DataTableViewCell()
     
+    let pinchGestureRecognizer = UIPinchGestureRecognizer()
+    var pinchGestureActive = false
+    var initialTouchPoints: TouchPoints!
+    var addNewCellByPinch = false
+    
+    var upperCellIndex = -100
+    var lowerCellIndex = -100
+    
     var pullDownGestureActive = false
     
     // MARK: - Outlets
@@ -25,6 +33,9 @@ class StandardDeviationVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        pinchGestureRecognizer.addTarget(self, action: #selector(StandardDeviationVC.userDidPinch(_:)))
+        dataTableView.addGestureRecognizer(pinchGestureRecognizer)
         
         dataTableView.dataSource = self
         dataTableView.delegate = self
@@ -90,45 +101,6 @@ extension StandardDeviationVC: UITableViewDataSource, UITableViewDelegate {
 
 extension StandardDeviationVC: DataTableViewCellDelegate {
     
-    func addDataTableCell() {
-        
-        let newDatum = DataTableDatum(textFieldText: "")
-        dataTableEntries.insert(newDatum, atIndex: 0)
-        dataTableView.reloadData()
-        
-        var newCell: DataTableViewCell
-        
-        let allVisibleCells = dataTableView.visibleCells as! [DataTableViewCell]
-        
-        for item in allVisibleCells {
-            
-            if item.datum === newDatum {
-                newCell = item
-                newCell.datumTextField.becomeFirstResponder()
-                break
-            }
-        }
-    }
-    
-    func deleteDataTableCell(itemToRemove: DataTableDatum) {
-        
-        let indexOfItemToRemove = (dataTableEntries as NSArray).indexOfObject(itemToRemove)
-        
-        guard indexOfItemToRemove != NSNotFound else {
-            return
-        }
-        
-        dataTableEntries.removeAtIndex(indexOfItemToRemove)
-        
-        /* Update the table view */
-        
-        
-        dataTableView.beginUpdates()
-        let indexPathOfItemToDelete = NSIndexPath(forRow: indexOfItemToRemove, inSection: 0)
-        dataTableView.deleteRowsAtIndexPaths([indexPathOfItemToDelete], withRowAnimation: .Automatic)
-        dataTableView.endUpdates()
-    }
-    
     func cellDidBeginEditing(editingCell: DataTableViewCell) {
         
         print("\n *** cellDidBeginEditing *** ")
@@ -169,7 +141,51 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
         if editingCell.datum!.datumText == "" {
             deleteDataTableCell(editingCell.datum!)
         }
-    }    
+    }
+    
+    func addDataTableCell() {
+        /* By default, add a cell to the top of the table */
+        addDataTableCellAtIndex(0)
+        
+    }
+    
+    func addDataTableCellAtIndex(index: Int) {
+        
+        let newDatum = DataTableDatum(textFieldText: "")
+        dataTableEntries.insert(newDatum, atIndex: index)
+        dataTableView.reloadData()
+        
+        var newCell: DataTableViewCell
+        
+        let allVisibleCells = dataTableView.visibleCells as! [DataTableViewCell]
+        
+        for item in allVisibleCells {
+            
+            if item.datum === newDatum {
+                newCell = item
+                newCell.datumTextField.becomeFirstResponder()
+                break
+            }
+        }
+        
+    }
+    
+    func deleteDataTableCell(itemToRemove: DataTableDatum) {
+        
+        let indexOfItemToRemove = (dataTableEntries as NSArray).indexOfObject(itemToRemove)
+        
+        guard indexOfItemToRemove != NSNotFound else {
+            return
+        }
+        
+        dataTableEntries.removeAtIndex(indexOfItemToRemove)
+        
+        /* Update the table view */                
+        dataTableView.beginUpdates()
+        let indexPathOfItemToDelete = NSIndexPath(forRow: indexOfItemToRemove, inSection: 0)
+        dataTableView.deleteRowsAtIndexPaths([indexPathOfItemToDelete], withRowAnimation: .Automatic)
+        dataTableView.endUpdates()
+    }
     
 }
 
@@ -218,6 +234,152 @@ extension StandardDeviationVC {
         pullDownGestureActive = false
         placeholderTableCell.removeFromSuperview()
     }
+}
+
+// MARK: - pinch-to-add methods
+
+extension StandardDeviationVC {
+    
+    func userDidPinch(recognizer: UIPinchGestureRecognizer) {
+        
+        if recognizer.state == .Began {
+            pinchStarted(recognizer)
+        }
+        if recognizer.state == .Changed && pinchGestureActive && recognizer.numberOfTouches() == 2 {
+            pinchChanged(recognizer)
+        }
+        if recognizer.state == .Ended {
+            pinchEnded(recognizer)
+        }
+    }
+    
+    func pinchStarted(recognizer: UIPinchGestureRecognizer) {
+        
+        initialTouchPoints = getNormalizedTouchPoints(recognizer)
+        
+        upperCellIndex = -100
+        lowerCellIndex = -100
+        
+        let allVisibleCells = dataTableView.visibleCells  as! [DataTableViewCell]
+        
+        for i in 0..<allVisibleCells.count {
+            let cell = allVisibleCells[i]
+            if viewContainsPoint(cell, point: initialTouchPoints.upper) {
+                upperCellIndex = i
+                cell.backgroundColor = UIColor.purpleColor()
+            }
+            if viewContainsPoint(cell, point: initialTouchPoints.lower) {
+                lowerCellIndex = i
+                cell.backgroundColor = UIColor.purpleColor()
+            }
+        }
+        
+        /* Are the cells neighbors? */
+        if abs(upperCellIndex - lowerCellIndex) == 1 {
+            
+            pinchGestureActive = true
+            
+            /* Insert the placeholder cell */
+            let precedingCell = allVisibleCells[upperCellIndex]
+            
+            placeholderTableCell.frame = CGRectOffset(precedingCell.frame, 0.0, dataTableView.rowHeight / 2.0)
+            placeholderTableCell.backgroundColor = precedingCell.backgroundColor
+            dataTableView.insertSubview(placeholderTableCell, atIndex: 0)
+        }
+        
+    }
+    
+    func pinchChanged(recognizer: UIPinchGestureRecognizer) {
+        
+        let currentTouchPoints = getNormalizedTouchPoints(recognizer)
+        
+        /* Set the "size" of the pinch to be the smaller of the two distances the touch points have moved */
+        let upperDelta = currentTouchPoints.upper.y - initialTouchPoints.upper.y
+        let lowerDelta = initialTouchPoints.lower.y - currentTouchPoints.lower.y
+        let delta = -min(0, min(upperDelta, lowerDelta))
+        
+        /* Re-position the cells to take the new cell into account */
+        let visibleCells = dataTableView.visibleCells as! [DataTableViewCell]
+        
+        for i in 0..<visibleCells.count {
+            
+            let cell = visibleCells[i]
+            
+            if i <= upperCellIndex {
+                cell.transform = CGAffineTransformMakeTranslation(0, -delta)
+            }
+            if i >= lowerCellIndex {
+                cell.transform = CGAffineTransformMakeTranslation(0, delta)
+            }
+        }
+        
+        /* Make the new cell more interactive */
+        let gapSize = delta * 2
+        let maxGapSize = min(gapSize, dataTableView.rowHeight)
+        placeholderTableCell.transform = CGAffineTransformMakeScale(1.0, maxGapSize / dataTableView.rowHeight)
+        placeholderTableCell.datum?.datumText = gapSize > dataTableView.rowHeight ? "Release to add item" : "Pull apart to add item"
+        placeholderTableCell.alpha = min(1.0, gapSize / dataTableView.rowHeight)
+        
+        /* Should the new cell be added? */
+        addNewCellByPinch = gapSize > dataTableView.rowHeight
+        
+    }
+    
+    func pinchEnded(recognizer: UIPinchGestureRecognizer) {
+        
+        addNewCellByPinch = false
+        
+        /* Get rid of the placeholder cell */
+        placeholderTableCell.transform = CGAffineTransformIdentity
+        placeholderTableCell.removeFromSuperview()
+        
+        if pinchGestureActive {
+            
+            pinchGestureActive = false
+            
+            /* Remove the space that was added when animating the insertion of the placeholder cell */
+            let visibleCells = self.dataTableView.visibleCells as! [DataTableViewCell]
+            for cell in visibleCells {
+                cell.transform = CGAffineTransformIdentity
+            }
+            
+            /* Add a new cell to the table, and add the accompanying data structure */
+            let indexOffset = Int(floor(dataTableView.contentOffset.y / dataTableView.rowHeight))
+            addDataTableCellAtIndex(lowerCellIndex + indexOffset)
+            
+        } else {
+            /* Return cells to their position before the pinch gesture occurred */
+            UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseInOut, animations: {() in
+                let allVisibleCells = self.dataTableView.visibleCells as! [DataTableViewCell]
+                for cell in allVisibleCells {
+                    cell.transform = CGAffineTransformIdentity
+                }
+                }, completion: nil)
+        }
+        
+    }
+    
+    // MARK: - Helpers
+    /* Make sure that point1 is the higher of the two on screen */
+    func getNormalizedTouchPoints(recognizer: UIGestureRecognizer) -> TouchPoints {
+        
+        var pointOne = recognizer.locationOfTouch(0, inView: dataTableView)
+        var pointTwo = recognizer.locationOfTouch(1, inView: dataTableView)
+        
+        if pointOne.y > pointTwo.y {
+            let temp = pointOne
+            pointOne = pointTwo
+            pointTwo = temp
+        }
+        return TouchPoints(upper: pointOne, lower: pointTwo)
+    }
+    
+    /* Did a given point land within the frame ?*/
+    func viewContainsPoint(view: UIView, point: CGPoint) -> Bool {
+        let frame = view.frame
+        return (frame.origin.y < point.y) && (frame.origin.y + (frame.size.height) > point.y)
+    }
+
 }
 
 // MARK: - Close the keyboard when the user taps outside the editng field

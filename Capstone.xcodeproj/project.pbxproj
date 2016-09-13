@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2E155A8207CAD21EBDC53486 /* Pods_Capstone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8747C179A3984881F437A6AE /* Pods_Capstone.framework */; };
+		4E1E8B881D88B65700412E5D /* TouchPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E8B871D88B65700412E5D /* TouchPoints.swift */; };
 		4E27EB511D7294A80044B428 /* CalculatorNumberButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E27EB501D7294A80044B428 /* CalculatorNumberButton.swift */; };
 		4E27EB541D729B140044B428 /* UtilitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E27EB531D729B140044B428 /* UtilitiesVC.swift */; };
 		4E27EB561D72A1710044B428 /* ErsatzStatTablesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E27EB551D72A1710044B428 /* ErsatzStatTablesVC.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		2EC96ECBBB259B6E1E545981 /* Pods-Capstone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capstone.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Capstone/Pods-Capstone.debug.xcconfig"; sourceTree = "<group>"; };
+		4E1E8B871D88B65700412E5D /* TouchPoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchPoints.swift; sourceTree = "<group>"; };
 		4E27EB501D7294A80044B428 /* CalculatorNumberButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorNumberButton.swift; sourceTree = "<group>"; };
 		4E27EB531D729B140044B428 /* UtilitiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilitiesVC.swift; sourceTree = "<group>"; };
 		4E27EB551D72A1710044B428 /* ErsatzStatTablesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErsatzStatTablesVC.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				4E27EB641D7397020044B428 /* ErsatzStatTableOptions.swift */,
 				4E6CB37F1D7DEBBF00C12F23 /* StatUtility.swift */,
 				4E4472251D84EB3C00C87732 /* DataTableDatum.swift */,
+				4E1E8B871D88B65700412E5D /* TouchPoints.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -135,8 +138,8 @@
 			children = (
 				4E9D69341D748149002021E3 /* Services */,
 				4E27EB631D7396E10044B428 /* Model */,
-				4E27EB521D729ADF0044B428 /* Controller */,
 				4E27EB4F1D7293500044B428 /* View */,
+				4E27EB521D729ADF0044B428 /* Controller */,
 				4EC93FCD1D6A4AB800F850B9 /* Assets */,
 				4EB1ACA81D66BF7D00742261 /* AppDelegate.swift */,
 				4EB1ACAA1D66BF7D00742261 /* ViewController.swift */,
@@ -298,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E6CB3821D7DFF6600C12F23 /* StandardNormalVC.swift in Sources */,
+				4E1E8B881D88B65700412E5D /* TouchPoints.swift in Sources */,
 				4E6CB37A1D7CD2FD00C12F23 /* StatUtilitiesTableViewCell.swift in Sources */,
 				4E9D69361D748169002021E3 /* StatisticsFunctions.swift in Sources */,
 				4E6CB3841D7E07CB00C12F23 /* SequenceGenerator.swift in Sources */,

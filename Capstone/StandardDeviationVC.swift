@@ -29,6 +29,9 @@ class StandardDeviationVC: UIViewController {
     
     @IBOutlet var dataTableView: UITableView!
     
+    @IBOutlet var stDevTitleLabel: UILabel!
+    @IBOutlet var stDevAnswerLabel: UILabel!
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -51,6 +54,12 @@ class StandardDeviationVC: UIViewController {
         }
         
         print("dataTableEntries includes \(dataTableEntries.count) entries")
+        print("Here are the data table entries respective double values:")
+        for item in dataTableEntries {
+            print("-")
+            print(item.datumText)
+            print(item.datumDoubleValue)
+        }
         
         // TODO: Fix this crash
         //placeholderTableCell.datumTextField.text = "Hello"
@@ -82,8 +91,6 @@ extension StandardDeviationVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        print("cellForRowAtIndexPath, number of cells: \(dataTableEntries.count)")
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("DatumCell", forIndexPath: indexPath) as! DataTableViewCell
         
         cell.delegate = self
@@ -107,7 +114,6 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
         print("dataTableView.contentOffset: \(dataTableView.contentOffset)")
         print("editingCell.frame.origin.y: \(editingCell.frame.origin.y)")
         
-        // TODO: Implement this method
         let offsetWhileEditing = dataTableView.contentOffset.y - editingCell.frame.origin.y as CGFloat
         let cellsToMove = dataTableView.visibleCells as! [DataTableViewCell]
         
@@ -180,7 +186,7 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
         
         dataTableEntries.removeAtIndex(indexOfItemToRemove)
         
-        /* Update the table view */                
+        /* Update the table view */
         dataTableView.beginUpdates()
         let indexPathOfItemToDelete = NSIndexPath(forRow: indexOfItemToRemove, inSection: 0)
         dataTableView.deleteRowsAtIndexPaths([indexPathOfItemToDelete], withRowAnimation: .Automatic)
@@ -196,12 +202,19 @@ extension StandardDeviationVC {
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         
         pullDownGestureActive = scrollView.contentOffset.y <= 0.0
-        placeholderTableCell.backgroundColor = UIColor.redColor() // make the placeholder cell distinct for debugging
         
-        if pullDownGestureActive {
-            /* User has pulled downward at the top of the table, add the placeholder cell */
+        if dataTableEntries.count <= 2 {
+            placeholderTableCell.backgroundColor = UIColor.redColor() // make the placeholder cell distinct for debugging
             
-            dataTableView.insertSubview(placeholderTableCell, atIndex: 0)
+            if pullDownGestureActive {
+                /* User has pulled downward at the top of the table, add the placeholder cell */
+                dataTableView.insertSubview(placeholderTableCell, atIndex: 0)
+            }
+        } else {
+            if pullDownGestureActive {
+                print("A pull-down drag has cued the calculation of a data summary ")
+                StatisticsFunctions.swift_sd(dataTableEntries)
+            }
         }
     }
     
@@ -379,7 +392,7 @@ extension StandardDeviationVC {
         let frame = view.frame
         return (frame.origin.y < point.y) && (frame.origin.y + (frame.size.height) > point.y)
     }
-
+    
 }
 
 // MARK: - Close the keyboard when the user taps outside the editng field

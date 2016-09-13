@@ -290,4 +290,14 @@ public class StatisticsFunctions {
     }
     
     
+    /* Calculate basic, descriptive statistics for user-entered data */
+    static func swift_sd(data: [DataTableDatum]) {
+        
+        for item in data {
+            print(item.datumDoubleValue)
+        }
+    
+    }
+    
+    
 }

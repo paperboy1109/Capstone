@@ -90,6 +90,26 @@ extension StandardDeviationVC: UITableViewDataSource, UITableViewDelegate {
 
 extension StandardDeviationVC: DataTableViewCellDelegate {
     
+    func addDataTableCell() {
+        
+        let newDatum = DataTableDatum(textFieldText: "")
+        dataTableEntries.insert(newDatum, atIndex: 0)
+        dataTableView.reloadData()
+        
+        var newCell: DataTableViewCell
+        
+        let allVisibleCells = dataTableView.visibleCells as! [DataTableViewCell]
+        
+        for item in allVisibleCells {
+            
+            if item.datum === newDatum {
+                newCell = item
+                newCell.datumTextField.becomeFirstResponder()
+                break
+            }
+        }
+    }
+    
     func deleteDataTableCell(itemToRemove: DataTableDatum) {
         
         let indexOfItemToRemove = (dataTableEntries as NSArray).indexOfObject(itemToRemove)
@@ -175,6 +195,8 @@ extension StandardDeviationVC {
             
             // TODO: Fix the crash caused by trying to access datumTextField.text
             //placeholderTableCell.datumTextField.text = -scrollViewContentOffsetY > dataTableView.rowHeight ? "Release to add the cell" : "Pull to create a data entry cell"
+            
+            /* Give the placeholder cell a fade-in effect */
             placeholderTableCell.alpha = min(1.0, (-1.0) * scrollViewContentOffsetY / dataTableView.rowHeight)
         } else {
             pullDownGestureActive = false
@@ -184,11 +206,9 @@ extension StandardDeviationVC {
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
         /* If the scroll-down gesture was far enough, add the placeholder cell to the collection of items in the table view */
-        if pullDownGestureActive && -scrollView.contentOffset.y > dataTableView.rowHeight {
-            
-            if pullDownGestureActive && -scrollView.contentOffset.y > dataTableView.rowHeight {
-                // toDoItemAdded()
-            }
+        if pullDownGestureActive && (-1.0) * scrollView.contentOffset.y > dataTableView.rowHeight {
+            // TODO: Insert a new cell into the table
+            addDataTableCell()
         }
         pullDownGestureActive = false
         placeholderTableCell.removeFromSuperview()

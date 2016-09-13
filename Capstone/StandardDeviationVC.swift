@@ -152,7 +152,7 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
     
     func cellDidEndEditing(editingCell: DataTableViewCell) {
         
-        // TODO: Implement this method
+        
         let cellsToMove = dataTableView.visibleCells as! [DataTableViewCell]
         
         for item in cellsToMove {
@@ -163,6 +163,11 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
                     item.alpha = 1.0
                 }
             })
+        }
+        
+        /* Don't insert empty cells into the table */
+        if editingCell.datum!.datumText == "" {
+            deleteDataTableCell(editingCell.datum!)
         }
     }    
     

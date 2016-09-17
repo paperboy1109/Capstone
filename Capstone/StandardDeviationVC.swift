@@ -204,25 +204,27 @@ extension StandardDeviationVC {
         pullDownGestureActive = scrollView.contentOffset.y <= 0.0
         
         if dataTableEntries.count <= 2 {
-            placeholderTableCell.backgroundColor = UIColor.redColor() // make the placeholder cell distinct for debugging
             
             if pullDownGestureActive {
+                placeholderTableCell.backgroundColor = UIColor.redColor() // make the placeholder cell distinct for debugging
                 /* User has pulled downward at the top of the table, add the placeholder cell */
                 dataTableView.insertSubview(placeholderTableCell, atIndex: 0)
             }
-        } else {
-            if pullDownGestureActive {
-                print("A pull-down drag has cued the calculation of a data summary ")
-                StatisticsFunctions.swift_sd(dataTableEntries)
-            }
         }
+        
+        //        else {
+        //            if pullDownGestureActive {
+        //                print("A pull-down drag has cued the calculation of a data summary ")
+        //                StatisticsFunctions.swift_sd(dataTableEntries)
+        //            }
+        //        }
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
         let scrollViewContentOffsetY = scrollView.contentOffset.y
         
-        if pullDownGestureActive && scrollView.contentOffset.y <= 0.0 {
+        if dataTableEntries.count <= 2 && pullDownGestureActive && scrollView.contentOffset.y <= 0.0 {
             /* Re-position the placeholder cell as the user scrolls */
             placeholderTableCell.frame = CGRect(x: 0, y: -dataTableView.rowHeight,
                                                 width: dataTableView.frame.size.width, height: dataTableView.rowHeight)
@@ -232,6 +234,18 @@ extension StandardDeviationVC {
             
             /* Give the placeholder cell a fade-in effect */
             placeholderTableCell.alpha = min(1.0, (-1.0) * scrollViewContentOffsetY / dataTableView.rowHeight)
+            
+        } else if pullDownGestureActive && scrollView.contentOffset.y <= 0.0 {
+            
+            /* Instead of adding a new data and a new cell, summarize the data */
+            print("A pull-down drag has cued the calculation of a data summary ")
+            
+            /* Check that all values are valid (Doubles) */
+            // TODO: Create an alert if there are invalid elements
+            let currentData = StatisticsFunctions.getDataTableDataAsArrayOfDoubles(dataTableEntries)
+            print(StatisticsFunctions.swift_sd(currentData))
+            stDevAnswerLabel.text = String(StatisticsFunctions.swift_sd(currentData))
+            
         } else {
             pullDownGestureActive = false
         }
@@ -240,12 +254,13 @@ extension StandardDeviationVC {
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
         /* If the scroll-down gesture was far enough, add the placeholder cell to the collection of items in the table view */
-        if pullDownGestureActive && (-1.0) * scrollView.contentOffset.y > dataTableView.rowHeight {
+        if dataTableEntries.count <= 2 && pullDownGestureActive && (-1.0) * scrollView.contentOffset.y > dataTableView.rowHeight {
             // TODO: Insert a new cell into the table
             addDataTableCell()
+        } else {
+            pullDownGestureActive = false
+            placeholderTableCell.removeFromSuperview()
         }
-        pullDownGestureActive = false
-        placeholderTableCell.removeFromSuperview()
     }
 }
 

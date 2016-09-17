@@ -289,15 +289,71 @@ public class StatisticsFunctions {
         return estimateRoot(pVal, minValue: (-1.0) * pow(10.0, 2), maxValue: pow(10.0, 2), df: df, function: swift_pt)
     }
     
+    // MARK: - Data summary
     
-    /* Calculate basic, descriptive statistics for user-entered data */
-    static func swift_sd(data: [DataTableDatum]) {
+    
+    /* These methods are all designed with small, user-entered data sets in mind */
+    
+    static func getDataTableDataAsArrayOfDoubles(data: [DataTableDatum]) -> [Double] {
+        
+        var arrayOfDoubles: [Double] = []
         
         for item in data {
-            print(item.datumDoubleValue)
+            if let newDatum = item.datumDoubleValue {
+                arrayOfDoubles.append(newDatum)
+            }
         }
+        
+        return arrayOfDoubles
+        
+    }
+    
+    static func swift_mean(data: [Double]) -> Double {
+        
+        return data.reduce(0.0, combine: +) / Double(data.count)
+    }
+    
+    static func swift_sd(data: [Double]) -> Double {
+        
+        let currentMean = swift_mean(data)
+        let squaredDeviations = data.map{pow(($0 - currentMean), 2)}
+        let sSD = squaredDeviations.reduce(0.0, combine: +)        
+        
+        return sqrt(sSD / Double(data.count - 1))
     
     }
+    
+    static func swift_median(data: [Double]) -> Double {
+        
+        let sortedData = data.sort()
+        
+        if data.count % 2 != 0 {
+            print(sortedData[0...sortedData.count/2])
+            return sortedData[sortedData.count/2]
+        } else {
+            print(sortedData[0...sortedData.count/2 - 1 ])
+            return (sortedData[sortedData.count/2 - 1 ] + sortedData[sortedData.count/2 ]) / 2.0
+        }
+        
+    }
+    
+    static func swift_fiveNumberSummary(data: [Double]) -> (Double, Double, Double, Double, Double) {
+        
+        let sortedData = data.sort()
+        let q1: Double
+        let q3: Double
+        
+        if sortedData.count % 2 != 0 {
+            q1 = swift_median(Array(sortedData[0...sortedData.count/2 - 1 ]))
+            q3 = swift_median(Array(sortedData[(sortedData.count/2 + 1)...(sortedData.count - 1) ]))
+        } else {
+            q1 = swift_median(Array(sortedData[0...sortedData.count/2 - 1 ]))
+            q3 = swift_median(Array(sortedData[(sortedData.count/2)...(sortedData.count - 1) ]))
+        }
+        
+        return (sortedData.minElement()!, q1, swift_median(sortedData), q3, sortedData.maxElement()!)
+    }
+
     
     
 }

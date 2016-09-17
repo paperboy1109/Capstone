@@ -257,7 +257,12 @@ extension StandardDeviationVC {
         if dataTableEntries.count <= 2 && pullDownGestureActive && (-1.0) * scrollView.contentOffset.y > dataTableView.rowHeight {
             // TODO: Insert a new cell into the table
             addDataTableCell()
-        } else {
+        } else if pullDownGestureActive && (-1.0) * scrollView.contentOffset.y > dataTableView.rowHeight {
+            //DataSummary
+            let dataSummaryVC = self.storyboard!.instantiateViewControllerWithIdentifier("DataSummary") as! DataSummaryVC
+            self.presentViewController(dataSummaryVC, animated: true, completion: nil)
+            
+        }else {
             pullDownGestureActive = false
             placeholderTableCell.removeFromSuperview()
         }

@@ -907,6 +907,41 @@
             </objects>
             <point key="canvasLocation" x="2335" y="1797"/>
         </scene>
+        <!--Data SummaryVC-->
+        <scene sceneID="dze-CY-Cdf">
+            <objects>
+                <viewController storyboardIdentifier="DataSummary" id="Ol0-7o-5Q8" customClass="DataSummaryVC" customModule="Capstone" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="n2g-2D-KfA"/>
+                        <viewControllerLayoutGuide type="bottom" id="A9c-fh-49a"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zsM-kM-iIq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kvy-EH-kkq">
+                                <rect key="frame" x="543" y="20" width="37" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="37" id="5vx-E2-hVv"/>
+                                    <constraint firstAttribute="height" constant="30" id="PW6-wk-Lqf"/>
+                                </constraints>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="doneTapped:" destination="Ol0-7o-5Q8" eventType="touchUpInside" id="Ktl-qd-0hR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kvy-EH-kkq" firstAttribute="top" secondItem="n2g-2D-KfA" secondAttribute="bottom" id="EKe-qm-D0U"/>
+                            <constraint firstItem="kvy-EH-kkq" firstAttribute="trailing" secondItem="zsM-kM-iIq" secondAttribute="trailingMargin" id="tcP-og-Epl"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tcx-iw-Dov" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2335" y="2506"/>
+        </scene>
         <!--Ersatz Stat TablesVC-->
         <scene sceneID="eWq-Mj-B5a">
             <objects>

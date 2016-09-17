@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2E155A8207CAD21EBDC53486 /* Pods_Capstone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8747C179A3984881F437A6AE /* Pods_Capstone.framework */; };
+		4E192E6C1D8DC187004B3115 /* DataSummaryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E192E6B1D8DC187004B3115 /* DataSummaryVC.swift */; };
 		4E1E8B881D88B65700412E5D /* TouchPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E8B871D88B65700412E5D /* TouchPoints.swift */; };
 		4E27EB511D7294A80044B428 /* CalculatorNumberButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E27EB501D7294A80044B428 /* CalculatorNumberButton.swift */; };
 		4E27EB541D729B140044B428 /* UtilitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E27EB531D729B140044B428 /* UtilitiesVC.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		2EC96ECBBB259B6E1E545981 /* Pods-Capstone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Capstone.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Capstone/Pods-Capstone.debug.xcconfig"; sourceTree = "<group>"; };
+		4E192E6B1D8DC187004B3115 /* DataSummaryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSummaryVC.swift; sourceTree = "<group>"; };
 		4E1E8B871D88B65700412E5D /* TouchPoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchPoints.swift; sourceTree = "<group>"; };
 		4E27EB501D7294A80044B428 /* CalculatorNumberButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorNumberButton.swift; sourceTree = "<group>"; };
 		4E27EB531D729B140044B428 /* UtilitiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilitiesVC.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				4E6CB3751D7C662B00C12F23 /* HomeSceneVC.swift */,
 				4E6CB3811D7DFF6600C12F23 /* StandardNormalVC.swift */,
 				4E6F37981D821B7B0029DC71 /* StandardDeviationVC.swift */,
+				4E192E6B1D8DC187004B3115 /* DataSummaryVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				4E6F37991D821B7B0029DC71 /* StandardDeviationVC.swift in Sources */,
 				4E27EB561D72A1710044B428 /* ErsatzStatTablesVC.swift in Sources */,
 				4E27EB511D7294A80044B428 /* CalculatorNumberButton.swift in Sources */,
+				4E192E6C1D8DC187004B3115 /* DataSummaryVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

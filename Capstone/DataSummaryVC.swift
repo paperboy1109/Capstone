@@ -27,6 +27,12 @@ class DataSummaryVC: UIViewController {
                 print(item.datumDoubleValue)
             }
         }
+        
+        let currentData = StatisticsFunctions.getDataTableDataAsArrayOfDoubles(dataTableEntries)
+        print("mean: \(StatisticsFunctions.swift_mean(currentData))")
+        print("sd: \(StatisticsFunctions.swift_sd(currentData))")
+        // print("fiveNumberSummary: \(StatisticsFunctions.swift_fiveNumberSummary(currentData))")
+        
     }
     
     

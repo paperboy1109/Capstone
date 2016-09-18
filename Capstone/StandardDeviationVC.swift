@@ -93,6 +93,23 @@ class StandardDeviationVC: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    // MARK: - Helpers
+    private func blockGarbageIn(alertTitle: String, alertDescription: String, tableCell: DataTableViewCell?) {
+        
+        let alertView = UIAlertController(title: "\(alertTitle)", message: "\(alertDescription)", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alertView.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) in
+            
+            // TODO: Make UI changes?
+            if let cell = tableCell as DataTableViewCell! {
+                self.deleteDataTableCell(cell.datum!)
+            }
+            
+        }) )
+        
+        self.presentViewController(alertView, animated: true, completion: nil)
+    }
+    
 }
 
 // MARK: - Delegates for the table view
@@ -148,6 +165,8 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
     
     func cellDidEndEditing(editingCell: DataTableViewCell) {
         
+        print("\n\ncellDidEndEditing")
+        
         
         let cellsToMove = dataTableView.visibleCells as! [DataTableViewCell]
         
@@ -165,6 +184,26 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
         if editingCell.datum!.datumText == "" {
             deleteDataTableCell(editingCell.datum!)
         }
+        
+        /* Update the data model if the cell has valid data */
+        
+        if let newDatum = editingCell.datum?.datumText {
+            print("Here is the contents of the text field: ")
+            print(newDatum)
+            editingCell.datum?.updateDatumValue()
+        }
+        
+        if let newDatumValue = editingCell.datum?.datumDoubleValue {
+            print("Here is the datum value: \(newDatumValue)")
+            
+        } else {
+            editingCell.backgroundColor = UIColor.orangeColor()
+            blockGarbageIn("Invalid data", alertDescription: "Check that the value you entered is a valid number", tableCell: editingCell)
+            //deleteDataTableCell(editingCell.datum!)
+        }
+        
+
+
     }
     
     func addDataTableCell() {

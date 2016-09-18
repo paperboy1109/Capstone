@@ -328,10 +328,8 @@ public class StatisticsFunctions {
         let sortedData = data.sort()
         
         if data.count % 2 != 0 {
-            print(sortedData[0...sortedData.count/2])
             return sortedData[sortedData.count/2]
         } else {
-            print(sortedData[0...sortedData.count/2 - 1 ])
             return (sortedData[sortedData.count/2 - 1 ] + sortedData[sortedData.count/2 ]) / 2.0
         }
         

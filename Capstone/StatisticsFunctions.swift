@@ -335,7 +335,7 @@ public class StatisticsFunctions {
         
     }
     
-    static func swift_fiveNumberSummary(data: [Double]) -> (Double, Double, Double, Double, Double) {
+    static func swift_fiveNumberSummary(data: [Double]) -> (min: Double, q1: Double, q2: Double, q3: Double, max: Double) {
         
         let sortedData = data.sort()
         let q1: Double

@@ -68,6 +68,24 @@ class StandardDeviationVC: UIViewController {
         
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "ToDataSummary" {
+            
+            print("Segue 'ToDataSummary' has been cued")
+            
+            if let dataSummaryVC = segue.destinationViewController as? DataSummaryVC {
+                
+                guard self.dataTableEntries != nil else {
+                    return
+                }
+                
+                dataSummaryVC.dataTableEntries = self.dataTableEntries!                
+            }
+            
+        }
+    }
+    
     
     // MARK: - Actions
     @IBAction func doneTapped(sender: AnyObject) {
@@ -238,12 +256,13 @@ extension StandardDeviationVC {
         } else if pullDownGestureActive && scrollView.contentOffset.y <= 0.0 {
             
             /* Instead of adding a new data and a new cell, summarize the data */
-            print("A pull-down drag has cued the calculation of a data summary ")
+            // TODO: scrollViewDidScroll is not a good event to trigger the data calculations
+            //print("A pull-down drag has cued the calculation of a data summary ")
             
             /* Check that all values are valid (Doubles) */
             // TODO: Create an alert if there are invalid elements
             let currentData = StatisticsFunctions.getDataTableDataAsArrayOfDoubles(dataTableEntries)
-            print(StatisticsFunctions.swift_sd(currentData))
+            //print(StatisticsFunctions.swift_sd(currentData))
             stDevAnswerLabel.text = String(StatisticsFunctions.swift_sd(currentData))
             
         } else {
@@ -258,9 +277,12 @@ extension StandardDeviationVC {
             // TODO: Insert a new cell into the table
             addDataTableCell()
         } else if pullDownGestureActive && (-1.0) * scrollView.contentOffset.y > dataTableView.rowHeight {
-            //DataSummary
-            let dataSummaryVC = self.storyboard!.instantiateViewControllerWithIdentifier("DataSummary") as! DataSummaryVC
-            self.presentViewController(dataSummaryVC, animated: true, completion: nil)
+            
+            /* Segue to the data summary scene */
+            //let dataSummaryVC = self.storyboard!.instantiateViewControllerWithIdentifier("DataSummary") as! DataSummaryVC
+            //self.presentViewController(dataSummaryVC, animated: true, completion: nil)
+            
+            self.performSegueWithIdentifier("ToDataSummary", sender: nil)
             
         }else {
             pullDownGestureActive = false

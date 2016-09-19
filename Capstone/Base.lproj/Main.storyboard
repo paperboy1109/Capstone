@@ -787,7 +787,10 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="blh-dI-AVe">
-                                <rect key="frame" x="28" y="104" width="544" height="29"/>
+                                <rect key="frame" x="28" y="104" width="544" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="e0q-RR-apj"/>
+                                </constraints>
                                 <segments>
                                     <segment title="First"/>
                                     <segment title="Second"/>
@@ -798,10 +801,10 @@
                                 </connections>
                             </segmentedControl>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="ISD-eI-L3b">
-                                <rect key="frame" x="20" y="148" width="560" height="174"/>
+                                <rect key="frame" x="20" y="152" width="560" height="173"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VFr-R2-xmd">
-                                        <rect key="frame" x="0.0" y="0.0" width="279" height="174"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="279" height="173"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KAq-f8-3zj">
                                                 <rect key="frame" x="73" y="54" width="133" height="66"/>
@@ -851,7 +854,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cc1-fk-yvY">
-                                        <rect key="frame" x="281" y="0.0" width="279" height="174"/>
+                                        <rect key="frame" x="281" y="0.0" width="279" height="173"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sH2-mp-8JC">
                                                 <rect key="frame" x="73" y="54" width="133" height="66"/>
@@ -907,10 +910,10 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9o-6l-DfF">
-                                <rect key="frame" x="20" y="330" width="560" height="262"/>
+                                <rect key="frame" x="20" y="333" width="560" height="259"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shake It" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PfH-kG-E4z">
-                                        <rect key="frame" x="213" y="108" width="135" height="46"/>
+                                        <rect key="frame" x="8" y="16" width="544" height="227"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -918,11 +921,27 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="PfH-kG-E4z" firstAttribute="top" secondItem="p9o-6l-DfF" secondAttribute="top" constant="16" id="2CX-Iu-Xag"/>
                                     <constraint firstItem="PfH-kG-E4z" firstAttribute="centerX" secondItem="p9o-6l-DfF" secondAttribute="centerX" id="4qH-vf-oRR"/>
                                     <constraint firstItem="PfH-kG-E4z" firstAttribute="centerY" secondItem="p9o-6l-DfF" secondAttribute="centerY" id="Hfk-yQ-C6m"/>
+                                    <constraint firstItem="PfH-kG-E4z" firstAttribute="height" secondItem="p9o-6l-DfF" secondAttribute="height" id="L5s-gj-JVQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="PfH-kG-E4z" secondAttribute="bottom" constant="16" id="etd-dc-5Kg"/>
                                     <constraint firstItem="PfH-kG-E4z" firstAttribute="centerX" secondItem="p9o-6l-DfF" secondAttribute="centerX" id="g4a-kV-t2j"/>
+                                    <constraint firstAttribute="trailing" secondItem="PfH-kG-E4z" secondAttribute="trailing" constant="8" id="mGx-Qx-Rj6"/>
                                     <constraint firstItem="PfH-kG-E4z" firstAttribute="centerY" secondItem="p9o-6l-DfF" secondAttribute="centerY" id="uEf-lQ-3N5"/>
+                                    <constraint firstAttribute="trailing" secondItem="PfH-kG-E4z" secondAttribute="trailing" constant="8" id="uS5-r1-oof"/>
+                                    <constraint firstItem="PfH-kG-E4z" firstAttribute="leading" secondItem="p9o-6l-DfF" secondAttribute="leading" constant="8" id="zyP-8u-hV9"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="4qH-vf-oRR"/>
+                                        <exclude reference="Hfk-yQ-C6m"/>
+                                        <exclude reference="L5s-gj-JVQ"/>
+                                        <exclude reference="g4a-kV-t2j"/>
+                                        <exclude reference="mGx-Qx-Rj6"/>
+                                        <exclude reference="uEf-lQ-3N5"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

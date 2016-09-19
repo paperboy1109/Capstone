@@ -26,10 +26,10 @@ class RandomNumberVC: UIViewController {
     @IBOutlet var rightTextField: UITextField!
     
     // MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         /* Configure the segmented control */
         distributionSelectionControl.setTitle(StatDistributions.normal.rawValue, forSegmentAtIndex: StatDistributions.allOptions.indexOf(StatDistributions.normal)!)
         distributionSelectionControl.setTitle(StatDistributions.uniform.rawValue, forSegmentAtIndex: StatDistributions.allOptions.indexOf(StatDistributions.uniform)!)
@@ -68,17 +68,53 @@ class RandomNumberVC: UIViewController {
                 } else {
                     showAlert("Invalid value entered", alertDescription: "Is your mean a valid number?")
                 }
-
+                
                 
             case .uniform :
-                setMaxMinLabels()
-                randomNumberLabel.text = String(StatisticsFunctions.swift_randomUniform(-100, max: 100))
+                
+                if let minValue = Double(leftTextField.text!) {
+                    if let maxValue = Double(rightTextField.text!) {
+                        
+                        if maxValue <= minValue {
+                            
+                            showAlert("Error", alertDescription: "Quick fix: your maximum value must be greater than your minimum value.")
+                            
+                        } else {
+                            
+                            
+                            randomNumberLabel.text = String(StatisticsFunctions.swift_randomUniform(minValue, max: maxValue))
+                        }
+                        
+                    } else {
+                        showAlert("Invalid value entered", alertDescription: "Is your maximum value a valid number?")
+                    }
+                } else {
+                    showAlert("Invalid value entered", alertDescription: "Is your minimum value a valid number?")
+                }
                 
             case .integerVals :
-                setMaxMinLabels()
-                randomNumberLabel.text = String(StatisticsFunctions.swift_randomInt(-100, max: 100))
+                
+                if let minValue = Double(leftTextField.text!) {
+                    if let maxValue = Double(rightTextField.text!) {
+                        
+                        if maxValue <= minValue {
+                            
+                            showAlert("Error", alertDescription: "Quick fix: your maximum value must be greater than your minimum value.")
+                            
+                        } else {
+                            
+                            
+                            randomNumberLabel.text = String(StatisticsFunctions.swift_randomInt(minValue, max: maxValue))
+                        }
+                        
+                    } else {
+                        showAlert("Invalid value entered", alertDescription: "Is your maximum value a valid number?")
+                    }
+                } else {
+                    showAlert("Invalid value entered", alertDescription: "Is your minimum value a valid number?")
+                }
             }
-
+            
         }
     }
     
@@ -94,11 +130,9 @@ class RandomNumberVC: UIViewController {
             
         case .uniform :
             setMaxMinLabels()
-            randomNumberLabel.text = String(StatisticsFunctions.swift_randomUniform(-100, max: 100))
             
         case .integerVals :
             setMaxMinLabels()
-            randomNumberLabel.text = String(StatisticsFunctions.swift_randomInt(-100, max: 100))
         }
         
     }
@@ -117,7 +151,7 @@ class RandomNumberVC: UIViewController {
         
         self.presentViewController(alertView, animated: true, completion: nil)
     }
-
+    
     
     // MARK: - Actions
     @IBAction func doneTapped(sender: AnyObject) {
@@ -130,7 +164,7 @@ class RandomNumberVC: UIViewController {
         self.currentMode = StatDistributions.allOptions[sender.selectedSegmentIndex]
         updateInputControlsByMode(self.currentMode)
     }
-
+    
 }
 
 // MARK: - Improve Keyboard behavior

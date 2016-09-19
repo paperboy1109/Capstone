@@ -378,9 +378,12 @@ public class StatisticsFunctions {
         return swift_getArbitraryNormal(z, mean: mean, sd: sd)
     }
     
-    static func swift_randomInt(min: Int, max: Int) -> Int {
+    static func swift_randomInt(min: Double, max: Double) -> Int {
         
-        let gkRandomDistribution = GKRandomDistribution(lowestValue: min, highestValue: max)
+        let minInt = Int(floor(min))
+        let maxInt = Int(ceil(max))
+        
+        let gkRandomDistribution = GKRandomDistribution(lowestValue: minInt, highestValue: maxInt)
         
         return gkRandomDistribution.nextInt()
     }

@@ -64,7 +64,7 @@ extension UtilitiesVC: UITableViewDelegate, UITableViewDataSource {
         
         if let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! StatUtilitiesTableViewCell? {
             
-            cell.titleLabel.text = utilityForCell.title//"Calculate ALL the p-values!"
+            cell.titleLabel.text = utilityForCell.title//"Calculate ALL the p-values!"                                    
             
             return cell
             

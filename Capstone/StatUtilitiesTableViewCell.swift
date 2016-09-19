@@ -11,11 +11,14 @@ import UIKit
 class StatUtilitiesTableViewCell: UITableViewCell {
     
     @IBOutlet var titleLabel: UILabel!
-
+    @IBOutlet var iconLabel: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         selectionStyle = .None
+        iconLabel.text = "\u{26AB}"
         
         // TODO: Add a custom font
         // titleLabel.font =

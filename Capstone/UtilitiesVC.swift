@@ -12,7 +12,11 @@ class UtilitiesVC: UIViewController {
     
     // MARK: - Properties
     
-    let statUtilities = StatUtility.getUtilitiesFromBundle()
+    var statUtilities = StatUtility.getUtilitiesFromBundle()
+    
+    let cellReuseIdentifier = "StatUtilityCell"
+    
+    let utilityInfoText = "Tap for details ... "
     
     // MARK: - Outlets
     
@@ -31,7 +35,7 @@ class UtilitiesVC: UIViewController {
         
         /* Have Auto Layout determine the height of the table view cells */
         statUtilityTableView.rowHeight = UITableViewAutomaticDimension
-        statUtilityTableView.estimatedRowHeight = 64
+        statUtilityTableView.estimatedRowHeight = 100
     }
     
     override func didReceiveMemoryWarning() {
@@ -39,16 +43,49 @@ class UtilitiesVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Actions
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    @IBAction func moreInfoTapped(sender: UIButton) {
+        print("The button was tapped")
+        print(sender.tag)
+        
+        /* Access the cell that contains the button */
+        var targetIndexPath: NSIndexPath!
+        
+        let currentButton = sender
+        if let buttonSuperview = currentButton.superview {
+            if let currentCell = buttonSuperview.superview as? StatUtilitiesTableViewCell {
+                targetIndexPath = statUtilityTableView.indexPathForCell(currentCell)
+                
+                
+                /* Toggle the state of the cell (utility details are displayed, or not) */
+                var utilityForCell = statUtilities[sender.tag]
+                utilityForCell.isShowingDetails = !utilityForCell.isShowingDetails
+                
+                /* Update the cell */
+                currentCell.utilityDetailsText.text = utilityForCell.isShowingDetails ? utilityForCell.moreInfo : utilityInfoText
+                currentCell.utilityDetailsText.textAlignment = utilityForCell.isShowingDetails ? NSTextAlignment.Left : NSTextAlignment.Center
+                
+                /* Update the model */
+                statUtilities[targetIndexPath.row] = utilityForCell
+                
+                /* Animate constraint changes now that the moreInfoTextView has changed size and content */
+                UIView.animateWithDuration(0.3) {
+                    currentCell.contentView.layoutIfNeeded()
+                }
+                
+                /* Force the table view to update */
+                statUtilityTableView.beginUpdates()
+                statUtilityTableView.endUpdates()
+                
+                /* Scroll the table view so that the selected cell is aligned with the top of the table view (helpful when the description is long)*/
+                statUtilityTableView.scrollToRowAtIndexPath(targetIndexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+            }
+        }
+        
+    }
+    
+    
     
 }
 
@@ -58,13 +95,16 @@ extension UtilitiesVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cellReuseIdentifier = "StatUtilityCell"
-        
         let utilityForCell = statUtilities[indexPath.row]
         
         if let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! StatUtilitiesTableViewCell? {
             
-            cell.titleLabel.text = utilityForCell.title//"Calculate ALL the p-values!"                                    
+            cell.utilityDetailsButton.tag = indexPath.row
+            
+            cell.titleLabel.text = utilityForCell.title
+            cell.utilityDetailsText.text = utilityForCell.isShowingDetails ? utilityForCell.moreInfo : utilityInfoText
+            cell.utilityDetailsText.textAlignment = utilityForCell.isShowingDetails ? NSTextAlignment.Left : NSTextAlignment.Center
+            
             
             return cell
             

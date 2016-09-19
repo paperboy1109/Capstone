@@ -9,14 +9,17 @@
 import UIKit
 
 struct StatUtility {
+    
     let title: String
     let moreInfo: String
     let utilityID: Int
+    var isShowingDetails: Bool
     
     init(title: String, moreInfo: String, utilityID: Int) {
         self.title = title
         self.moreInfo = moreInfo
         self.utilityID = utilityID
+        self.isShowingDetails = false
     }
     
     static func getUtilitiesFromBundle() -> [StatUtility] {

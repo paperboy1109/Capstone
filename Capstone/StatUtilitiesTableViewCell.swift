@@ -11,8 +11,9 @@ import UIKit
 class StatUtilitiesTableViewCell: UITableViewCell {
     
     @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var iconLabel: UILabel!
-    
+    @IBOutlet var iconLabel: UILabel!    
+    @IBOutlet var utilityDetailsText: UITextView!
+    @IBOutlet var utilityDetailsButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

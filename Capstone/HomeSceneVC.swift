@@ -18,11 +18,31 @@ class HomeSceneVC: UIViewController {
     // MARK: - Outlets
     
     @IBOutlet var plotView: LineChartView!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var welcomeTextField: UITextView!
     
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        createPlot()
+        
+        /* Set the title and welcome text */
+        titleLabel.font = UIFont(name: "PTSans-Regular", size: 48)
+        titleLabel.textAlignment = NSTextAlignment.Center
+        titleLabel.textColor = UIColor.darkGrayColor()
+        titleLabel.text = "Welcome"
+        
+        welcomeTextField.font = UIFont(name: "PTSans-Italic", size: 17)
 
+        
+    }
+    
+    
+    // MARK: - Helpers
+    func createPlot() {
+        
         /* Create some sample data */
         
         let xValues = SequenceGenerator.createSequenceWithStartingPoint(-2.5, end: 2.5, numberOfSteps: 50)
@@ -47,7 +67,7 @@ class HomeSceneVC: UIViewController {
         
         /* Configure the look of the plot */
         plotView.leftAxis.axisMinValue = 0.0
-        plotView.rightAxis.axisMaxValue = 0.0        
+        plotView.rightAxis.axisMaxValue = 0.0
         plotView.legend.enabled = false
         plotView.descriptionText = ""
         plotView.userInteractionEnabled = false

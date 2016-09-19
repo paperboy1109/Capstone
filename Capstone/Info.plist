@@ -36,5 +36,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>PT_Sans-Web-Regular.ttf</string>
+		<string>PT_Sans-Web-Italic.ttf</string>
+		<string>PT_Sans-Web-BoldItalic.ttf</string>
+		<string>PT_Sans-Web-Bold.ttf</string>
+	</array>
 </dict>
 </plist>

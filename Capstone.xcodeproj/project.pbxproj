@@ -26,6 +26,10 @@
 		4E6CB3821D7DFF6600C12F23 /* StandardNormalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6CB3811D7DFF6600C12F23 /* StandardNormalVC.swift */; };
 		4E6CB3841D7E07CB00C12F23 /* SequenceGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6CB3831D7E07CB00C12F23 /* SequenceGenerator.swift */; };
 		4E6F37991D821B7B0029DC71 /* StandardDeviationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6F37981D821B7B0029DC71 /* StandardDeviationVC.swift */; };
+		4E8141D61D9099F500F06205 /* PT_Sans-Web-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E8141D21D9099CB00F06205 /* PT_Sans-Web-Bold.ttf */; };
+		4E8141D71D9099F800F06205 /* PT_Sans-Web-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E8141D31D9099CB00F06205 /* PT_Sans-Web-BoldItalic.ttf */; };
+		4E8141D81D9099FA00F06205 /* PT_Sans-Web-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E8141D41D9099CB00F06205 /* PT_Sans-Web-Italic.ttf */; };
+		4E8141D91D9099FD00F06205 /* PT_Sans-Web-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E8141D51D9099CB00F06205 /* PT_Sans-Web-Regular.ttf */; };
 		4E9D69361D748169002021E3 /* StatisticsFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9D69351D748169002021E3 /* StatisticsFunctions.swift */; };
 		4EB1ACA91D66BF7D00742261 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1ACA81D66BF7D00742261 /* AppDelegate.swift */; };
 		4EB1ACAB1D66BF7D00742261 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1ACAA1D66BF7D00742261 /* ViewController.swift */; };
@@ -54,6 +58,10 @@
 		4E6CB3811D7DFF6600C12F23 /* StandardNormalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardNormalVC.swift; sourceTree = "<group>"; };
 		4E6CB3831D7E07CB00C12F23 /* SequenceGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SequenceGenerator.swift; sourceTree = "<group>"; };
 		4E6F37981D821B7B0029DC71 /* StandardDeviationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardDeviationVC.swift; sourceTree = "<group>"; };
+		4E8141D21D9099CB00F06205 /* PT_Sans-Web-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PT_Sans-Web-Bold.ttf"; sourceTree = "<group>"; };
+		4E8141D31D9099CB00F06205 /* PT_Sans-Web-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PT_Sans-Web-BoldItalic.ttf"; sourceTree = "<group>"; };
+		4E8141D41D9099CB00F06205 /* PT_Sans-Web-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PT_Sans-Web-Italic.ttf"; sourceTree = "<group>"; };
+		4E8141D51D9099CB00F06205 /* PT_Sans-Web-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PT_Sans-Web-Regular.ttf"; sourceTree = "<group>"; };
 		4E9D69351D748169002021E3 /* StatisticsFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsFunctions.swift; sourceTree = "<group>"; };
 		4EB1ACA51D66BF7D00742261 /* Capstone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Capstone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EB1ACA81D66BF7D00742261 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +168,10 @@
 		4EC93FCD1D6A4AB800F850B9 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				4E8141D21D9099CB00F06205 /* PT_Sans-Web-Bold.ttf */,
+				4E8141D31D9099CB00F06205 /* PT_Sans-Web-BoldItalic.ttf */,
+				4E8141D41D9099CB00F06205 /* PT_Sans-Web-Italic.ttf */,
+				4E8141D51D9099CB00F06205 /* PT_Sans-Web-Regular.ttf */,
 				4EB1ACAC1D66BF7D00742261 /* Main.storyboard */,
 				4EB1ACB11D66BF7D00742261 /* LaunchScreen.storyboard */,
 				4EB1ACAF1D66BF7D00742261 /* Assets.xcassets */,
@@ -247,10 +259,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E8141D61D9099F500F06205 /* PT_Sans-Web-Bold.ttf in Resources */,
 				4EB1ACB31D66BF7D00742261 /* LaunchScreen.storyboard in Resources */,
+				4E8141D81D9099FA00F06205 /* PT_Sans-Web-Italic.ttf in Resources */,
 				4EB1ACB01D66BF7D00742261 /* Assets.xcassets in Resources */,
 				4E6CB37E1D7CEE9C00C12F23 /* statisticsUtilities.json in Resources */,
+				4E8141D91D9099FD00F06205 /* PT_Sans-Web-Regular.ttf in Resources */,
 				4EB1ACAE1D66BF7D00742261 /* Main.storyboard in Resources */,
+				4E8141D71D9099F800F06205 /* PT_Sans-Web-BoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

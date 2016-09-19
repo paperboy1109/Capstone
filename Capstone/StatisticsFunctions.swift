@@ -7,11 +7,18 @@
 //
 
 import Foundation
+import GameplayKit
 
 public class StatisticsFunctions {
     
+    static func swift_getArbitraryNormal(z: Double, mean: Double, sd: Double) -> Double {
+        return (z * sd) + mean
+    }
     
-    // MARK: - Helpers
+    static func swift_standardizedScore(x: Double, mean: Double, standardDev: Double) -> Double {
+        
+        return (x - mean) / standardDev
+    }
     
     static func swift_dorm(x: Double, mean: Double, standardDev: Double) -> Double {
         
@@ -20,12 +27,6 @@ public class StatisticsFunctions {
         let exponent = (-1) * ( pow(x - mean, 2) / (2 * variance) )
         
         return coef * pow(M_E, exponent)
-    }
-    
-    
-    static func swift_standardizedScore(x: Double, mean: Double, standardDev: Double) -> Double {
-        
-        return (x - mean) / standardDev
     }
     
     static func simpsonCoefsArray(k: Int) -> [Double] {
@@ -352,6 +353,41 @@ public class StatisticsFunctions {
         return (sortedData.minElement()!, q1, swift_median(sortedData), q3, sortedData.maxElement()!)
     }
 
+    // MARK: - Generating Random Numbers
     
+    static func swift_randomNormal(mean: Double, sd: Double) -> Double {
+        
+        /* Use the Box-Muller transormation */
+        // http://www.design.caltech.edu/erik/Misc/Gaussian.html
+        
+        let x1: Double = Double(GKMersenneTwisterRandomSource.sharedRandom().nextUniform())
+        let x2: Double = Double(GKMersenneTwisterRandomSource.sharedRandom().nextUniform())
+        
+        let y1 = sqrt( (-1.0) * 2.0 * log(x1)) * cos(2 * M_PI * x2)
+        let y2 = sqrt( (-1.0) * 2.0 * log(x1)) * sin(2 * M_PI * x2)
+        
+        let takeTheFirst = GKMersenneTwisterRandomSource.sharedRandom().nextBool()
+        
+        let z: Double
+        if takeTheFirst {
+            z = y1
+        } else {
+            z = y2
+        }
+        
+        return swift_getArbitraryNormal(z, mean: mean, sd: sd)
+    }
+    
+    static func swift_randomInt(min: Int, max: Int) -> Int {
+        
+        let gkRandomDistribution = GKRandomDistribution(lowestValue: min, highestValue: max)
+        
+        return gkRandomDistribution.nextInt()
+    }
+    
+    
+    static func swift_randomUniform(min: Double, max: Double) -> Double {
+        return ( Double(GKMersenneTwisterRandomSource.sharedRandom().nextUniform()) * (max - min)) + (min)
+    }
     
 }

@@ -60,13 +60,15 @@ class RandomNumberVC: UIViewController {
         case .normal :
             leftLabel.text = "\nMean: "
             rightLabel.text = "Standard \nDeviation: "
+            randomNumberLabel.text = String(StatisticsFunctions.swift_randomNormal(0, sd: 1))
             
         case .uniform :
             setMaxMinLabels()
+            randomNumberLabel.text = String(StatisticsFunctions.swift_randomUniform(-100, max: 100))
             
         case .integerVals :
             setMaxMinLabels()
-
+            randomNumberLabel.text = String(StatisticsFunctions.swift_randomInt(-100, max: 100))
         }
         
     }

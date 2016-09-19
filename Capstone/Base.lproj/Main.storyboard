@@ -21,11 +21,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjT-hT-gsD" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="20" y="20" width="560" height="258"/>
+                                <rect key="frame" x="10" y="20" width="560" height="206"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gjr-Z8-b1u">
-                                <rect key="frame" x="20" y="286" width="560" height="257"/>
+                                <rect key="frame" x="20" y="234" width="560" height="309"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -33,12 +33,12 @@
                         <constraints>
                             <constraint firstItem="gjr-Z8-b1u" firstAttribute="leading" secondItem="PfN-cj-2wA" secondAttribute="leading" constant="20" id="7xy-6I-SXn"/>
                             <constraint firstItem="bjT-hT-gsD" firstAttribute="top" secondItem="2Ll-CX-DDS" secondAttribute="bottom" id="80j-hb-Tvc"/>
-                            <constraint firstAttribute="trailing" secondItem="bjT-hT-gsD" secondAttribute="trailing" constant="20" id="ES7-hJ-xla"/>
-                            <constraint firstItem="gjr-Z8-b1u" firstAttribute="height" secondItem="bjT-hT-gsD" secondAttribute="height" id="QxJ-Ie-REP"/>
+                            <constraint firstAttribute="trailing" secondItem="bjT-hT-gsD" secondAttribute="trailing" constant="30" id="ES7-hJ-xla"/>
+                            <constraint firstItem="gjr-Z8-b1u" firstAttribute="height" secondItem="bjT-hT-gsD" secondAttribute="height" multiplier="3:2" id="QxJ-Ie-REP"/>
                             <constraint firstAttribute="trailing" secondItem="gjr-Z8-b1u" secondAttribute="trailing" constant="20" id="XCZ-Ci-8wB"/>
                             <constraint firstItem="Wpa-oD-6rK" firstAttribute="top" secondItem="gjr-Z8-b1u" secondAttribute="bottom" constant="8" id="bI9-qu-qfL"/>
                             <constraint firstItem="gjr-Z8-b1u" firstAttribute="top" secondItem="bjT-hT-gsD" secondAttribute="bottom" constant="8" id="dC0-CY-QDz"/>
-                            <constraint firstItem="bjT-hT-gsD" firstAttribute="leading" secondItem="PfN-cj-2wA" secondAttribute="leading" constant="20" id="ijt-g0-vri"/>
+                            <constraint firstItem="bjT-hT-gsD" firstAttribute="leading" secondItem="PfN-cj-2wA" secondAttribute="leading" constant="10" id="ijt-g0-vri"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="wallet" id="Q35-Yh-D1g"/>

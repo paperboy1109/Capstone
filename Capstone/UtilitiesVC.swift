@@ -21,6 +21,7 @@ class UtilitiesVC: UIViewController {
     // MARK: - Outlets
     
     @IBOutlet var statUtilityTableView: UITableView!
+    @IBOutlet var bannerLabel: UILabel!
     
     // MARK: - Lifecycle
     
@@ -36,6 +37,13 @@ class UtilitiesVC: UIViewController {
         /* Have Auto Layout determine the height of the table view cells */
         statUtilityTableView.rowHeight = UITableViewAutomaticDimension
         statUtilityTableView.estimatedRowHeight = 100
+        
+        /* Set the text in the banner */
+        // UIFont(name: "PTSans-Regular", size: 48)
+        bannerLabel.font = UIFont(name: "PTSans-Regular", size: 32)
+        bannerLabel.textColor = UIColor.darkGrayColor()
+        bannerLabel.textAlignment = NSTextAlignment.Center
+        bannerLabel.text = "Helpful utilities, ready when you are."
     }
     
     override func didReceiveMemoryWarning() {
@@ -157,6 +165,12 @@ extension UtilitiesVC: UITableViewDelegate, UITableViewDataSource {
         
         
     }
+}
+
+
+extension UtilitiesVC {
     
-    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
 }

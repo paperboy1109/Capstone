@@ -382,7 +382,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="131" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hze-dA-XW7">
-                                <rect key="frame" x="0.0" y="133" width="600" height="447"/>
+                                <rect key="frame" x="0.0" y="142" width="600" height="438"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StatUtilityCell" rowHeight="131" id="nbM-ey-QM2" customClass="StatUtilitiesTableViewCell" customModule="Capstone" customModuleProvider="target">
@@ -392,7 +392,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="130"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uTc-Lo-Mlw">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="uTc-Lo-Mlw">
                                                     <rect key="frame" x="101" y="8" width="483" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -406,7 +406,6 @@
                                                 </textView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0N3-pI-c1n">
                                                     <rect key="frame" x="100" y="31" width="484" height="87"/>
-                                                    <state key="normal" title="Button"/>
                                                     <connections>
                                                         <action selector="moreInfoTapped:" destination="5hk-iF-7ic" eventType="touchUpInside" id="d8c-C7-Ddd"/>
                                                     </connections>
@@ -459,25 +458,40 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YSV-fh-bmU">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="8" y="16" width="584" height="110"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AbH-Ck-j84">
+                                        <rect key="frame" x="2" y="2" width="580" height="106"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="AbH-Ck-j84" secondAttribute="bottom" constant="2" id="D37-Ed-AfJ"/>
+                                    <constraint firstItem="AbH-Ck-j84" firstAttribute="leading" secondItem="YSV-fh-bmU" secondAttribute="leading" constant="2" id="QUF-Pe-MfW"/>
+                                    <constraint firstAttribute="trailing" secondItem="AbH-Ck-j84" secondAttribute="trailing" constant="2" id="fNQ-ZL-RfS"/>
+                                    <constraint firstItem="AbH-Ck-j84" firstAttribute="top" secondItem="YSV-fh-bmU" secondAttribute="top" constant="2" id="wSV-Ti-CYn"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="hze-dA-XW7" secondAttribute="bottom" constant="20" id="6C0-yN-Nw3"/>
-                            <constraint firstItem="hze-dA-XW7" firstAttribute="height" secondItem="YSV-fh-bmU" secondAttribute="height" multiplier="5:1" id="Mbc-Th-xD6"/>
-                            <constraint firstItem="hze-dA-XW7" firstAttribute="top" secondItem="YSV-fh-bmU" secondAttribute="bottom" constant="43" id="Vkg-hj-qB4"/>
-                            <constraint firstItem="YSV-fh-bmU" firstAttribute="leading" secondItem="7k6-WS-E5X" secondAttribute="leading" id="Z4P-4T-IBO"/>
+                            <constraint firstItem="hze-dA-XW7" firstAttribute="height" secondItem="YSV-fh-bmU" secondAttribute="height" multiplier="4:1" id="Mbc-Th-xD6"/>
+                            <constraint firstItem="hze-dA-XW7" firstAttribute="top" secondItem="YSV-fh-bmU" secondAttribute="bottom" constant="16" id="Vkg-hj-qB4"/>
+                            <constraint firstItem="YSV-fh-bmU" firstAttribute="leading" secondItem="7k6-WS-E5X" secondAttribute="leading" constant="8" id="Z4P-4T-IBO"/>
                             <constraint firstItem="hze-dA-XW7" firstAttribute="leading" secondItem="7k6-WS-E5X" secondAttribute="leading" id="c7m-RZ-8T6"/>
-                            <constraint firstAttribute="trailing" secondItem="YSV-fh-bmU" secondAttribute="trailing" id="epW-Ws-DCo"/>
-                            <constraint firstItem="YSV-fh-bmU" firstAttribute="top" secondItem="7k6-WS-E5X" secondAttribute="top" id="uD7-g7-bpN"/>
+                            <constraint firstAttribute="trailing" secondItem="YSV-fh-bmU" secondAttribute="trailing" constant="8" id="epW-Ws-DCo"/>
+                            <constraint firstItem="YSV-fh-bmU" firstAttribute="top" secondItem="7k6-WS-E5X" secondAttribute="top" constant="16" id="uD7-g7-bpN"/>
                             <constraint firstAttribute="trailing" secondItem="hze-dA-XW7" secondAttribute="trailing" id="wmY-uo-MWe"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Utilities" image="confirm_button" selectedImage="confirm_button" id="aec-cT-Hp6"/>
                     <navigationItem key="navigationItem" id="wu3-E9-nUa"/>
                     <connections>
+                        <outlet property="bannerLabel" destination="AbH-Ck-j84" id="dJ3-gy-r93"/>
                         <outlet property="statUtilityTableView" destination="hze-dA-XW7" id="FAd-P8-J68"/>
                     </connections>
                 </viewController>

@@ -19,7 +19,15 @@ class StatUtilitiesTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         selectionStyle = .None
+        
+        titleLabel.font = UIFont(name: "PTSans-Regular", size: 21)
+        titleLabel.textColor = UIColor.darkGrayColor()
+        
         iconLabel.text = "\u{26AB}"
+        
+        utilityDetailsText.font = UIFont(name: "PTSans-Italic", size: 17)
+        utilityDetailsText.textColor = UIColor.darkGrayColor()
+        
         
         // TODO: Add a custom font
         // titleLabel.font =

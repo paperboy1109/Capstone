@@ -11,12 +11,12 @@
       "id" : 1
      },
      {
-       "title" : "Confidence Intervals",
+       "title" : "Random Number Generator",
        "moreInfo" : "Describe the utility here ...",
        "id" : 2
      },
      {
-       "title" : "Standard Deviation",
+       "title" : "Data Summary",
        "moreInfo" : "Describe the utility here ...",
        "id" : 3
      }

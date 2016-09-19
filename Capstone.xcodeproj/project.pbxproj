@@ -17,6 +17,8 @@
 		4E27EB651D7397020044B428 /* ErsatzStatTableOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E27EB641D7397020044B428 /* ErsatzStatTableOptions.swift */; };
 		4E4472241D83AB4500C87732 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4472231D83AB4500C87732 /* DataTableViewCell.swift */; };
 		4E4472261D84EB3C00C87732 /* DataTableDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4472251D84EB3C00C87732 /* DataTableDatum.swift */; };
+		4E6743E81D8F4A3600430C91 /* RandomNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6743E71D8F4A3600430C91 /* RandomNumberVC.swift */; };
+		4E6743EA1D8F580300430C91 /* StatDistributions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6743E91D8F580300430C91 /* StatDistributions.swift */; };
 		4E6CB3761D7C662B00C12F23 /* HomeSceneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6CB3751D7C662B00C12F23 /* HomeSceneVC.swift */; };
 		4E6CB37A1D7CD2FD00C12F23 /* StatUtilitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6CB3791D7CD2FD00C12F23 /* StatUtilitiesTableViewCell.swift */; };
 		4E6CB37E1D7CEE9C00C12F23 /* statisticsUtilities.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E6CB37D1D7CEE9C00C12F23 /* statisticsUtilities.json */; };
@@ -43,6 +45,8 @@
 		4E27EB641D7397020044B428 /* ErsatzStatTableOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErsatzStatTableOptions.swift; sourceTree = "<group>"; };
 		4E4472231D83AB4500C87732 /* DataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
 		4E4472251D84EB3C00C87732 /* DataTableDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableDatum.swift; sourceTree = "<group>"; };
+		4E6743E71D8F4A3600430C91 /* RandomNumberVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNumberVC.swift; sourceTree = "<group>"; };
+		4E6743E91D8F580300430C91 /* StatDistributions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatDistributions.swift; sourceTree = "<group>"; };
 		4E6CB3751D7C662B00C12F23 /* HomeSceneVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSceneVC.swift; sourceTree = "<group>"; };
 		4E6CB3791D7CD2FD00C12F23 /* StatUtilitiesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatUtilitiesTableViewCell.swift; sourceTree = "<group>"; };
 		4E6CB37D1D7CEE9C00C12F23 /* statisticsUtilities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = statisticsUtilities.json; sourceTree = "<group>"; };
@@ -87,11 +91,12 @@
 		4E27EB521D729ADF0044B428 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4E6CB3751D7C662B00C12F23 /* HomeSceneVC.swift */,
+				4E27EB5C1D735C3E0044B428 /* CalculatorVC.swift */,
 				4E27EB531D729B140044B428 /* UtilitiesVC.swift */,
 				4E27EB551D72A1710044B428 /* ErsatzStatTablesVC.swift */,
-				4E27EB5C1D735C3E0044B428 /* CalculatorVC.swift */,
-				4E6CB3751D7C662B00C12F23 /* HomeSceneVC.swift */,
 				4E6CB3811D7DFF6600C12F23 /* StandardNormalVC.swift */,
+				4E6743E71D8F4A3600430C91 /* RandomNumberVC.swift */,
 				4E6F37981D821B7B0029DC71 /* StandardDeviationVC.swift */,
 				4E192E6B1D8DC187004B3115 /* DataSummaryVC.swift */,
 			);
@@ -105,6 +110,7 @@
 				4E6CB37F1D7DEBBF00C12F23 /* StatUtility.swift */,
 				4E4472251D84EB3C00C87732 /* DataTableDatum.swift */,
 				4E1E8B871D88B65700412E5D /* TouchPoints.swift */,
+				4E6743E91D8F580300430C91 /* StatDistributions.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -309,8 +315,10 @@
 				4E9D69361D748169002021E3 /* StatisticsFunctions.swift in Sources */,
 				4E6CB3841D7E07CB00C12F23 /* SequenceGenerator.swift in Sources */,
 				4E6CB3761D7C662B00C12F23 /* HomeSceneVC.swift in Sources */,
+				4E6743E81D8F4A3600430C91 /* RandomNumberVC.swift in Sources */,
 				4EB1ACAB1D66BF7D00742261 /* ViewController.swift in Sources */,
 				4E27EB651D7397020044B428 /* ErsatzStatTableOptions.swift in Sources */,
+				4E6743EA1D8F580300430C91 /* StatDistributions.swift in Sources */,
 				4E4472241D83AB4500C87732 /* DataTableViewCell.swift in Sources */,
 				4E27EB541D729B140044B428 /* UtilitiesVC.swift in Sources */,
 				4E6CB3801D7DEBBF00C12F23 /* StatUtility.swift in Sources */,

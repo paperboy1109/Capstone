@@ -946,8 +946,10 @@
                     <connections>
                         <outlet property="distributionSelectionControl" destination="blh-dI-AVe" id="pXY-ns-lE6"/>
                         <outlet property="leftLabel" destination="aL9-jc-v78" id="jAb-UB-eTR"/>
+                        <outlet property="leftTextField" destination="xhF-5q-vNi" id="76z-7v-fgk"/>
                         <outlet property="randomNumberLabel" destination="PfH-kG-E4z" id="7Js-ps-GWo"/>
                         <outlet property="rightLabel" destination="d3C-e3-Y5Y" id="Nag-ty-nAG"/>
+                        <outlet property="rightTextField" destination="QGD-V3-aVm" id="Pq8-EQ-Kgn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="de5-D5-Kby" userLabel="First Responder" sceneMemberID="firstResponder"/>

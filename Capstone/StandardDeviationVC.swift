@@ -100,7 +100,7 @@ class StandardDeviationVC: UIViewController {
         
         alertView.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) in
             
-            // TODO: Make UI changes?
+            // Make UI changes
             if let cell = tableCell as DataTableViewCell! {
                 self.deleteDataTableCell(cell.datum!)
             }

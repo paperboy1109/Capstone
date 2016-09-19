@@ -22,6 +22,9 @@ class RandomNumberVC: UIViewController {
     @IBOutlet var leftLabel: UILabel!
     @IBOutlet var rightLabel: UILabel!
     
+    @IBOutlet var leftTextField: UITextField!
+    @IBOutlet var rightTextField: UITextField!
+    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -45,8 +48,36 @@ class RandomNumberVC: UIViewController {
             
             print("Device was shaken")
             
-            let randomNumber = Int(arc4random_uniform(UInt32(100)))
-            print(randomNumber)
+            /* Check that values in the text field are valid */
+            
+            guard leftTextField.text != nil && rightTextField.text != nil else {
+                return
+            }
+            
+            switch self.currentMode! {
+            case .normal :
+                
+                if let mu = Double(leftTextField.text!) {
+                    if let sigma = Double(rightTextField.text!) {
+                        
+                        randomNumberLabel.text = String(StatisticsFunctions.swift_randomNormal(mu, sd: sigma))
+                        
+                    } else {
+                        showAlert("Invalid value entered", alertDescription: "Is your standard deviation a valid number?")
+                    }
+                } else {
+                    showAlert("Invalid value entered", alertDescription: "Is your mean a valid number?")
+                }
+
+                
+            case .uniform :
+                setMaxMinLabels()
+                randomNumberLabel.text = String(StatisticsFunctions.swift_randomUniform(-100, max: 100))
+                
+            case .integerVals :
+                setMaxMinLabels()
+                randomNumberLabel.text = String(StatisticsFunctions.swift_randomInt(-100, max: 100))
+            }
 
         }
     }
@@ -60,7 +91,6 @@ class RandomNumberVC: UIViewController {
         case .normal :
             leftLabel.text = "\nMean: "
             rightLabel.text = "Standard \nDeviation: "
-            randomNumberLabel.text = String(StatisticsFunctions.swift_randomNormal(0, sd: 1))
             
         case .uniform :
             setMaxMinLabels()
@@ -78,6 +108,15 @@ class RandomNumberVC: UIViewController {
         rightLabel.text = "Maximum Value"
         
     }
+    
+    func showAlert(alertTitle: String, alertDescription: String) {
+        
+        let alertView = UIAlertController(title: "\(alertTitle)", message: "\(alertDescription)", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alertView.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        
+        self.presentViewController(alertView, animated: true, completion: nil)
+    }
 
     
     // MARK: - Actions
@@ -92,6 +131,21 @@ class RandomNumberVC: UIViewController {
         updateInputControlsByMode(self.currentMode)
     }
 
+}
+
+// MARK: - Improve Keyboard behavior
+
+extension RandomNumberVC {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
+    }
 }
 
 

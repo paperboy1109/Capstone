@@ -39,7 +39,6 @@ class UtilitiesVC: UIViewController {
         statUtilityTableView.estimatedRowHeight = 100
         
         /* Set the text in the banner */
-        // UIFont(name: "PTSans-Regular", size: 48)
         bannerLabel.font = UIFont(name: "PTSans-Regular", size: 32)
         bannerLabel.textColor = UIColor.darkGrayColor()
         bannerLabel.textAlignment = NSTextAlignment.Center

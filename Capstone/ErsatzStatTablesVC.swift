@@ -21,17 +21,16 @@ class ErsatzStatTablesVC: UIViewController {
     
     // MARK: - Outlets
     
+    @IBOutlet var titleLabel: UILabel!
+    
     @IBOutlet var lookupValueTextField: UITextField!
     
     @IBOutlet var plusMinusButton: UIButton!
     
     @IBOutlet var answerValueLabel: UILabel!
-    
     @IBOutlet var answerValueLabel_Secondary: UILabel!
     
-    
     @IBOutlet var entryTypeLabel: UILabel!
-    
     
     @IBOutlet var modeControl: UISegmentedControl!
     @IBOutlet var calculateButton: UIButton!
@@ -41,6 +40,8 @@ class ErsatzStatTablesVC: UIViewController {
     @IBOutlet var dfPickerView: UIPickerView!
     @IBOutlet var dfLabel1: UILabel!
     @IBOutlet var dfLabel2: UILabel!
+    
+    @IBOutlet var assumptionLabel: UILabel!
     
     // MARK: - Lifecycle
     
@@ -62,6 +63,35 @@ class ErsatzStatTablesVC: UIViewController {
         selectedDf = 1
         
         answerValueLabel.text = ""
+        
+        /* Set custom fonts */
+        titleLabel.font = UIFont(name: "PTSans-Italic", size: 21)
+        titleLabel.textColor = UIColor.darkGrayColor()
+        titleLabel.textAlignment = NSTextAlignment.Center
+        
+        entryTypeLabel.font = UIFont(name: "PTSans-Regular", size: 17)
+        entryTypeLabel.textColor = UIColor.darkGrayColor()
+        entryTypeLabel.textAlignment = NSTextAlignment.Left
+        
+        dfLabel1.font = UIFont(name: "PTSans-Regular", size: 17)
+        dfLabel1.textColor = UIColor.darkGrayColor()
+        dfLabel1.textAlignment = NSTextAlignment.Left
+        
+        dfLabel2.font = UIFont(name: "PTSans-Italic", size: 17)
+        dfLabel2.textColor = UIColor.darkGrayColor()
+        dfLabel2.textAlignment = NSTextAlignment.Center
+        
+        assumptionLabel.font = UIFont(name: "PTSans-Regular", size: 14)
+        assumptionLabel.textColor = UIColor.darkGrayColor()
+        assumptionLabel.textAlignment = NSTextAlignment.Center
+        
+        answerValueLabel.font = UIFont(name: "PTSans-Bold", size: 17)
+        answerValueLabel.textColor = UIColor.darkGrayColor()
+        answerValueLabel.textAlignment = NSTextAlignment.Center
+        
+        answerValueLabel_Secondary.font = UIFont(name: "PTSans-Bold", size: 17)
+        answerValueLabel_Secondary.textColor = UIColor.darkGrayColor()
+        answerValueLabel_Secondary.textAlignment = NSTextAlignment.Center
         
         
     }
@@ -170,7 +200,10 @@ class ErsatzStatTablesVC: UIViewController {
             removeSecondaryButton()
             removeDfEntry()
             removePlusMinusButton()
-            entryTypeLabel.text = "p-value (left tail): "
+            entryTypeLabel.text = "p-value: "
+            answerValueLabel_Secondary.hidden = true
+            assumptionLabel.hidden = false
+            assumptionLabel.text = "* Your p-value is treated as the area to the left of z"
             
             calculateButton.setTitle("Calculate z-score", forState: .Normal)
             
@@ -179,8 +212,10 @@ class ErsatzStatTablesVC: UIViewController {
             addDfEntry()
             dfLabel2.hidden = true
             removePlusMinusButton()
-            
-            entryTypeLabel.text = "p-value (left tail): "
+            entryTypeLabel.text = "p-value: "
+            answerValueLabel_Secondary.hidden = true
+            assumptionLabel.hidden = false
+            assumptionLabel.text = "* Your p-value is treated as the area to the left of t"
             
             calculateButton.setTitle("Calculate t-score", forState: .Normal)
             
@@ -188,8 +223,9 @@ class ErsatzStatTablesVC: UIViewController {
             addSecondaryButton()
             addDfEntry()
             addPlusMinusButton()
-            
+            answerValueLabel_Secondary.hidden = false
             entryTypeLabel.text = "z or t: "
+            assumptionLabel.hidden = true
             
             calculateButton.setTitle("Calculate p-value for z", forState: .Normal)
             calculateButton_Secondary.setTitle("Calculate p-value for t", forState: .Normal)

@@ -13,6 +13,7 @@ import NumberMorphView
 class StandardNormalVC: UIViewController {
     
     // MARK: - Properties
+    
     let plotBackgroundColor = UIColor.whiteColor()
     let defaultStartingPoint = -3.0
     let defaultEndingPoint = 3.0
@@ -20,9 +21,9 @@ class StandardNormalVC: UIViewController {
     let defaultDecimalPlacesToShow = 3
     
     let numberFormatter = NSNumberFormatter()
+    let pValNumberFormatter = NSNumberFormatter()
     
     var zScore: Double!
-    
     
     // MARK: - Outlets
     
@@ -88,9 +89,11 @@ class StandardNormalVC: UIViewController {
             /* Display the p-value */
             if zScore > 0 {
                 // Show the larger area (left-tailed, above the mean)
-                pValueLabel.text = "\(1 - StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))"
+                // pValueLabel.text = "\(1.0 - StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))"
+                pValueLabel.text = roundPValue(1.0 - StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))
             } else {
-                pValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))"
+                // pValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))"
+                pValueLabel.text = roundPValue(StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))
             }
         case 1:
             let maskFillValues = lineDataForMaskingFill(xValues, targetValue: zScore, maskingValue: yValues.maxElement()!, leftTail: false)
@@ -98,9 +101,11 @@ class StandardNormalVC: UIViewController {
             /* Display the p-value */
             if zScore < 0 {
                 // Show the larger area (right-tailed, below the mean)
-                pValueLabel.text = "\(1 - StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))"
+                // pValueLabel.text = "\(1 - StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))"
+                pValueLabel.text = roundPValue(1.0 - StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))
             } else {
-                pValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))"
+                // pValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))"
+                pValueLabel.text = roundPValue(StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))
             }
         default:
             let maskFillValues = lineDataForMaskingFill(xValues, targetValue: 3.0, maskingValue: yValues.maxElement()!, leftTail: false)
@@ -157,6 +162,8 @@ class StandardNormalVC: UIViewController {
         
     }
     
+    // MARK: - Helpers
+    
     func updateZScore(leadingDigit: Int, firstDecimal: Int, secondDecimal: Int, thirdDecimal: Int) {
         
         let zScoreText = "\(leadingDigit)" + "." + "\(firstDecimal)\(secondDecimal)\(thirdDecimal)"
@@ -208,6 +215,18 @@ class StandardNormalVC: UIViewController {
             /* The zScore and displayed value must be an exact match */
             updateZScore(newLeadingDigit, firstDecimal: newFirstDecimal, secondDecimal: newSecondDecimal, thirdDecimal: newThirdDecimal)
         }
+    }
+    
+    func roundPValue(fullNumber: Double) -> String {
+        pValNumberFormatter.minimumFractionDigits = 4
+        pValNumberFormatter.maximumFractionDigits = 4
+        
+        if let roundedNumberAsString = pValNumberFormatter.stringFromNumber(fullNumber) {
+            return roundedNumberAsString
+        } else {
+            return ""
+        }
+        
     }
     
     

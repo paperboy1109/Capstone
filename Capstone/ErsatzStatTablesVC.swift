@@ -23,9 +23,8 @@ class ErsatzStatTablesVC: UIViewController {
     
     @IBOutlet var lookupValueTextField: UITextField!
     
-    
     @IBOutlet var plusMinusButton: UIButton!
-        
+    
     @IBOutlet var answerValueLabel: UILabel!
     
     @IBOutlet var answerValueLabel_Secondary: UILabel!
@@ -125,19 +124,34 @@ class ErsatzStatTablesVC: UIViewController {
             // answerValueLabel.text = "\(StatisticsFunctions.swift_qNorm(lookupValue))"
             result = StatisticsFunctions.swift_qNorm(lookupValue)
             answerValueLabel.text = roundDoubleToNDecimals(result, n: 3)
+            
         case .tScore :
             //answerValueLabel.text = "\(StatisticsFunctions.swift_qt(lookupValue, df: selectedDf))"
             result = StatisticsFunctions.swift_qt(lookupValue, df: selectedDf)
             answerValueLabel.text = roundDoubleToNDecimals(result, n: 3)
+            
         case .pVal :
             if sender.tag == 0 {
                 // answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(lookupValue, mean: 0.0, standardDev: 1.0, n: integrationStepCount))"
                 result = StatisticsFunctions.swift_pnormFewestSteps(lookupValue, mean: 0.0, standardDev: 1.0, n: integrationStepCount)
-                answerValueLabel.text = roundDoubleToNDecimals(result, n: 4)
+                
+                if lookupValue <= 0.0 {
+                    answerValueLabel.text = "Area to the left: " + roundDoubleToNDecimals(result, n: 4)
+                    answerValueLabel_Secondary.text = "Area to the right: " + roundDoubleToNDecimals(1.0 - result, n: 4)
+                } else {
+                    answerValueLabel.text = "Area to the left: " + roundDoubleToNDecimals(1.0 - result, n: 4)
+                    answerValueLabel_Secondary.text = "Area to the right: " + roundDoubleToNDecimals(result, n: 4)
+                }
+                
             } else if sender.tag == 1 {
                 // answerValueLabel.text = "\(StatisticsFunctions.swift_pt(lookupValue, df: selectedDf))"
                 result = StatisticsFunctions.swift_pt(lookupValue, df: selectedDf)
-                answerValueLabel.text = roundDoubleToNDecimals(result, n: 4)
+                //answerValueLabel.text = roundDoubleToNDecimals(result, n: 4)
+                
+                
+                answerValueLabel.text = "Area to the left: " + roundDoubleToNDecimals(result, n: 4)
+                answerValueLabel_Secondary.text = "Area to the right: " + roundDoubleToNDecimals(1.0 - result, n: 4)
+                
             }
         }
         
@@ -147,6 +161,9 @@ class ErsatzStatTablesVC: UIViewController {
     func updateInputControlsByMode(updatedMode: ErsatzStatTableOptions!) {
         
         answerValueLabel.text = ""
+        answerValueLabel_Secondary.text = ""
+        lookupValueTextField.text = ""
+        lookupValue = 0.0
         
         switch updatedMode! {
         case .zScore :

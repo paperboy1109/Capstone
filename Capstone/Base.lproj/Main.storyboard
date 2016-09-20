@@ -1667,10 +1667,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PZQ-Nc-KPC" userLabel="Answer Labels Stack View">
-                                <rect key="frame" x="204" y="480" width="192" height="50"/>
+                                <rect key="frame" x="36" y="480" width="528" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The answer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mtk-hW-8SK">
-                                        <rect key="frame" x="0.0" y="0.0" width="192" height="21"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="528" height="21"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="Wrf-HA-F2l"/>
@@ -1679,9 +1679,14 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="ucm-fW-1Mu"/>
+                                            </mask>
+                                        </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The answer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMq-aT-KnC">
-                                        <rect key="frame" x="0.0" y="29" width="192" height="21"/>
+                                        <rect key="frame" x="0.0" y="29" width="528" height="21"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="4BK-25-JjL"/>
@@ -1690,6 +1695,11 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="PER-xD-fk3"/>
+                                            </mask>
+                                        </variation>
                                     </label>
                                 </subviews>
                             </stackView>
@@ -1698,6 +1708,8 @@
                         <constraints>
                             <constraint firstItem="WbN-RI-5Sy" firstAttribute="top" secondItem="MmN-7p-39N" secondAttribute="bottom" constant="21" id="2Ip-BA-W4N"/>
                             <constraint firstItem="ZVg-JK-LQ9" firstAttribute="top" secondItem="WbN-RI-5Sy" secondAttribute="bottom" constant="21" id="4Dx-WC-We8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PZQ-Nc-KPC" secondAttribute="trailing" constant="16" id="5Wh-Hc-nhJ"/>
+                            <constraint firstItem="PZQ-Nc-KPC" firstAttribute="leading" secondItem="sE3-Dy-xWn" secondAttribute="leadingMargin" constant="16" id="61k-We-705"/>
                             <constraint firstItem="MmN-7p-39N" firstAttribute="top" secondItem="1BC-LX-GG7" secondAttribute="bottom" constant="15" id="71u-Gc-qgO"/>
                             <constraint firstItem="WbN-RI-5Sy" firstAttribute="centerX" secondItem="sE3-Dy-xWn" secondAttribute="centerX" id="8q9-AA-6JH"/>
                             <constraint firstItem="MmN-7p-39N" firstAttribute="centerX" secondItem="sE3-Dy-xWn" secondAttribute="centerX" id="JuX-Cc-jCm"/>

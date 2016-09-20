@@ -387,3 +387,15 @@ extension StandardNormalVC {
     
     
 }
+
+extension StandardNormalVC {
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
+    /* Disable landscape mode for this scene */
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
+}

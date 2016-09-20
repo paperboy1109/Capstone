@@ -22,6 +22,7 @@ class UtilitiesVC: UIViewController {
     
     @IBOutlet var statUtilityTableView: UITableView!
     @IBOutlet var bannerLabel: UILabel!
+    @IBOutlet var dividerView: UIView!
     
     // MARK: - Lifecycle
     
@@ -33,6 +34,8 @@ class UtilitiesVC: UIViewController {
         }
         
         statUtilityTableView.delegate = self
+        
+        dividerView.backgroundColor = UIColor(red: 96.0/255.0, green: 237.0/255.0, blue: 179.0/255.0, alpha: 1.0)
         
         /* Have Auto Layout determine the height of the table view cells */
         statUtilityTableView.rowHeight = UITableViewAutomaticDimension
@@ -71,7 +74,7 @@ class UtilitiesVC: UIViewController {
                 
                 /* Update the cell */
                 currentCell.utilityDetailsText.text = utilityForCell.isShowingDetails ? utilityForCell.moreInfo : utilityInfoText
-                currentCell.utilityDetailsText.textAlignment = utilityForCell.isShowingDetails ? NSTextAlignment.Left : NSTextAlignment.Center
+                currentCell.utilityDetailsText.textAlignment = utilityForCell.isShowingDetails ? NSTextAlignment.Left : NSTextAlignment.Left
                 
                 /* Update the model */
                 statUtilities[targetIndexPath.row] = utilityForCell
@@ -110,7 +113,7 @@ extension UtilitiesVC: UITableViewDelegate, UITableViewDataSource {
             
             cell.titleLabel.text = utilityForCell.title
             cell.utilityDetailsText.text = utilityForCell.isShowingDetails ? utilityForCell.moreInfo : utilityInfoText
-            cell.utilityDetailsText.textAlignment = utilityForCell.isShowingDetails ? NSTextAlignment.Left : NSTextAlignment.Center
+            cell.utilityDetailsText.textAlignment = utilityForCell.isShowingDetails ? NSTextAlignment.Left : NSTextAlignment.Left //NSTextAlignment.Center
             
             
             return cell

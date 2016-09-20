@@ -155,6 +155,12 @@ class StandardNormalVC: UIViewController {
         print("Stepper was tapped: ")
         print(sender.value)
         
+        if sender.value < 0 {
+            plusMinusLabel.text = "-"
+        } else {
+            plusMinusLabel.text = ""
+        }
+        
         slider.value = Float(stepper.value)
         
         setMorphNumbers(slider.value)
@@ -345,6 +351,7 @@ extension StandardNormalVC {
         lineChartDataSet_Layer1.drawCirclesEnabled = false
         lineChartDataSet_Layer1.mode = .CubicBezier
         lineChartDataSet_Layer1.cubicIntensity = bezierIntensity
+        lineChartDataSet_Layer1.setColor(UIColor.darkGrayColor())
         
         /* Customize the appearance of line 2 (middle layer) */
         lineChartDataSet_Layer2.setColor(plotBackgroundColor)
@@ -353,12 +360,14 @@ extension StandardNormalVC {
         lineChartDataSet_Layer2.fillAlpha = 1.0
         lineChartDataSet_Layer2.mode = .Stepped
         lineChartDataSet_Layer2.drawCirclesEnabled = false
+        //lineChartDataSet_Layer2.setColor(UIColor(red: 96.0/255.0, green: 237.0/255.0, blue: 179.0/255.0, alpha: 1.0))
         
         /* Customize the appearance of line 3 (top layer)*/
         lineChartDataSet_Layer3.setColor(lineColor)
         lineChartDataSet_Layer3.drawCirclesEnabled = false
         lineChartDataSet_Layer3.mode = .CubicBezier
         lineChartDataSet_Layer3.cubicIntensity = bezierIntensity
+        lineChartDataSet_Layer3.setColor(UIColor.darkGrayColor())
         
         
         let linesToPlot = [lineChartDataSet_Layer1, lineChartDataSet_Layer2, lineChartDataSet_Layer3]

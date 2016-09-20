@@ -25,9 +25,12 @@ class ErsatzStatTablesVC: UIViewController {
     
     
     @IBOutlet var plusMinusButton: UIButton!
-    
-    @IBOutlet var lookupValueLabel: UILabel!
+        
     @IBOutlet var answerValueLabel: UILabel!
+    
+    @IBOutlet var answerValueLabel_Secondary: UILabel!
+    
+    
     @IBOutlet var entryTypeLabel: UILabel!
     
     
@@ -285,6 +288,11 @@ extension ErsatzStatTablesVC {
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    /* Disable landscape mode for this scene */
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
     }
 }
 

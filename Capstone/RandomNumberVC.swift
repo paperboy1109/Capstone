@@ -38,7 +38,21 @@ class RandomNumberVC: UIViewController {
         /* Set the UI according to the current mode */
         currentMode = StatDistributions.allOptions[distributionSelectionControl.selectedSegmentIndex]
         updateInputControlsByMode(currentMode)
+        
+        /* Set custom fonts */
+        leftLabel.font = UIFont(name: "PTSans-Regular", size: 17)
+        leftLabel.textColor = UIColor.darkGrayColor()
+        leftLabel.textAlignment = NSTextAlignment.Center
+        
+        rightLabel.font = UIFont(name: "PTSans-Regular", size: 17)
+        rightLabel.textColor = UIColor.darkGrayColor()
+        rightLabel.textAlignment = NSTextAlignment.Center
+        
+        randomNumberLabel.font = UIFont(name: "PTSans-Regular", size: 38)
+        randomNumberLabel.textColor = UIColor.darkGrayColor()
+        randomNumberLabel.textAlignment = NSTextAlignment.Center
     }
+    
     
     // MARK: - Detect a shake gesture
     
@@ -121,7 +135,7 @@ class RandomNumberVC: UIViewController {
     // MARK: - Helpers
     func updateInputControlsByMode(updatedMode: StatDistributions!) {
         
-        randomNumberLabel.text = "Shake It"
+        randomNumberLabel.text = "Shake Me ;)"
         
         switch updatedMode! {
         case .normal :

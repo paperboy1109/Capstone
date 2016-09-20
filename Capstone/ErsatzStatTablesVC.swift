@@ -65,34 +65,7 @@ class ErsatzStatTablesVC: UIViewController {
         answerValueLabel.text = ""
         
         /* Set custom fonts */
-        titleLabel.font = UIFont(name: "PTSans-Italic", size: 21)
-        titleLabel.textColor = UIColor.darkGrayColor()
-        titleLabel.textAlignment = NSTextAlignment.Center
-        
-        entryTypeLabel.font = UIFont(name: "PTSans-Regular", size: 17)
-        entryTypeLabel.textColor = UIColor.darkGrayColor()
-        entryTypeLabel.textAlignment = NSTextAlignment.Left
-        
-        dfLabel1.font = UIFont(name: "PTSans-Regular", size: 17)
-        dfLabel1.textColor = UIColor.darkGrayColor()
-        dfLabel1.textAlignment = NSTextAlignment.Left
-        
-        dfLabel2.font = UIFont(name: "PTSans-Italic", size: 17)
-        dfLabel2.textColor = UIColor.darkGrayColor()
-        dfLabel2.textAlignment = NSTextAlignment.Center
-        
-        assumptionLabel.font = UIFont(name: "PTSans-Regular", size: 14)
-        assumptionLabel.textColor = UIColor.darkGrayColor()
-        assumptionLabel.textAlignment = NSTextAlignment.Center
-        
-        answerValueLabel.font = UIFont(name: "PTSans-Bold", size: 17)
-        answerValueLabel.textColor = UIColor.darkGrayColor()
-        answerValueLabel.textAlignment = NSTextAlignment.Center
-        
-        answerValueLabel_Secondary.font = UIFont(name: "PTSans-Bold", size: 17)
-        answerValueLabel_Secondary.textColor = UIColor.darkGrayColor()
-        answerValueLabel_Secondary.textAlignment = NSTextAlignment.Center
-        
+        setCustomFonts()
         
     }
     
@@ -188,6 +161,39 @@ class ErsatzStatTablesVC: UIViewController {
     }
     
     // MARK: - Helpers
+    
+    func setCustomFonts() {
+        
+        titleLabel.font = UIFont(name: "PTSans-Italic", size: 21)
+        titleLabel.textColor = UIColor.darkGrayColor()
+        titleLabel.textAlignment = NSTextAlignment.Center
+        
+        entryTypeLabel.font = UIFont(name: "PTSans-Regular", size: 17)
+        entryTypeLabel.textColor = UIColor.darkGrayColor()
+        entryTypeLabel.textAlignment = NSTextAlignment.Left
+        
+        dfLabel1.font = UIFont(name: "PTSans-Regular", size: 17)
+        dfLabel1.textColor = UIColor.darkGrayColor()
+        dfLabel1.textAlignment = NSTextAlignment.Left
+        
+        dfLabel2.font = UIFont(name: "PTSans-Italic", size: 17)
+        dfLabel2.textColor = UIColor.darkGrayColor()
+        dfLabel2.textAlignment = NSTextAlignment.Center
+        
+        assumptionLabel.font = UIFont(name: "PTSans-Regular", size: 14)
+        assumptionLabel.textColor = UIColor.darkGrayColor()
+        assumptionLabel.textAlignment = NSTextAlignment.Center
+        
+        answerValueLabel.font = UIFont(name: "PTSans-Bold", size: 17)
+        answerValueLabel.textColor = UIColor.darkGrayColor()
+        answerValueLabel.textAlignment = NSTextAlignment.Center
+        
+        answerValueLabel_Secondary.font = UIFont(name: "PTSans-Bold", size: 17)
+        answerValueLabel_Secondary.textColor = UIColor.darkGrayColor()
+        answerValueLabel_Secondary.textAlignment = NSTextAlignment.Center
+        
+    }
+    
     func updateInputControlsByMode(updatedMode: ErsatzStatTableOptions!) {
         
         answerValueLabel.text = ""

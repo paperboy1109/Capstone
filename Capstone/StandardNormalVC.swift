@@ -34,14 +34,13 @@ class StandardNormalVC: UIViewController {
     
     @IBOutlet var stepper: UIStepper!
     
+    @IBOutlet var pValTitleLabel: UILabel!
     @IBOutlet var pValueLabel: UILabel!
-    
-    
-    @IBOutlet var tempLabel: UILabel!
-    @IBOutlet var tempLabel2: UILabel!
     
     @IBOutlet var plotView: LineChartView!
     @IBOutlet var slider: UISlider!
+    
+    @IBOutlet var maskView: UIView!
     
     // MARK: - Lifecycle
     
@@ -63,17 +62,17 @@ class StandardNormalVC: UIViewController {
         leadingDigit.currentDigit = 0
         decimal1.currentDigit = 0
         zScore = 0.0
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        pValTitleLabel.text = "p-value:"
+        maskView.hidden = false
     }
     
     
     // MARK: - Actions
     
     @IBAction func plotTapped(sender: UIButton) {
+        
+        maskView.hidden = true
         
         plotView.data = nil
         plotView.setNeedsLayout()
@@ -141,10 +140,6 @@ class StandardNormalVC: UIViewController {
             plusMinusLabel.text = ""
         }
         
-        print(numberFormatter.stringFromNumber(sender.value))
-        //tempLabel.text = numberFormatter.stringFromNumber(2.12345)
-        
-        
         setMorphNumbers(sender.value)
         
     }
@@ -165,8 +160,6 @@ class StandardNormalVC: UIViewController {
     func updateZScore(leadingDigit: Int, firstDecimal: Int, secondDecimal: Int, thirdDecimal: Int) {
         
         let zScoreText = "\(leadingDigit)" + "." + "\(firstDecimal)\(secondDecimal)\(thirdDecimal)"
-        tempLabel2.text = zScoreText
-        // tempLabel2.text = String(zScore)
         
         zScore = Double(zScoreText)
         
@@ -179,8 +172,6 @@ class StandardNormalVC: UIViewController {
     }
     
     func setMorphNumbers(newValue: Float) {
-        
-        tempLabel.text = numberFormatter.stringFromNumber(newValue)
         
         guard var numberText = numberFormatter.stringFromNumber(abs(newValue)) else {
             return

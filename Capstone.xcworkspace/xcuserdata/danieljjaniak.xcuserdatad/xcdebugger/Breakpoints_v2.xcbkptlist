@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Capstone/StandardNormalVC.swift"
-            timestampString = "494883474.479963"
+            timestampString = "496074584.254759"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "sliderMoved(_:)"
             landmarkType = "5">
          </BreakpointContent>

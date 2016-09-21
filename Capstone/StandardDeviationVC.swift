@@ -23,6 +23,8 @@ class StandardDeviationVC: UIViewController {
     var upperCellIndex = -100
     var lowerCellIndex = -100
     
+    let themeColor = UIColor(red: 96.0/255.0, green: 237.0/255.0, blue: 179.0/255.0, alpha: 1.0)
+    
     var pullDownGestureActive = false
     
     // MARK: - Outlets
@@ -32,10 +34,17 @@ class StandardDeviationVC: UIViewController {
     @IBOutlet var stDevTitleLabel: UILabel!
     @IBOutlet var stDevAnswerLabel: UILabel!
     
+    @IBOutlet var dividerView: UIView!
+    
+    @IBOutlet var bottomView: UIView!
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dividerView.backgroundColor = themeColor
+        bottomView.backgroundColor = themeColor
         
         pinchGestureRecognizer.addTarget(self, action: #selector(StandardDeviationVC.userDidPinch(_:)))
         dataTableView.addGestureRecognizer(pinchGestureRecognizer)
@@ -80,7 +89,7 @@ class StandardDeviationVC: UIViewController {
                     return
                 }
                 
-                dataSummaryVC.dataTableEntries = self.dataTableEntries!                
+                dataSummaryVC.dataTableEntries = self.dataTableEntries!
             }
             
         }
@@ -92,6 +101,50 @@ class StandardDeviationVC: UIViewController {
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    @IBAction func plusMinusTapped(sender: UIButton) {
+        
+        print("\nStandardDeviationVC plusMinusTapped ")
+        
+        /* Access the cell that contains the button */
+        var targetIndexPath: NSIndexPath!
+        
+        let currentButton = sender
+        
+        if let buttonStackView = currentButton.superview {
+            
+            if let buttonSuperview = buttonStackView.superview {
+                
+                if let currentCell = buttonSuperview.superview as? DataTableViewCell {
+                    
+                    /* Keep track of the cell's index */
+                    targetIndexPath = dataTableView.indexPathForCell(currentCell)
+                    
+                    /* Update the model with the sign change */
+                    var currentDatum = dataTableEntries[sender.tag]
+                    currentDatum.changeSignOfDatum()
+                    
+                    /* Update the cell */
+                    currentCell.datum = currentDatum
+                    
+                    /* Update the model */
+                    dataTableEntries[targetIndexPath.row] = currentDatum
+                    
+                    /* Animate constraint changes now that the moreInfoTextView has changed size and content */
+                    UIView.animateWithDuration(0.1) {
+                        currentCell.contentView.layoutIfNeeded()
+                    }
+                    
+                    /* Force the table view to update */
+                    dataTableView.beginUpdates()
+                    dataTableView.endUpdates()
+                    
+                }
+            }
+        }
+        
+    }
+    
     
     // MARK: - Helpers
     private func blockGarbageIn(alertTitle: String, alertDescription: String, tableCell: DataTableViewCell?) {
@@ -129,8 +182,10 @@ extension StandardDeviationVC: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier("DatumCell", forIndexPath: indexPath) as! DataTableViewCell
         
         cell.delegate = self
-        // TODO: Add data to the cell
+        
         cell.datum = dataTableEntries[indexPath.row]
+        
+        cell.plusMinusButton.tag = indexPath.row
         
         return cell
     }
@@ -202,8 +257,8 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
             //deleteDataTableCell(editingCell.datum!)
         }
         
-
-
+        
+        
     }
     
     func addDataTableCell() {

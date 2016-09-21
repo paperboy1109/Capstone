@@ -43,4 +43,12 @@ class DataTableDatum: NSObject {
         }
     }
     
+    func changeSignOfDatum() {
+        
+        guard let currentDoubleValue = self.datumDoubleValue else { return }
+        
+        self.datumDoubleValue = (-1.0) * currentDoubleValue
+        self.datumText = String(self.datumDoubleValue!)
+    }
+    
 }

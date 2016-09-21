@@ -65,6 +65,8 @@ class UtilitiesVC: UIViewController {
         let currentButton = sender
         if let buttonSuperview = currentButton.superview {
             if let currentCell = buttonSuperview.superview as? StatUtilitiesTableViewCell {
+                
+                /* Keep track of the cell's index */
                 targetIndexPath = statUtilityTableView.indexPathForCell(currentCell)
                 
                 

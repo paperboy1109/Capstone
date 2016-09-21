@@ -35,6 +35,8 @@ class DataTableViewCell: UITableViewCell {
     
     @IBOutlet var datumTextField: UITextField!
     
+    @IBOutlet var plusMinusButton: UIButton!
+    
     // MARK: - Observers
     
     /* If new text is entered */

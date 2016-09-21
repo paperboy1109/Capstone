@@ -15,8 +15,14 @@ class DataSummaryVC: UIViewController {
     var dataTableEntries: [DataTableDatum]!
     let numberFormatter = NSNumberFormatter()
     let maxDecimalPlaces = 5
+    let themeColor = UIColor(red: 96.0/255.0, green: 237.0/255.0, blue: 179.0/255.0, alpha: 1.0)
     
     // MARK: - Outlets
+    
+    @IBOutlet var titleLabel: UILabel!
+    
+    @IBOutlet var headingLabel: UILabel!
+    
     
     @IBOutlet var meanLabel: UILabel!
     @IBOutlet var varLabel: UILabel!
@@ -29,11 +35,15 @@ class DataSummaryVC: UIViewController {
     @IBOutlet var q3Label: UILabel!    
     @IBOutlet var maxLabel: UILabel!
     
+    @IBOutlet var dividerView: UIView!
     
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setFont()
+        dividerView.backgroundColor = themeColor
         
         print("\n*** Data Summary VC ***")
         print(dataTableEntries?.count)
@@ -46,28 +56,14 @@ class DataSummaryVC: UIViewController {
         }
         
         let currentData = StatisticsFunctions.getDataTableDataAsArrayOfDoubles(dataTableEntries)
-        print("mean: \(StatisticsFunctions.swift_mean(currentData))")
-        print("sd: \(StatisticsFunctions.swift_sd(currentData))")
-        // print("fiveNumberSummary: \(StatisticsFunctions.swift_fiveNumberSummary(currentData))")
         
-        /* Display common descriptive statistics */
-        
-        meanLabel.text = roundDoubleToNDecimals(StatisticsFunctions.swift_mean(currentData), n: maxDecimalPlaces)
-        let standardDeviation = StatisticsFunctions.swift_sd(currentData)
-        varLabel.text = roundDoubleToNDecimals(pow(standardDeviation, 2), n: maxDecimalPlaces)
-        sdLabel.text = roundDoubleToNDecimals(standardDeviation, n: maxDecimalPlaces)
-        
-        let fiveNumberSummary = StatisticsFunctions.swift_fiveNumberSummary(currentData)
-        minLabel.text = roundDoubleToNDecimals(fiveNumberSummary.min, n: maxDecimalPlaces)
-        q1Label.text = roundDoubleToNDecimals(fiveNumberSummary.q1, n: maxDecimalPlaces)
-        medianLabel.text = roundDoubleToNDecimals(fiveNumberSummary.q2, n: maxDecimalPlaces)
-        q3Label.text = roundDoubleToNDecimals(fiveNumberSummary.q3, n: maxDecimalPlaces)
-        maxLabel.text = roundDoubleToNDecimals(fiveNumberSummary.max, n: maxDecimalPlaces)
+        showDataSummary(currentData)
 
-        print(fiveNumberSummary.q1)
+
     }
     
     // MARK: - Helpers
+    
     func roundDoubleToNDecimals(fullNumber: Double, n: Int) -> String {
         numberFormatter.minimumFractionDigits = n
         numberFormatter.maximumFractionDigits = n
@@ -77,6 +73,33 @@ class DataSummaryVC: UIViewController {
         } else {
             return ""
         }
+        
+    }
+    
+    func setFont() {
+        
+        titleLabel.font = UIFont(name: "PTSans-Regular", size: 32)
+        titleLabel.textAlignment = NSTextAlignment.Center
+        titleLabel.textColor = UIColor.darkGrayColor()
+        
+        headingLabel.font = UIFont(name: "PTSans-Regular", size: 18)
+        headingLabel.textColor = UIColor.darkGrayColor()
+    }
+    
+    func showDataSummary(data: [Double]) {
+        
+        /* Display common descriptive statistics */
+        meanLabel.text = roundDoubleToNDecimals(StatisticsFunctions.swift_mean(data), n: maxDecimalPlaces)
+        let standardDeviation = StatisticsFunctions.swift_sd(data)
+        varLabel.text = roundDoubleToNDecimals(pow(standardDeviation, 2), n: maxDecimalPlaces)
+        sdLabel.text = roundDoubleToNDecimals(standardDeviation, n: maxDecimalPlaces)
+        
+        let fiveNumberSummary = StatisticsFunctions.swift_fiveNumberSummary(data)
+        minLabel.text = roundDoubleToNDecimals(fiveNumberSummary.min, n: maxDecimalPlaces)
+        q1Label.text = roundDoubleToNDecimals(fiveNumberSummary.q1, n: maxDecimalPlaces)
+        medianLabel.text = roundDoubleToNDecimals(fiveNumberSummary.q2, n: maxDecimalPlaces)
+        q3Label.text = roundDoubleToNDecimals(fiveNumberSummary.q3, n: maxDecimalPlaces)
+        maxLabel.text = roundDoubleToNDecimals(fiveNumberSummary.max, n: maxDecimalPlaces)
         
     }
     

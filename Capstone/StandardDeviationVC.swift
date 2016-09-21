@@ -190,14 +190,17 @@ extension StandardDeviationVC: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier("DatumCell", forIndexPath: indexPath) as! DataTableViewCell
         
         cell.delegate = self
-        
+        cell.backgroundColor = UIColor.whiteColor()
         cell.datum = dataTableEntries[indexPath.row]
-        
         cell.plusMinusButton.tag = indexPath.row
         
         return cell
     }
     
+    /* Incomplete pinch gestures will change background colors; give the user a way to return the color to white */
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.cellForRowAtIndexPath(indexPath)?.backgroundColor = UIColor.whiteColor()
+    }
     
     
 }
@@ -260,7 +263,7 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
             print("Here is the datum value: \(newDatumValue)")
             
         } else {
-            editingCell.backgroundColor = UIColor.orangeColor()
+            editingCell.backgroundColor = UIColor.redColor()
             blockGarbageIn("Invalid data", alertDescription: "Check that the value you entered is a valid number", tableCell: editingCell)
             //deleteDataTableCell(editingCell.datum!)
         }
@@ -331,18 +334,12 @@ extension StandardDeviationVC {
         if dataTableEntries.count <= 2 {
             
             if pullDownGestureActive {
-                placeholderTableCell.backgroundColor = UIColor.redColor() // make the placeholder cell distinct for debugging
+                placeholderTableCell.backgroundColor = themeColor
                 /* User has pulled downward at the top of the table, add the placeholder cell */
                 dataTableView.insertSubview(placeholderTableCell, atIndex: 0)
             }
         }
         
-        //        else {
-        //            if pullDownGestureActive {
-        //                print("A pull-down drag has cued the calculation of a data summary ")
-        //                StatisticsFunctions.swift_sd(dataTableEntries)
-        //            }
-        //        }
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -354,22 +351,12 @@ extension StandardDeviationVC {
             placeholderTableCell.frame = CGRect(x: 0, y: -dataTableView.rowHeight,
                                                 width: dataTableView.frame.size.width, height: dataTableView.rowHeight)
             
-            // TODO: Fix the crash caused by trying to access datumTextField.text
-            //placeholderTableCell.datumTextField.text = -scrollViewContentOffsetY > dataTableView.rowHeight ? "Release to add the cell" : "Pull to create a data entry cell"
-            
             /* Give the placeholder cell a fade-in effect */
             placeholderTableCell.alpha = min(1.0, (-1.0) * scrollViewContentOffsetY / dataTableView.rowHeight)
             
         } else if pullDownGestureActive && scrollView.contentOffset.y <= 0.0 {
             
-            /* Instead of adding a new data and a new cell, summarize the data */
-            // TODO: scrollViewDidScroll is not a good event to trigger the data calculations
-            //print("A pull-down drag has cued the calculation of a data summary ")
-            
-            /* Check that all values are valid (Doubles) */
-            // TODO: Create an alert if there are invalid elements
-            let currentData = StatisticsFunctions.getDataTableDataAsArrayOfDoubles(dataTableEntries)
-            //print(StatisticsFunctions.swift_sd(currentData))
+            pullDownGestureActive = true
             
         } else {
             pullDownGestureActive = false
@@ -430,11 +417,11 @@ extension StandardDeviationVC {
             let cell = allVisibleCells[i]
             if viewContainsPoint(cell, point: initialTouchPoints.upper) {
                 upperCellIndex = i
-                cell.backgroundColor = UIColor.purpleColor()
+                cell.backgroundColor = UIColor.lightGrayColor()
             }
             if viewContainsPoint(cell, point: initialTouchPoints.lower) {
                 lowerCellIndex = i
-                cell.backgroundColor = UIColor.purpleColor()
+                cell.backgroundColor = UIColor.lightGrayColor()
             }
         }
         
@@ -447,7 +434,7 @@ extension StandardDeviationVC {
             let precedingCell = allVisibleCells[upperCellIndex]
             
             placeholderTableCell.frame = CGRectOffset(precedingCell.frame, 0.0, dataTableView.rowHeight / 2.0)
-            placeholderTableCell.backgroundColor = precedingCell.backgroundColor
+            placeholderTableCell.backgroundColor = themeColor //precedingCell.backgroundColor
             dataTableView.insertSubview(placeholderTableCell, atIndex: 0)
         }
         

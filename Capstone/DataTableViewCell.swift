@@ -95,8 +95,6 @@ class DataTableViewCell: UITableViewCell {
         if recognizer.state == .Began {
             /* when the gesture begins, record the initial center location */
             initialCellCenter = center
-            
-            datumTextField.backgroundColor = UIColor.blueColor()
         }
         
         if recognizer.state == .Changed {
@@ -125,16 +123,15 @@ class DataTableViewCell: UITableViewCell {
             let initialCellFrame = CGRect(x: 0, y: frame.origin.y, width: bounds.size.width, height: bounds.size.height)
             
             if self.deleteWhenPanGestureEnds {
-                datumTextField.backgroundColor = UIColor.redColor()
+                // datumTextField.backgroundColor = UIColor.redColor()
+                backgroundColor = UIColor.redColor()
                 UIView.animateWithDuration(0.4, animations: {self.frame = initialCellFrame})
                 
-                // Create a protocol and delegate to remove the cell from the table view
                 if delegate != nil && datum != nil {
                     delegate!.deleteDataTableCell(datum!)
                 }
-                
+            /* Add functionality to a swipe-to-the-right gesture */
             } else if self.changeSignOfDatumValue {
-                datumTextField.backgroundColor = UIColor.greenColor()
                 UIView.animateWithDuration(0.4, animations: {self.frame = initialCellFrame})
             } else {
                 UIView.animateWithDuration(0.2, animations: {self.frame = initialCellFrame})

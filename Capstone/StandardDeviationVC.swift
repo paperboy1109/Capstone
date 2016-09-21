@@ -29,13 +29,9 @@ class StandardDeviationVC: UIViewController {
     
     // MARK: - Outlets
     
+    @IBOutlet var bannerTextLabel: UILabel!
     @IBOutlet var dataTableView: UITableView!
-    
-    @IBOutlet var stDevTitleLabel: UILabel!
-    @IBOutlet var stDevAnswerLabel: UILabel!
-    
     @IBOutlet var dividerView: UIView!
-    
     @IBOutlet var bottomView: UIView!
     
     // MARK: - Lifecycle
@@ -55,6 +51,11 @@ class StandardDeviationVC: UIViewController {
         
         dataTableEntries = []
         
+        /* Configure the initial banner text */
+        bannerTextLabel.font = UIFont(name: "PTSans-Regular", size: 21)
+        bannerTextLabel.textAlignment = NSTextAlignment.Center
+        bannerTextLabel.textColor = UIColor.darkGrayColor()
+        
         /* Create some example data */
         let sampleData = ["1.0", "2.0", "3.0", "4.0", "5.0", "6.0", "7.0"]
         for item in sampleData {
@@ -70,9 +71,7 @@ class StandardDeviationVC: UIViewController {
             print(item.datumDoubleValue)
         }
         
-        // TODO: Fix this crash
-        //placeholderTableCell.datumTextField.text = "Hello"
-        //print("Here is placeholderTableCell: \(placeholderTableCell)")
+        updateBannerMessage()
         
         
     }
@@ -161,6 +160,15 @@ class StandardDeviationVC: UIViewController {
         }) )
         
         self.presentViewController(alertView, animated: true, completion: nil)
+    }
+    
+    func updateBannerMessage() {
+        
+        if dataTableEntries.count <= 2 {
+            bannerTextLabel.text = "Pull downward to add data."
+        } else {
+            bannerTextLabel.text = "Pull downward to summarize the data. Pinch outward to add new data."
+        }
     }
     
 }
@@ -286,6 +294,7 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
             }
         }
         
+        updateBannerMessage()
     }
     
     func deleteDataTableCell(itemToRemove: DataTableDatum) {
@@ -303,6 +312,8 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
         let indexPathOfItemToDelete = NSIndexPath(forRow: indexOfItemToRemove, inSection: 0)
         dataTableView.deleteRowsAtIndexPaths([indexPathOfItemToDelete], withRowAnimation: .Automatic)
         dataTableView.endUpdates()
+        
+        updateBannerMessage()
     }
     
 }
@@ -312,6 +323,8 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
 extension StandardDeviationVC {
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        
+        updateBannerMessage()
         
         pullDownGestureActive = scrollView.contentOffset.y <= 0.0
         
@@ -357,7 +370,6 @@ extension StandardDeviationVC {
             // TODO: Create an alert if there are invalid elements
             let currentData = StatisticsFunctions.getDataTableDataAsArrayOfDoubles(dataTableEntries)
             //print(StatisticsFunctions.swift_sd(currentData))
-            stDevAnswerLabel.text = String(StatisticsFunctions.swift_sd(currentData))
             
         } else {
             pullDownGestureActive = false
@@ -368,13 +380,16 @@ extension StandardDeviationVC {
         
         /* If the scroll-down gesture was far enough, add the placeholder cell to the collection of items in the table view */
         if dataTableEntries.count <= 2 && pullDownGestureActive && (-1.0) * scrollView.contentOffset.y > dataTableView.rowHeight {
-            // TODO: Insert a new cell into the table
+            
             addDataTableCell()
+            updateBannerMessage()
+            
         } else if pullDownGestureActive && (-1.0) * scrollView.contentOffset.y > dataTableView.rowHeight {
             
             /* Segue to the data summary scene */
             //let dataSummaryVC = self.storyboard!.instantiateViewControllerWithIdentifier("DataSummary") as! DataSummaryVC
             //self.presentViewController(dataSummaryVC, animated: true, completion: nil)
+            updateBannerMessage()
             
             self.performSegueWithIdentifier("ToDataSummary", sender: nil)
             

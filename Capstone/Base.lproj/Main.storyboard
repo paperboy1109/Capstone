@@ -1147,20 +1147,20 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="snE-nF-gNp">
                                 <rect key="frame" x="20" y="53" width="560" height="125"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Standard Deviation:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jbi-PK-u8h">
-                                        <rect key="frame" x="8" y="8" width="159" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vk1-Dv-ZgL">
-                                        <rect key="frame" x="8" y="37" width="269" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Or8-Us-uJI">
+                                        <rect key="frame" x="8" y="8" width="544" height="109"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Or8-Us-uJI" secondAttribute="trailing" constant="8" id="axW-BM-Fxm"/>
+                                    <constraint firstItem="Or8-Us-uJI" firstAttribute="leading" secondItem="snE-nF-gNp" secondAttribute="leading" constant="8" id="t4x-7Q-EAM"/>
+                                    <constraint firstItem="Or8-Us-uJI" firstAttribute="top" secondItem="snE-nF-gNp" secondAttribute="top" constant="8" id="vmE-pL-yXK"/>
+                                    <constraint firstAttribute="bottom" secondItem="Or8-Us-uJI" secondAttribute="bottom" constant="8" id="xia-ki-CBW"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UpQ-xw-EXT" userLabel="Divider View">
                                 <rect key="frame" x="0.0" y="185" width="600" height="2"/>
@@ -1171,7 +1171,7 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KLt-DO-Ops">
                                 <rect key="frame" x="20" y="194" width="560" height="374"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DatumCell" rowHeight="64" id="4pC-wR-rsQ" customClass="DataTableViewCell" customModule="Capstone" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="560" height="64"/>
@@ -1228,7 +1228,21 @@
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8S6-VX-fdI">
                                 <rect key="frame" x="0.0" y="569" width="600" height="31"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uU5-Wj-UXq">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="hfC-2Y-Ipi"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="uU5-Wj-UXq" firstAttribute="top" secondItem="8S6-VX-fdI" secondAttribute="top" id="IWE-j6-8Y0"/>
+                                    <constraint firstItem="uU5-Wj-UXq" firstAttribute="leading" secondItem="8S6-VX-fdI" secondAttribute="leading" id="Qsi-B3-sDq"/>
+                                    <constraint firstAttribute="trailing" secondItem="uU5-Wj-UXq" secondAttribute="trailing" id="j9g-qb-dkM"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1261,11 +1275,10 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="bannerTextLabel" destination="Or8-Us-uJI" id="42e-RJ-eGH"/>
                         <outlet property="bottomView" destination="8S6-VX-fdI" id="SOC-5W-eRL"/>
                         <outlet property="dataTableView" destination="KLt-DO-Ops" id="W5B-v8-usz"/>
                         <outlet property="dividerView" destination="UpQ-xw-EXT" id="olh-QO-aUI"/>
-                        <outlet property="stDevAnswerLabel" destination="vk1-Dv-ZgL" id="q5c-eG-BZD"/>
-                        <outlet property="stDevTitleLabel" destination="Jbi-PK-u8h" id="4NW-lr-l8W"/>
                         <segue destination="Ol0-7o-5Q8" kind="presentation" identifier="ToDataSummary" id="90L-qs-aXc"/>
                     </connections>
                 </viewController>

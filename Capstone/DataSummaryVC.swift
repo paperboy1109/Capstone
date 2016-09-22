@@ -45,13 +45,6 @@ class DataSummaryVC: UIViewController {
         setFont()
         dividerView.backgroundColor = themeColor
         
-        if let currentData = dataTableEntries {
-            
-            for item in currentData {
-                print(item.datumDoubleValue)
-            }
-        }
-        
         let currentData = StatisticsFunctions.getDataTableDataAsArrayOfDoubles(dataTableEntries)
         
         showDataSummary(currentData)

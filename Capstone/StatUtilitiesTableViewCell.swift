@@ -27,10 +27,6 @@ class StatUtilitiesTableViewCell: UITableViewCell {
         
         utilityDetailsText.font = UIFont(name: "PTSans-Italic", size: 17)
         utilityDetailsText.textColor = UIColor.darkGrayColor()
-        
-        
-        // TODO: Add a custom font
-        // titleLabel.font =
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

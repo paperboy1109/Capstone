@@ -23,23 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    /* Set the orientation of specific scenes */
-//    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
-//        
-//        return customizeVCOrientation(self.window!.rootViewController?)
-//        
-//    }
-//    
-//    func customizeVCOrientation(viewController:UIViewController?) -> Int {
-//        
-//        if viewController == nil {
-//            return Int(UIInterfaceOrientationMask.All.rawValue)
-//        } else if (viewController is ErsatzStatTablesVC) {
-//            return Int(UIInterfaceOrientationMask.Portrait.rawValue)
-//        } else {
-//            return customizeVCOrientation(viewController!.presentedViewController)
-//        }
-//    }
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

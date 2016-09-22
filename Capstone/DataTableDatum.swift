@@ -13,16 +13,6 @@ class DataTableDatum: NSObject {
     var datumDoubleValue: Double?
     var datumText: String
     
-    //    var datumText: String {
-    //        didSet {
-    //            if let unwrappedText = Double(datumText) {
-    //                datumDoubleValue = unwrappedText
-    //            } else {
-    //                datumDoubleValue = nil
-    //            }
-    //        }
-    //    }
-    
     init(textFieldText: String) {
         
         self.datumText = textFieldText

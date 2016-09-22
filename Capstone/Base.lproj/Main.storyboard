@@ -475,7 +475,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Tap for details ..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qgR-H6-Q9O">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Tap here for details ..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qgR-H6-Q9O">
                                                     <rect key="frame" x="101" y="31" width="483" height="87"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>

@@ -16,7 +16,7 @@ class UtilitiesVC: UIViewController {
     
     let cellReuseIdentifier = "StatUtilityCell"
     
-    let utilityInfoText = "Tap for details ... "
+    let utilityInfoText = "Tap here for details ... "
     
     // MARK: - Outlets
     

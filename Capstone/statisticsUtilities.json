@@ -7,7 +7,7 @@
     },
     {
       "title" : "Standard Normal Distribution",
-      "moreInfo" : "Set the value for your z-score to see it in context.  The animated distribution will shade the p-value in for you and give you its numerical value.",
+      "moreInfo" : "Set the value for your z-score to see it in context.  The animated distribution will shade the p-value in for you and give you its numerical value.  The provided range of z-scores covers more than 99.7% of the distribution.",
       "id" : 1
      },
      {

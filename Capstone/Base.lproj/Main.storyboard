@@ -97,7 +97,7 @@
                             <constraint firstItem="bjT-hT-gsD" firstAttribute="leading" secondItem="PfN-cj-2wA" secondAttribute="leading" constant="10" id="ijt-g0-vri"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" image="wallet" id="Q35-Yh-D1g"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="basic_info" selectedImage="basic_info" id="Q35-Yh-D1g"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <outlet property="plotView" destination="bjT-hT-gsD" id="TqR-qs-8Bh"/>
@@ -1934,8 +1934,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="basic_info" width="25" height="25"/>
         <image name="confirm_button" width="45" height="30"/>
         <image name="notifications_btn" width="15" height="28"/>
-        <image name="wallet" width="20" height="17"/>
     </resources>
 </document>

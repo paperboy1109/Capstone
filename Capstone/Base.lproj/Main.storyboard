@@ -161,10 +161,16 @@
                                                                 <rect key="frame" x="219" y="0.0" width="110" height="83"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <state key="normal" title="sqrt"/>
+                                                                <connections>
+                                                                    <action selector="operationButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8dL-8V-y5Q"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSi-uV-Unq">
                                                                 <rect key="frame" x="329" y="0.0" width="109" height="83"/>
                                                                 <state key="normal" title="^"/>
+                                                                <connections>
+                                                                    <action selector="operationButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eKK-9P-vWO"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -295,9 +301,12 @@
                                                             <action selector="numberTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6cc-dW-FlV"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hqu-0H-Lgx" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
+                                                    <button opaque="NO" tag="99" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hqu-0H-Lgx" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
                                                         <rect key="frame" x="292" y="0.0" width="146" height="83"/>
                                                         <state key="normal" title="."/>
+                                                        <connections>
+                                                            <action selector="numberTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yfD-3X-fJs"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" tag="18" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UAq-wA-xdG">
                                                         <rect key="frame" x="438" y="0.0" width="146" height="83"/>

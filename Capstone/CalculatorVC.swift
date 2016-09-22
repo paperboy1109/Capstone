@@ -31,9 +31,12 @@ class CalculatorVC: UIViewController {
     @IBOutlet var addButton: UIButton!
     @IBOutlet var equalsButton: UIButton!
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureDisplayText()
         clearDisplayText()
         
     }
@@ -43,25 +46,42 @@ class CalculatorVC: UIViewController {
     
     @IBAction func numberTapped(sender: CalculatorNumberButton) {
         
+        print(sender.tag)
+        
         enableMathOperations()
         
         guard displayLabel.text != nil else {return}
         
         let currentDisplayText = displayLabel.text!
         let currentDigit = sender.tag
-        let currentDigitString = String(currentDigit)
-        let concatenatedString = currentDisplayText + currentDigitString
+        var currentDigitString = String(currentDigit)
+        var concatenatedString = currentDisplayText + currentDigitString
         
-        /* Simply update the active value */
+        if sender.tag == 99 {
+            
+            currentDigitString = "."
+            concatenatedString = currentDisplayText + "."
+        }
+        
+        
+        /* No math operation has been tapped, simply update the active value */
         if calculatorData.operation == nil {
             
             if currentDisplayText == "0" || currentDisplayText == "" {
+                
                 displayLabel.text = currentDigitString
+                
+            } else if calculatorData.hasSavedValue {
+                
+                showBlockedFromEditing()
+                
             } else {
                 displayLabel.text = concatenatedString
             }
             
-            updateActiveValue()
+            if !calculatorData.hasSavedValue {
+                updateActiveValue()
+            }
             
             /* Take the mathematical operation into account */
         } else {
@@ -74,6 +94,7 @@ class CalculatorVC: UIViewController {
                 /* The display label is showing the active value and should be updated */
             } else {
                 displayLabel.text = concatenatedString
+                delButton.enabled = true
             }
             
             updateActiveValue()
@@ -87,6 +108,7 @@ class CalculatorVC: UIViewController {
             
             clearDisplayText()
             calculatorData.resetValues()
+            delButton.enabled = true
             
         } else if sender.tag == EditingOperations.delete.rawValue {
             
@@ -94,39 +116,94 @@ class CalculatorVC: UIViewController {
             
         } else if sender.tag == MathOperations.equate.rawValue {
             
-            if let currentStoredValue = calculatorData.activeValue {
-                
-                if let currentSecondStoredValue = calculatorData.savedValue {
-                    
-                    let result = currentStoredValue + currentSecondStoredValue
-                    
-                    displayLabel.text = String(result)
-                    
-                    calculatorData.updateValues(result, val2: nil)
-                    
-                } else {
-                    displayLabel.text = String(currentStoredValue)
-                }
-                
-                
-            }
-            
-            print("After tapping =, calculator data is \(calculatorData)")
-            
-            
-        } else {
-            
             /* Ignore the button tap if no values have been entered */
             guard calculatorData.activeValue != nil else { return }
             
             /* Ignore the button tap if the screen is currently blank */
             guard displayLabel.text != "" else { return }
             
+            if calculatorData.hasSavedValue && calculatorData.operation != nil {
+                
+                calculatorData.combineValues()
+                
+                let newResult = calculatorData.getSavedValueAsString()
+                displayLabel.text = newResult
+                
+                highlightCalculationResult()
+            }
+            
+            delButton.enabled = false
+            
+            
+            
+            
+            print("After tapping =, calculator data is \(calculatorData)")
+            
+            
+        } else if sender.tag == MathOperations.sqrt.rawValue {
+            
+            /* Ignore the button tap if there is a saved value or if there is no number on screen */
+            guard let currentDisplayedValue = displayLabel.text else {
+                setError()
+                return
+            }
+            
+            guard currentDisplayedValue != "" else {
+                setError()
+                return
+            }
+            
+            /* If the result of a calculation is being displayed, display its square root */
+            if calculatorData.hasSavedValue && calculatorData.activeValue == nil {
+                
+                guard var result = calculatorData.savedValue else {
+                    setError()
+                    return
+                }
+                
+                result = sqrt(result)
+                displayLabel.text = String(result)
+                saveDisplayedValue()
+                
+                calculatorData.operation = nil
+                
+                
+
+                /* Alert the user that sqrt is not available if there is a saved value and an active value */
+            } else if calculatorData.hasSavedValue && calculatorData.activeValue != nil {
+                
+                showBlockedFromEditing()
+                
+                /* There is no saved vaue, but there is an active value.  Show its square root */
+            } else {
+                
+                guard var result = calculatorData.activeValue else {
+                    setError()
+                    return
+                }
+                
+                result = sqrt(result)
+                displayLabel.text = String(result)
+                saveDisplayedValue()
+                
+                calculatorData.operation = nil
+                
+            }
+            
+            
+            
+        } else {
+            
+            /* Ignore the button tap if no values have been entered */
+            guard calculatorData.activeValue != nil || calculatorData.hasSavedValue else { return }
+            
+            /* Ignore the button tap if the screen is currently blank */
+            guard displayLabel.text != "" else { return }
+            
             disableMathOperations()
             
-            calculatorData.setOperation(sender.tag)
-            
-            updateActiveValue()
+            //calculatorData.setOperation(sender.tag)
+            //updateActiveValue()
             
             if calculatorData.hasSavedValue {
                 
@@ -134,11 +211,17 @@ class CalculatorVC: UIViewController {
                 let newResult = calculatorData.getSavedValueAsString()
                 displayLabel.text = newResult
                 
+                calculatorData.setOperation(sender.tag)
+                
             } else {
                 
                 saveDisplayedValue()
                 self.displayLabel.text = ""
+                
+                calculatorData.setOperation(sender.tag)
             }
+            
+            print("operation tapped; \(calculatorData)")
             
         }
     }
@@ -148,6 +231,11 @@ class CalculatorVC: UIViewController {
     func clearDisplayText() {
         displayLabel.text = "0"
         currentCalculatorTask = CalculatorTasks.blank
+    }
+    
+    func configureDisplayText() {
+        displayLabel.font = UIFont(name: "PTSans-Regular", size: 24)
+        displayLabel.textColor = UIColor.darkGrayColor()
     }
     
     func setError() {
@@ -226,7 +314,7 @@ class CalculatorVC: UIViewController {
     
     func disableMathOperations() {
         clearButton.enabled = false
-        delButton.enabled = false
+        //delButton.enabled = false
         sqrtButton.enabled = false
         expButton.enabled = false
         divideButton.enabled = false
@@ -238,7 +326,7 @@ class CalculatorVC: UIViewController {
     
     func enableMathOperations() {
         clearButton.enabled = true
-        delButton.enabled = true
+        // delButton.enabled = true
         sqrtButton.enabled = true
         expButton.enabled = true
         divideButton.enabled = true
@@ -246,6 +334,39 @@ class CalculatorVC: UIViewController {
         subtractButton.enabled = true
         addButton.enabled = true
         equalsButton.enabled = true
+    }
+    
+    func showBlockedFromEditing() {
+        
+        /* Indicate to the user that the result can not be edited */
+        UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseOut, animations:{
+            
+            self.displayLabel.alpha = 0.6
+            self.displayLabel.textColor = UIColor.redColor()
+            
+            }, completion: { success in
+                
+                self.displayLabel.alpha = 1.0
+                self.displayLabel.textColor = UIColor.darkGrayColor()
+                
+        })
+        
+    }
+    
+    func highlightCalculationResult() {
+        
+        UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseOut, animations:{
+            
+            self.displayLabel.alpha = 0.9
+            self.displayLabel.textColor = UIColor(red: 96.0/255.0, green: 237.0/255.0, blue: 179.0/255.0, alpha: 1.0)
+            
+            }, completion: { success in
+                
+                self.displayLabel.alpha = 1.0
+                self.displayLabel.textColor = UIColor.darkGrayColor()
+                
+        })
+        
     }
     
 }

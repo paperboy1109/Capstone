@@ -37,6 +37,7 @@ struct CalculatorMathVariablePair {
     
     mutating func saveValue(value: Double) {
         self.savedValue = value
+        self.activeValue = nil
         setDoesHaveSavedValue()
     }
     
@@ -84,8 +85,9 @@ struct CalculatorMathVariablePair {
         guard self.activeValue != nil && self.savedValue != nil && self.operation != nil else { return }
         
         switch self.operation! {
+            
         case MathOperations.exponentiation:
-            self.savedValue = 0.0
+            self.savedValue = pow(self.savedValue!, self.activeValue!)
         case MathOperations.division:
             self.savedValue = self.savedValue! / self.activeValue!
         case MathOperations.multiplication:
@@ -94,12 +96,13 @@ struct CalculatorMathVariablePair {
             self.savedValue = self.savedValue! - self.activeValue!
         case MathOperations.addition:
             self.savedValue = self.savedValue! + self.activeValue!
+
         default:
             self.savedValue = 0.0
         }
         
         self.activeValue = nil        
-        
+        self.operation = nil
     }
     
     func getSavedValueAsString() -> String {

@@ -15,8 +15,6 @@ class CalculatorVC: UIViewController {
     var currentCalculatorTask: CalculatorTasks!
     var calculatorData = CalculatorMathVariablePair()
     
-    var enteredValue1 = ""
-    
     // MARK: - Outlets
     
     @IBOutlet var displayLabel: UILabel!
@@ -57,6 +55,7 @@ class CalculatorVC: UIViewController {
         var currentDigitString = String(currentDigit)
         var concatenatedString = currentDisplayText + currentDigitString
         
+        /* Accommodate the decimal place */
         if sender.tag == 99 {
             
             currentDigitString = "."
@@ -70,6 +69,7 @@ class CalculatorVC: UIViewController {
             if currentDisplayText == "0" || currentDisplayText == "" {
                 
                 displayLabel.text = currentDigitString
+                updateActiveValue()
                 
             } else if calculatorData.hasSavedValue {
                 
@@ -77,11 +77,12 @@ class CalculatorVC: UIViewController {
                 
             } else {
                 displayLabel.text = concatenatedString
-            }
-            
-            if !calculatorData.hasSavedValue {
                 updateActiveValue()
             }
+            
+            //            if !calculatorData.hasSavedValue {
+            //                updateActiveValue()
+            //            }
             
             /* Take the mathematical operation into account */
         } else {
@@ -122,6 +123,7 @@ class CalculatorVC: UIViewController {
             /* Ignore the button tap if the screen is currently blank */
             guard displayLabel.text != "" else { return }
             
+            /* Perform a calculation */
             if calculatorData.hasSavedValue && calculatorData.operation != nil {
                 
                 calculatorData.combineValues()
@@ -133,12 +135,6 @@ class CalculatorVC: UIViewController {
             }
             
             delButton.enabled = false
-            
-            
-            
-            
-            print("After tapping =, calculator data is \(calculatorData)")
-            
             
         } else if sender.tag == MathOperations.sqrt.rawValue {
             
@@ -161,6 +157,11 @@ class CalculatorVC: UIViewController {
                     return
                 }
                 
+                guard result >= 0.0 else {
+                    setError()
+                    return
+                }
+                
                 result = sqrt(result)
                 displayLabel.text = String(result)
                 saveDisplayedValue()
@@ -168,7 +169,7 @@ class CalculatorVC: UIViewController {
                 calculatorData.operation = nil
                 
                 
-
+                
                 /* Alert the user that sqrt is not available if there is a saved value and an active value */
             } else if calculatorData.hasSavedValue && calculatorData.activeValue != nil {
                 
@@ -182,6 +183,11 @@ class CalculatorVC: UIViewController {
                     return
                 }
                 
+                guard result >= 0.0 else {
+                    setError()
+                    return
+                }
+                
                 result = sqrt(result)
                 displayLabel.text = String(result)
                 saveDisplayedValue()
@@ -190,8 +196,7 @@ class CalculatorVC: UIViewController {
                 
             }
             
-            
-            
+            /* Do some arithmetic */
         } else {
             
             /* Ignore the button tap if no values have been entered */
@@ -221,10 +226,37 @@ class CalculatorVC: UIViewController {
                 calculatorData.setOperation(sender.tag)
             }
             
-            print("operation tapped; \(calculatorData)")
-            
         }
     }
+    
+    
+    @IBAction func plusMinusTapped(sender: AnyObject) {
+        
+        guard displayLabel.text != nil && displayLabel.text != "" else {
+            setError()
+            return
+        }
+        
+        /* Allow an active value to be updated */
+        if calculatorData.activeValue != nil {
+            
+            let newValue = (-1.0) * calculatorData.activeValue!
+            updateDisplayedValue(newValue)
+            updateActiveValue()
+            
+        }
+        
+        /* Allow the value of a calculation result to be updated */
+        else if calculatorData.hasSavedValue {
+            
+            let newValue = (-1.0) * calculatorData.savedValue!
+            updateDisplayedValue(newValue)
+            saveDisplayedValue()        
+        
+        }
+    }
+    
+    
     
     // MARK: - Helpers
     
@@ -234,7 +266,7 @@ class CalculatorVC: UIViewController {
     }
     
     func configureDisplayText() {
-        displayLabel.font = UIFont(name: "PTSans-Regular", size: 24)
+        displayLabel.font = UIFont(name: "PTSans-Regular", size: 32)
         displayLabel.textColor = UIColor.darkGrayColor()
     }
     
@@ -247,6 +279,10 @@ class CalculatorVC: UIViewController {
     func del() {
         
         guard let currentText = displayLabel.text else {
+            return
+        }
+        
+        guard currentText != "" else {
             return
         }
         
@@ -309,6 +345,17 @@ class CalculatorVC: UIViewController {
         } else {
             setError()
         }
+    }
+    
+    func updateDisplayedValue(newValue: Double) {
+        
+        guard displayLabel.text != nil else {
+            setError()
+            return
+        }
+        
+        displayLabel.text = String(newValue)
+    
     }
     
     

@@ -24,7 +24,7 @@ struct CalculatorMathVariablePair {
     var savedValue: Double?
     var activeValue: Double?
     var hasSavedValue = false
-    var operation: MathOperations?
+    var operation: MathOperations?    
     
     init() {
         self.savedValue = nil

@@ -2,22 +2,22 @@
   "statUtilities" : [
     {
       "title" : "z- and t-tables",
-      "moreInfo" : "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.",
+      "moreInfo" : "Use this utility as you would a printed set of z- and t-tables.  Just enter your p-value to get z or t, and vice-versa.",
       "id" : 0
     },
     {
       "title" : "Standard Normal Distribution",
-      "moreInfo" : "Describe the utility here ...",
+      "moreInfo" : "Set the value for your z-score to see it in context.  The animated distribution will shade the p-value in for you and give you its numerical value.",
       "id" : 1
      },
      {
        "title" : "Random Number Generator",
-       "moreInfo" : "Describe the utility here ...",
+       "moreInfo" : "Select from three distributions, set two quick parameters, and shake your phone to get a randomly-generated value.",
        "id" : 2
      },
      {
        "title" : "Data Summary",
-       "moreInfo" : "Describe the utility here ...",
+       "moreInfo" : "Need to calculate a standard deviation?  Or a five-number summary?  Here you can enter a small data set of your own into an interactive list to produce a summary.  Swiping to the left deletes an item from the list, and pinch and drag gestures do the rest.",
        "id" : 3
      }
   ]

@@ -103,18 +103,23 @@ class ErsatzStatTablesVC: UIViewController {
     
     @IBAction func calculateTapped(sender: UIButton) {
         
-        print("The current mode is: ")
-        print(self.currentMode.rawValue)
-        
-        var result: Double = 0.0
-        
         if let newUserEntry = lookupValueTextField.text {
+            
+            /* Check that the text entered does not contain multiple decimal points */
+            
+            if newUserEntry.characters.count > 0 {
+                
+                guard newUserEntry.componentsSeparatedByString(".").count <= 2 else {
+                    showErrorAlert("Error", alertDescription: "Check that you have entered a valid number.")
+                    return
+                }
+                
+            }
             
             if let unformattedNewValue = Double(newUserEntry) {
                 lookupValue = unformattedNewValue
             }
         }
-        
         
         /* Verify that the value entered by the user is valid */
         guard lookupValue != nil else {
@@ -122,38 +127,55 @@ class ErsatzStatTablesVC: UIViewController {
             return
         }
         
+        var result: Double = 0.0
+        
         switch currentMode! {
         case .zScore :
-            // answerValueLabel.text = "\(StatisticsFunctions.swift_qNorm(lookupValue))"
+            
+            /* Make sure the p-value is a valid number */
+            
+            guard lookupValue >= 0 && lookupValue <= 1 else {
+                showErrorAlert("Error", alertDescription: "A p-value can not have a negative value and can not be greater than 1.")
+                return
+            }
+                        
             result = StatisticsFunctions.swift_qNorm(lookupValue)
             answerValueLabel.text = roundDoubleToNDecimals(result, n: 3)
             
         case .tScore :
-            //answerValueLabel.text = "\(StatisticsFunctions.swift_qt(lookupValue, df: selectedDf))"
+            
+            /* Make sure the p-value is a valid number */
+            
+            guard lookupValue >= 0 && lookupValue <= 1 else {
+                showErrorAlert("Error", alertDescription: "A p-value can not have a negative value and can not be greater than 1.")
+                return
+            }
+            
             result = StatisticsFunctions.swift_qt(lookupValue, df: selectedDf)
             answerValueLabel.text = roundDoubleToNDecimals(result, n: 3)
             
         case .pVal :
+            
+            
+            
             if sender.tag == 0 {
-                // answerValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(lookupValue, mean: 0.0, standardDev: 1.0, n: integrationStepCount))"
+
                 result = StatisticsFunctions.swift_pnormFewestSteps(lookupValue, mean: 0.0, standardDev: 1.0, n: integrationStepCount)
                 
                 if lookupValue <= 0.0 {
-                    answerValueLabel.text = "Area to the left: " + roundDoubleToNDecimals(result, n: 4)
-                    answerValueLabel_Secondary.text = "Area to the right: " + roundDoubleToNDecimals(1.0 - result, n: 4)
+                    answerValueLabel.text = "Area to the left:  " + roundDoubleToNDecimals(result, n: 4)
+                    answerValueLabel_Secondary.text = "Area to the right:  " + roundDoubleToNDecimals(1.0 - result, n: 4)
                 } else {
-                    answerValueLabel.text = "Area to the left: " + roundDoubleToNDecimals(1.0 - result, n: 4)
-                    answerValueLabel_Secondary.text = "Area to the right: " + roundDoubleToNDecimals(result, n: 4)
+                    answerValueLabel.text = "Area to the left:  " + roundDoubleToNDecimals(1.0 - result, n: 4)
+                    answerValueLabel_Secondary.text = "Area to the right:  " + roundDoubleToNDecimals(result, n: 4)
                 }
                 
             } else if sender.tag == 1 {
-                // answerValueLabel.text = "\(StatisticsFunctions.swift_pt(lookupValue, df: selectedDf))"
+                
                 result = StatisticsFunctions.swift_pt(lookupValue, df: selectedDf)
-                //answerValueLabel.text = roundDoubleToNDecimals(result, n: 4)
                 
-                
-                answerValueLabel.text = "Area to the left: " + roundDoubleToNDecimals(result, n: 4)
-                answerValueLabel_Secondary.text = "Area to the right: " + roundDoubleToNDecimals(1.0 - result, n: 4)
+                answerValueLabel.text = "Area to the left:  " + roundDoubleToNDecimals(result, n: 4)
+                answerValueLabel_Secondary.text = "Area to the right:  " + roundDoubleToNDecimals(1.0 - result, n: 4)
                 
             }
         }
@@ -237,10 +259,6 @@ class ErsatzStatTablesVC: UIViewController {
             calculateButton_Secondary.setTitle("Calculate p-value for t", forState: .Normal)
         }
         
-        
-        
-        //calculateButton.setTitle("Calculate \(updatedMode.rawValue)", forState: .Normal)
-        
     }
     
     func showErrorAlert(alertTitle: String, alertDescription: String) {
@@ -303,6 +321,8 @@ class ErsatzStatTablesVC: UIViewController {
     }
 }
 
+// MARK: - Picker view delegate methods
+
 extension ErsatzStatTablesVC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -320,8 +340,9 @@ extension ErsatzStatTablesVC: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedDf = row + 1
-        /* Clear out the answer label if the value for df is changed */
+        /* Clear out the answer labels when the value for df is changed */
         answerValueLabel.text = ""
+        answerValueLabel_Secondary.text = ""
     }
     
     

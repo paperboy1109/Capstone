@@ -138,7 +138,7 @@ class ErsatzStatTablesVC: UIViewController {
                 showErrorAlert("Error", alertDescription: "A p-value can not have a negative value and can not be greater than 1.")
                 return
             }
-                        
+            
             result = StatisticsFunctions.swift_qNorm(lookupValue)
             answerValueLabel.text = roundDoubleToNDecimals(result, n: 3)
             

@@ -34,13 +34,26 @@ class HomeSceneVC: UIViewController {
         titleLabel.textColor = UIColor.darkGrayColor()
         titleLabel.text = "Welcome"
         
-        welcomeTextField.font = UIFont(name: "PTSans-Italic", size: 17)
-
+        //welcomeTextField.font = UIFont(name: "PTSans-Italic", size: 24)
+        //welcomeTextField.textColor = UIColor.darkGrayColor()
+        // welcomeTextField.text = "   This is not your average statistics app. "
         
+        //let newPosition = welcomeTextField.beginningOfDocument
+        //welcomeTextField.selectedTextRange = welcomeTextField.textRangeFromPosition(newPosition, toPosition: newPosition)
+        //welcomeTextField.scrollRangeToVisible(NSRange(location:0, length:0))
+        
+        welcomeTextField.scrollEnabled = false
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        /* Trick the text field into showing the beginning of the text */
+        welcomeTextField.scrollEnabled = true
     }
     
     
     // MARK: - Helpers
+    
     func createPlot() {
         
         /* Create some sample data */
@@ -85,5 +98,10 @@ extension HomeSceneVC {
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    /* Disable landscape mode for this scene */
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
     }
 }

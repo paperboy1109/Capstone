@@ -182,7 +182,7 @@ public class StatisticsFunctions {
             
             counter += 1
             
-            print("guess: \(newApproximation)")
+            //print("guess: \(newApproximation)")
         }
         
         return newApproximation

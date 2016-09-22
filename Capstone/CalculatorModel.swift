@@ -111,35 +111,30 @@ struct CalculatorMathVariablePair {
         return String(self.savedValue!)
     }
     
-    
-    
-    
-    
-    
-    mutating func updateValues(val1: Double?, val2: Double?) {
-        self.savedValue = val1
-        self.activeValue = val2
-    }
-    
-    mutating func storeValue(value: Double) {
-        if !self.hasSavedValue {
-            self.savedValue = value
-        } else {
-            self.activeValue = value
-        }
-    }
-    
-
-    
-
-    
     mutating func setOperation(currentOperation: MathOperations) {
         self.operation = currentOperation
     }
-}
+    
+    
+    
+    
+    
+    
+//    mutating func updateValues(val1: Double?, val2: Double?) {
+//        self.savedValue = val1
+//        self.activeValue = val2
+//    }
+//    
+//    mutating func storeValue(value: Double) {
+//        if !self.hasSavedValue {
+//            self.savedValue = value
+//        } else {
+//            self.activeValue = value
+//        }
+//    }
+    
+    
 
-enum CalculatorTasks {
     
-    case blank, creatingNewNumber, updatingNumber, updatingSecondNumber, fatalError
-    
+
 }

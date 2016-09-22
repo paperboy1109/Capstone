@@ -12,7 +12,6 @@ class CalculatorVC: UIViewController {
     
     // MARK: - Properties
     
-    var currentCalculatorTask: CalculatorTasks!
     var calculatorData = CalculatorMathVariablePair()
     
     // MARK: - Outlets
@@ -94,8 +93,15 @@ class CalculatorVC: UIViewController {
                 
                 /* The display label is showing the active value and should be updated */
             } else {
-                displayLabel.text = concatenatedString
-                delButton.enabled = true
+                if currentDisplayText == "0" || currentDisplayText == "" {
+                    displayLabel.text = currentDigitString
+                } else {
+                    displayLabel.text = concatenatedString
+                }
+                
+                if displayLabel.text!.characters.count > 1 {
+                    delButton.enabled = true
+                }
             }
             
             updateActiveValue()
@@ -218,6 +224,8 @@ class CalculatorVC: UIViewController {
                 
                 calculatorData.setOperation(sender.tag)
                 
+                delButton.enabled = false
+                
             } else {
                 
                 saveDisplayedValue()
@@ -245,14 +253,14 @@ class CalculatorVC: UIViewController {
             updateActiveValue()
             
         }
-        
-        /* Allow the value of a calculation result to be updated */
+            
+            /* Allow the value of a calculation result to be updated */
         else if calculatorData.hasSavedValue {
             
             let newValue = (-1.0) * calculatorData.savedValue!
             updateDisplayedValue(newValue)
-            saveDisplayedValue()        
-        
+            saveDisplayedValue()
+            
         }
     }
     
@@ -262,18 +270,16 @@ class CalculatorVC: UIViewController {
     
     func clearDisplayText() {
         displayLabel.text = "0"
-        currentCalculatorTask = CalculatorTasks.blank
     }
     
     func configureDisplayText() {
-        displayLabel.font = UIFont(name: "PTSans-Regular", size: 32)
+        //displayLabel.font = UIFont(name: "PTSans-Regular", size: 36)
         displayLabel.textColor = UIColor.darkGrayColor()
     }
     
     func setError() {
         displayLabel.text = "Error"
         calculatorData.resetValues()
-        currentCalculatorTask = CalculatorTasks.fatalError
     }
     
     func del() {
@@ -355,7 +361,7 @@ class CalculatorVC: UIViewController {
         }
         
         displayLabel.text = String(newValue)
-    
+        
     }
     
     

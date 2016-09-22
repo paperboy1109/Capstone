@@ -291,23 +291,32 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7Z-hv-1g2">
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="l7Z-hv-1g2">
                                                 <rect key="frame" x="0.0" y="332" width="584" height="83"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qk-6w-Gta" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="292" height="83"/>
-                                                        <state key="normal" title="0"/>
-                                                        <connections>
-                                                            <action selector="numberTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6cc-dW-FlV"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" tag="99" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hqu-0H-Lgx" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
-                                                        <rect key="frame" x="292" y="0.0" width="146" height="83"/>
-                                                        <state key="normal" title="."/>
-                                                        <connections>
-                                                            <action selector="numberTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yfD-3X-fJs"/>
-                                                        </connections>
-                                                    </button>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="heb-xa-bMm">
+                                                        <rect key="frame" x="0.0" y="0.0" width="438" height="83"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qk-6w-Gta" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="146" height="83"/>
+                                                                <state key="normal" title="0"/>
+                                                                <connections>
+                                                                    <action selector="numberTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6cc-dW-FlV"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" tag="99" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hqu-0H-Lgx" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
+                                                                <rect key="frame" x="146" y="0.0" width="146" height="83"/>
+                                                                <state key="normal" title="."/>
+                                                                <connections>
+                                                                    <action selector="numberTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yfD-3X-fJs"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ueG-Mz-bg3" userLabel="PlusMinus Button" customClass="CalculatorNumberButton" customModule="Capstone" customModuleProvider="target">
+                                                                <rect key="frame" x="292" y="0.0" width="146" height="83"/>
+                                                                <state key="normal" title="+/-"/>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
                                                     <button opaque="NO" tag="18" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UAq-wA-xdG">
                                                         <rect key="frame" x="438" y="0.0" width="146" height="83"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
@@ -317,10 +326,6 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="hqu-0H-Lgx" firstAttribute="width" secondItem="6Qk-6w-Gta" secondAttribute="width" multiplier="1:2" id="GMK-Vv-iMy"/>
-                                                    <constraint firstItem="UAq-wA-xdG" firstAttribute="width" secondItem="hqu-0H-Lgx" secondAttribute="width" id="aFP-hr-adj"/>
-                                                </constraints>
                                             </stackView>
                                         </subviews>
                                         <constraints>
@@ -331,6 +336,7 @@
                                             <constraint firstItem="45J-Pg-447" firstAttribute="width" secondItem="qJN-k2-GrU" secondAttribute="width" id="BGO-50-bsR"/>
                                             <constraint firstAttribute="trailing" secondItem="h7V-ta-aEw" secondAttribute="trailing" id="BTc-YK-zIo"/>
                                             <constraint firstItem="SmM-x4-GY5" firstAttribute="top" secondItem="Ukz-ak-R9y" secondAttribute="bottom" id="FMw-bd-A7E"/>
+                                            <constraint firstItem="UAq-wA-xdG" firstAttribute="width" secondItem="f5b-Zq-fZk" secondAttribute="width" id="GQQ-Gt-a2B"/>
                                             <constraint firstItem="h7V-ta-aEw" firstAttribute="top" secondItem="fSu-hT-whd" secondAttribute="bottom" id="L1O-yv-ijP"/>
                                             <constraint firstItem="l7Z-hv-1g2" firstAttribute="top" secondItem="h7V-ta-aEw" secondAttribute="bottom" id="SGo-hQ-FdS"/>
                                             <constraint firstAttribute="trailing" secondItem="fSu-hT-whd" secondAttribute="trailing" id="VLx-dg-1oY"/>

@@ -63,14 +63,6 @@ class StandardDeviationVC: UIViewController {
             dataTableEntries.append(newDatum)
         }
         
-        print("dataTableEntries includes \(dataTableEntries.count) entries")
-        print("Here are the data table entries respective double values:")
-        for item in dataTableEntries {
-            print("-")
-            print(item.datumText)
-            print(item.datumDoubleValue)
-        }
-        
         updateBannerMessage()
         
         
@@ -79,8 +71,6 @@ class StandardDeviationVC: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "ToDataSummary" {
-            
-            print("Segue 'ToDataSummary' has been cued")
             
             if let dataSummaryVC = segue.destinationViewController as? DataSummaryVC {
                 
@@ -102,8 +92,6 @@ class StandardDeviationVC: UIViewController {
     }
     
     @IBAction func plusMinusTapped(sender: UIButton) {
-        
-        print("\nStandardDeviationVC plusMinusTapped ")
         
         /* Access the cell that contains the button */
         var targetIndexPath: NSIndexPath!
@@ -211,10 +199,6 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
     
     func cellDidBeginEditing(editingCell: DataTableViewCell) {
         
-        print("\n *** cellDidBeginEditing *** ")
-        print("dataTableView.contentOffset: \(dataTableView.contentOffset)")
-        print("editingCell.frame.origin.y: \(editingCell.frame.origin.y)")
-        
         let offsetWhileEditing = dataTableView.contentOffset.y - editingCell.frame.origin.y as CGFloat
         let cellsToMove = dataTableView.visibleCells as! [DataTableViewCell]
         
@@ -230,9 +214,6 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
     }
     
     func cellDidEndEditing(editingCell: DataTableViewCell) {
-        
-        print("\n\ncellDidEndEditing")
-        
         
         let cellsToMove = dataTableView.visibleCells as! [DataTableViewCell]
         
@@ -254,18 +235,15 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
         /* Update the data model if the cell has valid data */
         
         if let newDatum = editingCell.datum?.datumText {
-            print("Here is the contents of the text field: ")
-            print(newDatum)
+
             editingCell.datum?.updateDatumValue()
         }
         
-        if let newDatumValue = editingCell.datum?.datumDoubleValue {
-            print("Here is the datum value: \(newDatumValue)")
+        if let newDatumValue = editingCell.datum?.datumDoubleValue {            
             
         } else {
             editingCell.backgroundColor = UIColor.redColor()
             blockGarbageIn("Invalid data", alertDescription: "Check that the value you entered is a valid number", tableCell: editingCell)
-            //deleteDataTableCell(editingCell.datum!)
         }
         
         

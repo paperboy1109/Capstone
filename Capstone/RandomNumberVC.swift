@@ -60,8 +60,6 @@ class RandomNumberVC: UIViewController {
         
         if event?.subtype == UIEventSubtype.MotionShake {
             
-            print("Device was shaken")
-            
             /* Check that values in the text field are valid */
             
             guard leftTextField.text != nil && rightTextField.text != nil else {

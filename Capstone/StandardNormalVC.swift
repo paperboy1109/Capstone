@@ -86,13 +86,14 @@ class StandardNormalVC: UIViewController {
         case 0:
             let maskFillValues = lineDataForMaskingFill(xValues, targetValue: zScore, maskingValue: yValues.maxElement()!, leftTail: true)
             pNormWithFill(xValues, dataCollections: [yValues, maskFillValues])
+            
             /* Display the p-value */
             if zScore > 0 {
-                // Show the larger area (left-tailed, above the mean)
-                // pValueLabel.text = "\(1.0 - StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))"
+                
                 pValueLabel.text = roundPValue(1.0 - StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))
+                
             } else {
-                // pValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))"
+                
                 pValueLabel.text = roundPValue(StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))
             }
         case 1:
@@ -100,11 +101,11 @@ class StandardNormalVC: UIViewController {
             pNormWithFill(xValues, dataCollections: [yValues, maskFillValues])
             /* Display the p-value */
             if zScore < 0 {
-                // Show the larger area (right-tailed, below the mean)
-                // pValueLabel.text = "\(1 - StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))"
+
                 pValueLabel.text = roundPValue(1.0 - StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))
+                
             } else {
-                // pValueLabel.text = "\(StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))"
+                
                 pValueLabel.text = roundPValue(StatisticsFunctions.swift_pnormFewestSteps(zScore, mean: 0, standardDev: 1, n: 500))
             }
         default:
@@ -126,9 +127,6 @@ class StandardNormalVC: UIViewController {
     
     @IBAction func doneTapped(sender: AnyObject) {
         
-        //        let utilitiesMenu = self.storyboard!.instantiateViewControllerWithIdentifier("UtilitiesMenu") as! UtilitiesVC
-        //        self.presentViewController(utilitiesMenu, animated: true, completion: nil)
-        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -136,8 +134,6 @@ class StandardNormalVC: UIViewController {
         
         /* Synchronize with the stepper value */
         stepper.value = Double(slider.value)
-        
-        print("Slider was moved")
         
         if sender.value < 0 {
             plusMinusLabel.text = "-"
@@ -151,9 +147,6 @@ class StandardNormalVC: UIViewController {
     
     
     @IBAction func stepperTapped(sender: UIStepper) {
-        
-        print("Stepper was tapped: ")
-        print(sender.value)
         
         if sender.value < 0 {
             plusMinusLabel.text = "-"
@@ -179,8 +172,6 @@ class StandardNormalVC: UIViewController {
         if plusMinusLabel.text == "-" {
             zScore = (-1.0) * zScore
         }
-        
-        print("zScore to use in plot: \(zScore)")
         
     }
     
@@ -337,10 +328,7 @@ extension StandardNormalVC {
         
         let lineChartDataSet_Layer1 = LineChartDataSet(yVals: completeDataEntriesCollection[0], label: "Line 1")
         let lineChartDataSet_Layer2 = LineChartDataSet(yVals: completeDataEntriesCollection[1], label: "Line 2")
-        // let lineChartDataSet_Layer3 = LineChartDataSet(yVals: completeDataEntriesCollection[2], label: "Line 3")
         let lineChartDataSet_Layer3 = LineChartDataSet(yVals: completeDataEntriesCollection[0], label: "Line 3")
-        
-        // let xValuesForPlot = xValues
         
         let lineColor = UIColor.blueColor()
         
@@ -360,7 +348,6 @@ extension StandardNormalVC {
         lineChartDataSet_Layer2.fillAlpha = 1.0
         lineChartDataSet_Layer2.mode = .Stepped
         lineChartDataSet_Layer2.drawCirclesEnabled = false
-        //lineChartDataSet_Layer2.setColor(UIColor(red: 96.0/255.0, green: 237.0/255.0, blue: 179.0/255.0, alpha: 1.0))
         
         /* Customize the appearance of line 3 (top layer)*/
         lineChartDataSet_Layer3.setColor(lineColor)

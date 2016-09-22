@@ -45,9 +45,6 @@ class DataSummaryVC: UIViewController {
         setFont()
         dividerView.backgroundColor = themeColor
         
-        print("\n*** Data Summary VC ***")
-        print(dataTableEntries?.count)
-        
         if let currentData = dataTableEntries {
             
             for item in currentData {

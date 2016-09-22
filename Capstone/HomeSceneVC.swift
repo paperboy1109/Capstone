@@ -34,14 +34,6 @@ class HomeSceneVC: UIViewController {
         titleLabel.textColor = UIColor.darkGrayColor()
         titleLabel.text = "Welcome"
         
-        //welcomeTextField.font = UIFont(name: "PTSans-Italic", size: 24)
-        //welcomeTextField.textColor = UIColor.darkGrayColor()
-        // welcomeTextField.text = "   This is not your average statistics app. "
-        
-        //let newPosition = welcomeTextField.beginningOfDocument
-        //welcomeTextField.selectedTextRange = welcomeTextField.textRangeFromPosition(newPosition, toPosition: newPosition)
-        //welcomeTextField.scrollRangeToVisible(NSRange(location:0, length:0))
-        
         welcomeTextField.scrollEnabled = false
         
     }

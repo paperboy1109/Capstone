@@ -43,8 +43,6 @@ class CalculatorVC: UIViewController {
     
     @IBAction func numberTapped(sender: CalculatorNumberButton) {
         
-        print(sender.tag)
-        
         enableMathOperations()
         
         guard displayLabel.text != nil else {return}
@@ -78,10 +76,7 @@ class CalculatorVC: UIViewController {
                 displayLabel.text = concatenatedString
                 updateActiveValue()
             }
-            
-            //            if !calculatorData.hasSavedValue {
-            //                updateActiveValue()
-            //            }
+
             
             /* Take the mathematical operation into account */
         } else {
@@ -175,7 +170,6 @@ class CalculatorVC: UIViewController {
                 calculatorData.operation = nil
                 
                 
-                
                 /* Alert the user that sqrt is not available if there is a saved value and an active value */
             } else if calculatorData.hasSavedValue && calculatorData.activeValue != nil {
                 
@@ -212,9 +206,6 @@ class CalculatorVC: UIViewController {
             guard displayLabel.text != "" else { return }
             
             disableMathOperations()
-            
-            //calculatorData.setOperation(sender.tag)
-            //updateActiveValue()
             
             if calculatorData.hasSavedValue {
                 
@@ -367,7 +358,6 @@ class CalculatorVC: UIViewController {
     
     func disableMathOperations() {
         clearButton.enabled = false
-        //delButton.enabled = false
         sqrtButton.enabled = false
         expButton.enabled = false
         divideButton.enabled = false
@@ -379,7 +369,6 @@ class CalculatorVC: UIViewController {
     
     func enableMathOperations() {
         clearButton.enabled = true
-        // delButton.enabled = true
         sqrtButton.enabled = true
         expButton.enabled = true
         divideButton.enabled = true

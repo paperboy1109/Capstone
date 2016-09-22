@@ -1665,7 +1665,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What would you like to calculate?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1BC-LX-GG7">
-                                <rect key="frame" x="20" y="58" width="560" height="21"/>
+                                <rect key="frame" x="20" y="100" width="560" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Cld-vL-7S4"/>
                                 </constraints>
@@ -1674,7 +1674,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m8m-Qt-EA2">
-                                <rect key="frame" x="543" y="20" width="37" height="30"/>
+                                <rect key="frame" x="543" y="28" width="37" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="37" id="FDR-pv-9sl"/>
                                     <constraint firstAttribute="height" constant="30" id="WN8-R5-idd"/>
@@ -1685,7 +1685,7 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="MmN-7p-39N">
-                                <rect key="frame" x="209" y="94" width="182" height="29"/>
+                                <rect key="frame" x="209" y="145" width="182" height="29"/>
                                 <segments>
                                     <segment title="First"/>
                                     <segment title="Second"/>
@@ -1696,7 +1696,7 @@
                                 </connections>
                             </segmentedControl>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="WbN-RI-5Sy">
-                                <rect key="frame" x="234" y="143" width="133" height="66"/>
+                                <rect key="frame" x="234" y="194" width="133" height="66"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="p-value (left tail)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qmc-Tc-zkR">
                                         <rect key="frame" x="0.0" y="0.0" width="133" height="21"/>
@@ -1742,7 +1742,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ZVg-JK-LQ9" userLabel="Df Stack View">
-                                <rect key="frame" x="180" y="230" width="241" height="81"/>
+                                <rect key="frame" x="180" y="281" width="241" height="81"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="o4f-8y-vbF">
                                         <rect key="frame" x="0.0" y="20" width="187" height="41"/>
@@ -1863,14 +1863,14 @@
                             <constraint firstAttribute="trailingMargin" secondItem="QnV-zA-F3Z" secondAttribute="trailing" constant="8" id="4go-1H-abu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PZQ-Nc-KPC" secondAttribute="trailing" constant="16" id="5Wh-Hc-nhJ"/>
                             <constraint firstItem="PZQ-Nc-KPC" firstAttribute="leading" secondItem="sE3-Dy-xWn" secondAttribute="leadingMargin" constant="16" id="61k-We-705"/>
-                            <constraint firstItem="MmN-7p-39N" firstAttribute="top" secondItem="1BC-LX-GG7" secondAttribute="bottom" constant="15" id="71u-Gc-qgO"/>
+                            <constraint firstItem="MmN-7p-39N" firstAttribute="top" secondItem="1BC-LX-GG7" secondAttribute="bottom" constant="24" id="71u-Gc-qgO"/>
                             <constraint firstItem="WbN-RI-5Sy" firstAttribute="centerX" secondItem="sE3-Dy-xWn" secondAttribute="centerX" id="8q9-AA-6JH"/>
                             <constraint firstItem="Zkq-UG-qXd" firstAttribute="top" secondItem="QnV-zA-F3Z" secondAttribute="bottom" constant="12" id="F5C-TN-1QH"/>
                             <constraint firstItem="MmN-7p-39N" firstAttribute="centerX" secondItem="sE3-Dy-xWn" secondAttribute="centerX" id="JuX-Cc-jCm"/>
                             <constraint firstItem="PZQ-Nc-KPC" firstAttribute="top" secondItem="Zkq-UG-qXd" secondAttribute="bottom" constant="25" id="YtU-W3-HdB"/>
                             <constraint firstItem="QnV-zA-F3Z" firstAttribute="leading" secondItem="sE3-Dy-xWn" secondAttribute="leadingMargin" constant="8" id="fkY-8E-hBL"/>
                             <constraint firstItem="Zkq-UG-qXd" firstAttribute="centerX" secondItem="sE3-Dy-xWn" secondAttribute="centerX" id="g3h-An-E6f"/>
-                            <constraint firstItem="m8m-Qt-EA2" firstAttribute="top" secondItem="ivK-cv-bCt" secondAttribute="bottom" id="jMv-1I-VHp"/>
+                            <constraint firstItem="m8m-Qt-EA2" firstAttribute="top" secondItem="ivK-cv-bCt" secondAttribute="bottom" constant="8" id="jMv-1I-VHp"/>
                             <constraint firstItem="91i-pC-Cb2" firstAttribute="top" secondItem="PZQ-Nc-KPC" secondAttribute="bottom" constant="70" id="lCc-4r-g83"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1BC-LX-GG7" secondAttribute="trailing" id="mEj-RK-4f4"/>
                             <constraint firstItem="1BC-LX-GG7" firstAttribute="leading" secondItem="sE3-Dy-xWn" secondAttribute="leadingMargin" id="mjj-M5-DE9"/>
@@ -1881,7 +1881,7 @@
                             <constraint firstItem="m8m-Qt-EA2" firstAttribute="trailing" secondItem="sE3-Dy-xWn" secondAttribute="trailingMargin" id="vLQ-xf-HGD"/>
                             <constraint firstItem="1BC-LX-GG7" firstAttribute="top" secondItem="ivK-cv-bCt" secondAttribute="bottom" constant="29" id="vuD-cp-AtE"/>
                             <constraint firstItem="Zkq-UG-qXd" firstAttribute="centerX" secondItem="sE3-Dy-xWn" secondAttribute="centerX" id="yzS-gy-daK"/>
-                            <constraint firstItem="1BC-LX-GG7" firstAttribute="top" secondItem="m8m-Qt-EA2" secondAttribute="bottom" constant="8" id="zZB-k1-ASd"/>
+                            <constraint firstItem="1BC-LX-GG7" firstAttribute="top" secondItem="m8m-Qt-EA2" secondAttribute="bottom" constant="42" id="zZB-k1-ASd"/>
                             <constraint firstItem="QnV-zA-F3Z" firstAttribute="centerX" secondItem="sE3-Dy-xWn" secondAttribute="centerX" id="zrw-ei-X6C"/>
                         </constraints>
                         <variation key="default">

@@ -29,10 +29,6 @@ class UtilitiesVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for item in statUtilities {
-            print(item)
-        }
-        
         statUtilityTableView.delegate = self
         
         dividerView.backgroundColor = UIColor(red: 96.0/255.0, green: 237.0/255.0, blue: 179.0/255.0, alpha: 1.0)
@@ -56,8 +52,6 @@ class UtilitiesVC: UIViewController {
     // MARK: - Actions
     
     @IBAction func moreInfoTapped(sender: UIButton) {
-        print("The button was tapped")
-        print(sender.tag)
         
         /* Access the cell that contains the button */
         var targetIndexPath: NSIndexPath!
@@ -131,25 +125,10 @@ extension UtilitiesVC: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    
-    //    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-    //        return 68
-    //    }
-    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        // let selectedTableCell = tableView.cellForRowAtIndexPath(tableView.indexPathForSelectedRow!)
-        print(statUtilities[indexPath.row].utilityID)
         
         let utilityID = statUtilities[indexPath.row].utilityID
         
-        //        if utilityID == 1 {
-        //            let selectedUtility = self.storyboard!.instantiateViewControllerWithIdentifier("StandardNormal") as! StandardNormalVC
-        //            self.presentViewController(selectedUtility, animated: true, completion: nil)
-        //        }
-        
-        //TODO: Segue to the corresponding statistics tool
-        //self.performSegueWithIdentifier("ToErsatzStatTables", sender: nil)
         switch utilityID {
         case 0:
             let selectedUtility = self.storyboard!.instantiateViewControllerWithIdentifier("StatTables") as! ErsatzStatTablesVC

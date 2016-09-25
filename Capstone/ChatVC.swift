@@ -27,9 +27,6 @@ class ChatVC: JSQMessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        print("ChatVC loaded ")
-        
         /* Initialize messagesRef */
         chatMessagesRef = FirebaseClient.sharedInstance().databaseRootRef.child(FirebaseClient.Constants.FirebaseDatabaseParameterKeys.DatabaseRootRefChildPathString)
         
@@ -43,10 +40,27 @@ class ChatVC: JSQMessagesViewController {
         
     }
     
-    // MARK: - Actions    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        observeForNewMessages()
+    }
+    
+    // MARK: - Helpers
+    
+    func observeForNewMessages() {
+        
+        FirebaseClient.sharedInstance().setMessageObserver(chatMessagesRef, maxMessagesToReturn: 50) { data in
+            
+            self.finishReceivingMessage()
+            
+        }
+        
+    }
+    
+    // MARK: - Actions
     
     @IBAction func leftNavigationBarButtonTapped(sender: AnyObject) {
-        print("Tap successfully detected")
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -54,6 +68,10 @@ class ChatVC: JSQMessagesViewController {
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
         
         FirebaseClient.sharedInstance().sendMessage(senderId, messageText: text, chatMessagesRef: chatMessagesRef)
+        
+        JSQSystemSoundPlayer.jsq_playMessageSentSound()
+        
+        finishSendingMessage()  // clears out the text field after send is tapped
     }
     
     
@@ -107,7 +125,7 @@ extension ChatVC {
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource! {
         
-        let message = chatMessages[indexPath.item]
+        let message = FirebaseClient.sharedInstance().chatMessages[indexPath.item] //chatMessages[indexPath.item]
         
         if message.senderId == senderId {
             return outgoingBubbleImageView

@@ -21,10 +21,9 @@ class FirebaseClient: NSObject {
     
     // MARK: - Methods for chat
     
-    func createNewMessage(senderId: String, messageText: String, messages: [JSQMessage]) {
+    func createNewMessage(senderId: String, messageText: String) {
         
-        let newMessage = JSQMessage(senderId: senderId, senderDisplayName: "", date: returnCurrentDateAsNSDate(), text: messageText)
-        
+        let newMessage = JSQMessage(senderId: senderId, senderDisplayName: "", date: returnCurrentDateAsNSDate(), text: messageText)        
         
         chatMessages.append(newMessage)
     }
@@ -44,6 +43,26 @@ class FirebaseClient: NSObject {
         
     }
     
+    func setMessageObserver(chatMessagesRef: FIRDatabaseReference, maxMessagesToReturn: UInt, completionHandlerForSetMessageObserver: (data: FIRDataSnapshot) -> Void ) {
+        
+        let chatMessageQuery = chatMessagesRef.queryLimitedToLast(maxMessagesToReturn)
+        
+        chatMessageQuery.observeEventType(.ChildAdded, withBlock: { snapshot in
+            
+            guard snapshot.value != nil else {
+                return
+            }
+            
+            let id = snapshot.value![FirebaseClient.Constants.FirebaseDatabaseParameterKeys.SenderId] as! String
+            let text = snapshot.value![FirebaseClient.Constants.FirebaseDatabaseParameterKeys.MessageText] as! String 
+            
+            self.createNewMessage(id, messageText: text)
+            
+            completionHandlerForSetMessageObserver(data: snapshot)
+            
+        })
+        
+    }
     
     func returnCurrentDateAsNSDate() -> NSDate {
         

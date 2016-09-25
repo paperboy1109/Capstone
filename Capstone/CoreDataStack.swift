@@ -12,7 +12,7 @@ import CoreData
 
 class CoreDataStack {
     
-    let model = "Model"
+    let model = "Data"
     
     // STEP 1 of 4: set the application documents directory
     

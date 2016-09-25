@@ -29,6 +29,22 @@ class ChatVC: JSQMessagesViewController {
         setupBubbles()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        
+        navigationItem.rightBarButtonItem?.title = "Done"
+        
+        
+    }
+    
+    // MARK: - Actions
+    
+    
+    @IBAction func leftNavigationBarButtonTapped(sender: AnyObject) {
+        print("Tap successfully detected")
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
 }
 

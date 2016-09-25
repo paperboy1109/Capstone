@@ -19,6 +19,7 @@
 		4E29E2A71D9771FC00293160 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E29E2A61D9771FC00293160 /* GoogleService-Info.plist */; };
 		4E29E2AB1D98144600293160 /* FirebaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29E2AA1D98144600293160 /* FirebaseClient.swift */; };
 		4E29E2AD1D9814B500293160 /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29E2AC1D9814B500293160 /* FirebaseConstants.swift */; };
+		4E29E2AF1D986E9F00293160 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29E2AE1D986E9F00293160 /* CoreDataStack.swift */; };
 		4E4472241D83AB4500C87732 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4472231D83AB4500C87732 /* DataTableViewCell.swift */; };
 		4E4472261D84EB3C00C87732 /* DataTableDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4472251D84EB3C00C87732 /* DataTableDatum.swift */; };
 		4E6743E81D8F4A3600430C91 /* RandomNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6743E71D8F4A3600430C91 /* RandomNumberVC.swift */; };
@@ -57,6 +58,7 @@
 		4E29E2A61D9771FC00293160 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4E29E2AA1D98144600293160 /* FirebaseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseClient.swift; sourceTree = "<group>"; };
 		4E29E2AC1D9814B500293160 /* FirebaseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
+		4E29E2AE1D986E9F00293160 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		4E4472231D83AB4500C87732 /* DataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
 		4E4472251D84EB3C00C87732 /* DataTableDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableDatum.swift; sourceTree = "<group>"; };
 		4E6743E71D8F4A3600430C91 /* RandomNumberVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNumberVC.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				4E1E8B871D88B65700412E5D /* TouchPoints.swift */,
 				4E6743E91D8F580300430C91 /* StatDistributions.swift */,
 				4E8141DC1D93095900F06205 /* CalculatorModel.swift */,
+				4E29E2AE1D986E9F00293160 /* CoreDataStack.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				4E27EB5D1D735C3E0044B428 /* CalculatorVC.swift in Sources */,
 				4EB1ACA91D66BF7D00742261 /* AppDelegate.swift in Sources */,
 				4E4472261D84EB3C00C87732 /* DataTableDatum.swift in Sources */,
+				4E29E2AF1D986E9F00293160 /* CoreDataStack.swift in Sources */,
 				4E6F37991D821B7B0029DC71 /* StandardDeviationVC.swift in Sources */,
 				4E27EB561D72A1710044B428 /* ErsatzStatTablesVC.swift in Sources */,
 				4E27EB511D7294A80044B428 /* CalculatorNumberButton.swift in Sources */,

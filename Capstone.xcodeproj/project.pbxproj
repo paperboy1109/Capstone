@@ -15,6 +15,7 @@
 		4E27EB561D72A1710044B428 /* ErsatzStatTablesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E27EB551D72A1710044B428 /* ErsatzStatTablesVC.swift */; };
 		4E27EB5D1D735C3E0044B428 /* CalculatorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E27EB5C1D735C3E0044B428 /* CalculatorVC.swift */; };
 		4E27EB651D7397020044B428 /* ErsatzStatTableOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E27EB641D7397020044B428 /* ErsatzStatTableOptions.swift */; };
+		4E29E2A51D975DC400293160 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29E2A41D975DC400293160 /* ChatVC.swift */; };
 		4E4472241D83AB4500C87732 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4472231D83AB4500C87732 /* DataTableViewCell.swift */; };
 		4E4472261D84EB3C00C87732 /* DataTableDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4472251D84EB3C00C87732 /* DataTableDatum.swift */; };
 		4E6743E81D8F4A3600430C91 /* RandomNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6743E71D8F4A3600430C91 /* RandomNumberVC.swift */; };
@@ -49,6 +50,7 @@
 		4E27EB551D72A1710044B428 /* ErsatzStatTablesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErsatzStatTablesVC.swift; sourceTree = "<group>"; };
 		4E27EB5C1D735C3E0044B428 /* CalculatorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorVC.swift; sourceTree = "<group>"; };
 		4E27EB641D7397020044B428 /* ErsatzStatTableOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErsatzStatTableOptions.swift; sourceTree = "<group>"; };
+		4E29E2A41D975DC400293160 /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		4E4472231D83AB4500C87732 /* DataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
 		4E4472251D84EB3C00C87732 /* DataTableDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableDatum.swift; sourceTree = "<group>"; };
 		4E6743E71D8F4A3600430C91 /* RandomNumberVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNumberVC.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				4E6743E71D8F4A3600430C91 /* RandomNumberVC.swift */,
 				4E6F37981D821B7B0029DC71 /* StandardDeviationVC.swift */,
 				4E192E6B1D8DC187004B3115 /* DataSummaryVC.swift */,
+				4E29E2A41D975DC400293160 /* ChatVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				4E8141DB1D92FB4B00F06205 /* DataSummaryLabel.swift in Sources */,
 				4EB1ACAB1D66BF7D00742261 /* ViewController.swift in Sources */,
 				4E27EB651D7397020044B428 /* ErsatzStatTableOptions.swift in Sources */,
+				4E29E2A51D975DC400293160 /* ChatVC.swift in Sources */,
 				4E6743EA1D8F580300430C91 /* StatDistributions.swift in Sources */,
 				4E4472241D83AB4500C87732 /* DataTableViewCell.swift in Sources */,
 				4E27EB541D729B140044B428 /* UtilitiesVC.swift in Sources */,

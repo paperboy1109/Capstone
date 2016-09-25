@@ -19,6 +19,11 @@
        "title" : "Data Summary",
        "moreInfo" : "Need to calculate a standard deviation?  Or a five-number summary?  Here you can enter a small data set of your own into an interactive list to produce a summary.  Swiping to the left deletes an item from the list, and pinch and drag gestures do the rest.",
        "id" : 3
+     },
+     {
+     "title" : "Want More?",
+     "moreInfo" : "What other topics would you also like a utility for?  Chi-square? Confidence intervals?  I'd love to konw.  Here you can send a message directly to the app developer",
+     "id" : 4
      }
   ]
 }

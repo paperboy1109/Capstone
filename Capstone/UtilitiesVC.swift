@@ -142,11 +142,13 @@ extension UtilitiesVC: UITableViewDelegate, UITableViewDataSource {
         case 3:
             let selectedUtility = self.storyboard!.instantiateViewControllerWithIdentifier("StandardDeviation") as! StandardDeviationVC
             self.presentViewController(selectedUtility, animated: true, completion: nil)
+        case 4:
+            let selectedUtility = self.storyboard!.instantiateViewControllerWithIdentifier("ChatScene") as! ChatVC
+            self.presentViewController(selectedUtility, animated: true, completion: nil)
         default: break
             
         }
-        
-        
+                
     }
 }
 

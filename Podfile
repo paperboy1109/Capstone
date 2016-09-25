@@ -8,5 +8,9 @@ target 'Capstone' do
   # Pods for Capstone
   pod 'Charts'
   pod 'NumberMorphView'
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Auth'
+  pod 'JSQMessagesViewController'
 
 end

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class UtilitiesVC: UIViewController {
     
@@ -44,9 +45,28 @@ class UtilitiesVC: UIViewController {
         bannerLabel.text = "Helpful utilities, ready when you are."
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        super.prepareForSegue(segue, sender: sender)
+        
+        if segue.identifier == "SegueToChat" {
+            
+            guard let navigationController = segue.destinationViewController as? UINavigationController,
+                let chatController = navigationController.viewControllers.first as? ChatVC else {
+                    
+                    return
+            }
+            
+            chatController.senderId = FIRAuth.auth()?.currentUser?.uid
+            chatController.senderDisplayName = FIRAuth.auth()?.currentUser?.displayName ?? ""
+        }
+        
     }
     
     // MARK: - Actions
@@ -143,12 +163,24 @@ extension UtilitiesVC: UITableViewDelegate, UITableViewDataSource {
             let selectedUtility = self.storyboard!.instantiateViewControllerWithIdentifier("StandardDeviation") as! StandardDeviationVC
             self.presentViewController(selectedUtility, animated: true, completion: nil)
         case 4:
-            let selectedUtility = self.storyboard!.instantiateViewControllerWithIdentifier("ChatScene") as! ChatVC
-            self.presentViewController(selectedUtility, animated: true, completion: nil)
+            FIRAuth.auth()?.signInAnonymouslyWithCompletion() { user, error in
+                
+                /* Make sure there is no error */
+                guard error == nil else {
+                    print(error?.localizedDescription)
+                    return
+                }
+                
+                print(user)
+                
+                self.performSegueWithIdentifier("SegueToChat", sender: nil)
+                
+            }
+
         default: break
             
         }
-                
+        
     }
 }
 

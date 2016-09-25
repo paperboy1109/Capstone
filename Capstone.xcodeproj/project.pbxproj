@@ -16,6 +16,7 @@
 		4E27EB5D1D735C3E0044B428 /* CalculatorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E27EB5C1D735C3E0044B428 /* CalculatorVC.swift */; };
 		4E27EB651D7397020044B428 /* ErsatzStatTableOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E27EB641D7397020044B428 /* ErsatzStatTableOptions.swift */; };
 		4E29E2A51D975DC400293160 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29E2A41D975DC400293160 /* ChatVC.swift */; };
+		4E29E2A71D9771FC00293160 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E29E2A61D9771FC00293160 /* GoogleService-Info.plist */; };
 		4E4472241D83AB4500C87732 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4472231D83AB4500C87732 /* DataTableViewCell.swift */; };
 		4E4472261D84EB3C00C87732 /* DataTableDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4472251D84EB3C00C87732 /* DataTableDatum.swift */; };
 		4E6743E81D8F4A3600430C91 /* RandomNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6743E71D8F4A3600430C91 /* RandomNumberVC.swift */; };
@@ -51,6 +52,7 @@
 		4E27EB5C1D735C3E0044B428 /* CalculatorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorVC.swift; sourceTree = "<group>"; };
 		4E27EB641D7397020044B428 /* ErsatzStatTableOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErsatzStatTableOptions.swift; sourceTree = "<group>"; };
 		4E29E2A41D975DC400293160 /* ChatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		4E29E2A61D9771FC00293160 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4E4472231D83AB4500C87732 /* DataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
 		4E4472251D84EB3C00C87732 /* DataTableDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableDatum.swift; sourceTree = "<group>"; };
 		4E6743E71D8F4A3600430C91 /* RandomNumberVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNumberVC.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				4EB1ACA81D66BF7D00742261 /* AppDelegate.swift */,
 				4EB1ACAA1D66BF7D00742261 /* ViewController.swift */,
 				4EB1ACB41D66BF7D00742261 /* Info.plist */,
+				4E29E2A61D9771FC00293160 /* GoogleService-Info.plist */,
 			);
 			path = Capstone;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			files = (
 				4E8141D61D9099F500F06205 /* PT_Sans-Web-Bold.ttf in Resources */,
 				4EB1ACB31D66BF7D00742261 /* LaunchScreen.storyboard in Resources */,
+				4E29E2A71D9771FC00293160 /* GoogleService-Info.plist in Resources */,
 				4E8141D81D9099FA00F06205 /* PT_Sans-Web-Italic.ttf in Resources */,
 				4EB1ACB01D66BF7D00742261 /* Assets.xcassets in Resources */,
 				4E6CB37E1D7CEE9C00C12F23 /* statisticsUtilities.json in Resources */,

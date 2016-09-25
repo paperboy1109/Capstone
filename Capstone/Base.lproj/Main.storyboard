@@ -566,11 +566,28 @@
                         <outlet property="bannerLabel" destination="AbH-Ck-j84" id="dJ3-gy-r93"/>
                         <outlet property="dividerView" destination="N4t-6D-102" id="B3b-xU-xEP"/>
                         <outlet property="statUtilityTableView" destination="hze-dA-XW7" id="FAd-P8-J68"/>
+                        <segue destination="oh3-oD-d6M" kind="presentation" identifier="SegueToChat" id="ZoV-wd-eLx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nxW-AC-6g6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1284" y="342"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0Yy-7H-2BG">
+            <objects>
+                <navigationController id="oh3-oD-d6M" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mgw-mF-3oI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="b5q-nh-Lhy" kind="relationship" relationship="rootViewController" id="FZe-CP-AqV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fgx-D9-jxP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1284" y="1038"/>
         </scene>
         <!--Standard NormalVC-->
         <scene sceneID="cLR-sn-mfZ">
@@ -1351,10 +1368,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="MwJ-mG-A8n"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FT6-xo-gGS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2335" y="2614"/>
+            <point key="canvasLocation" x="1284" y="1776"/>
         </scene>
         <!--Data SummaryVC-->
         <scene sceneID="dze-CY-Cdf">

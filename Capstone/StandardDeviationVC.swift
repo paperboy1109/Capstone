@@ -43,9 +43,6 @@ class StandardDeviationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //for debugging
-        //deleteAllPersistedData()
-        
         dividerView.backgroundColor = themeColor
         bottomView.backgroundColor = themeColor
         
@@ -63,27 +60,10 @@ class StandardDeviationVC: UIViewController {
         bannerTextLabel.textAlignment = NSTextAlignment.Center
         bannerTextLabel.textColor = UIColor.darkGrayColor()
         
-        /* Create some example data */
-        let sampleData = ["1.0", "2.0", "3.0", "4.0", "5.0", "6.0", "7.0"]
-        for item in sampleData {
-            let newDatum = DataTableDatum(textFieldText: item)
-            dataTableEntries.append(newDatum)
-        }
-        
-        /* Persist this sample data set */
-//        for item in dataTableEntries {
-//            
-//            let coreDataDatum = NSEntityDescription.insertNewObjectForEntityForName("Datum", inManagedObjectContext: self.sharedContext) as! Datum
-//            
-//            coreDataDatum.text = item.datumText
-//            coreDataDatum.numericalValue = NSNumber(double: item.datumDoubleValue!)
-//            
-//        }
-        refreshPersistedData()
-        
         updateBannerMessage()
         
-        loadData()
+        fetchPersistedData()
+        loadSavedData()
         
     }
     
@@ -161,6 +141,7 @@ class StandardDeviationVC: UIViewController {
     
     
     // MARK: - Helpers
+    
     private func blockGarbageIn(alertTitle: String, alertDescription: String, tableCell: DataTableViewCell?) {
         
         let alertView = UIAlertController(title: "\(alertTitle)", message: "\(alertDescription)", preferredStyle: UIAlertControllerStyle.Alert)
@@ -202,6 +183,50 @@ class StandardDeviationVC: UIViewController {
         CoreDataStack.sharedInstance().saveContext()
     }
     
+    func loadSavedData() {
+        
+        let fetchRequest = NSFetchRequest(entityName: "Datum")
+        
+        do {
+            
+            let allPersistedData = try sharedContext.executeFetchRequest(fetchRequest) as! [Datum]
+            
+            for item in allPersistedData {
+                sharedContext.deleteObject(item)
+                let newDataTableDatum = DataTableDatum(textFieldText: item.text!)
+                dataTableEntries.append(newDataTableDatum)
+            }
+            
+        } catch {
+            fatalError("Unable to load persisted data")
+        }
+        
+    }
+    
+    func createAndLoadSampleData() {
+        
+        /* Create some example data */
+        let sampleData = ["1.0", "2.0", "3.0", "4.0", "5.0", "6.0", "7.0"]
+        for item in sampleData {
+            let newDatum = DataTableDatum(textFieldText: item)
+            dataTableEntries.append(newDatum)
+        }
+        
+        /* Persist this sample data set */
+        
+        for item in dataTableEntries {
+            
+            let coreDataDatum = NSEntityDescription.insertNewObjectForEntityForName("Datum", inManagedObjectContext: self.sharedContext) as! Datum
+            
+            coreDataDatum.text = item.datumText
+            coreDataDatum.numericalValue = NSNumber(double: item.datumDoubleValue!)
+            
+        }
+        
+        refreshPersistedData()
+        
+    }
+    
 }
 
 // MARK: - Delegates for the table view
@@ -209,33 +234,22 @@ class StandardDeviationVC: UIViewController {
 extension StandardDeviationVC: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        if let sections = fetchedResultController.sections {
-//            return sections.count
-//        }
+        
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return dataTableEntries.count
-        
-//        if let sections = fetchedResultController.sections {
-//            let currentSection = sections[section]
-//            return currentSection.numberOfObjects
-//        }
-//        return 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("DatumCell", forIndexPath: indexPath) as! DataTableViewCell
         
-        //let datum = fetchedResultController.objectAtIndexPath(indexPath) as! Datum
-        //let dataTableDatum = DataTableDatum(textFieldText: datum.text!)
-        
         cell.delegate = self
         cell.backgroundColor = UIColor.whiteColor()
-        cell.datum = dataTableEntries[indexPath.row]//dataTableDatum //dataTableEntries[indexPath.row]
+        cell.datum = dataTableEntries[indexPath.row]
         cell.plusMinusButton.tag = indexPath.row
         
         return cell
@@ -291,11 +305,11 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
         /* Update the data model if the cell has valid data */
         
         if let newDatum = editingCell.datum?.datumText {
-
+            
             editingCell.datum?.updateDatumValue()
         }
         
-        if let newDatumValue = editingCell.datum?.datumDoubleValue {            
+        if let newDatumValue = editingCell.datum?.datumDoubleValue {
             
         } else {
             editingCell.backgroundColor = UIColor.redColor()
@@ -343,17 +357,6 @@ extension StandardDeviationVC: DataTableViewCellDelegate {
         }
         
         dataTableEntries.removeAtIndex(indexOfItemToRemove)
-        
-        /* Remove the persisted datum as well */
-        //let indexPathOfItemToDelete = NSIndexPath(forRow: indexOfItemToRemove, inSection: 0)
-        //let datumToDelete = fetchedResultController.objectAtIndexPath(indexPathOfItemToDelete) as! Datum
-        //self.sharedContext.deleteObject(datumToDelete)
-        //CoreDataStack.sharedInstance().saveContext()
-        
-        // Complete refresh
-//        self.deleteAllPersistedData()
-//        self.refreshPersistedData()
-        
         
         /* Update the table view */
         dataTableView.beginUpdates()
@@ -599,7 +602,7 @@ extension StandardDeviationVC {
 
 extension StandardDeviationVC: NSFetchedResultsControllerDelegate {
     
-    func loadData() {
+    func fetchPersistedData() {
         
         let fetchRequest = NSFetchRequest(entityName: "Datum")
         let sortDescriptors = NSSortDescriptor(key: "numericalValue", ascending: true)
@@ -616,30 +619,6 @@ extension StandardDeviationVC: NSFetchedResultsControllerDelegate {
             fatalError("Error in fetching records")
         }
     }
-    
-//    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-//        dataTableView.beginUpdates()
-//    }
-//    
-//    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-//        switch type {
-//        case NSFetchedResultsChangeType.Delete:
-//            print("NSFetchedResultsChangeType.Delete detected")
-//            if let deleteIndexPath = indexPath {
-//                dataTableView.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
-//            }
-//        case NSFetchedResultsChangeType.Insert:
-//            print("NSFetchedResultsChangeType.Insert detected")
-//        case NSFetchedResultsChangeType.Move:
-//            print("NSFetchedResultsChangeType.Move detected")
-//        case NSFetchedResultsChangeType.Update:
-//            print("NSFetchedResultsChangeType.Update detected")
-//        }
-//    }
-//    
-//    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-//        dataTableView.endUpdates()
-//    }
     
     func deleteAllPersistedData() {
         
@@ -660,5 +639,5 @@ extension StandardDeviationVC: NSFetchedResultsControllerDelegate {
         CoreDataStack.sharedInstance().saveContext()
     }
     
-
+    
 }

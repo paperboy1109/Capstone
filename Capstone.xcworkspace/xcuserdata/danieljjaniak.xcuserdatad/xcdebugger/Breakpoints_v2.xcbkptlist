@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Capstone/StandardDeviationVC.swift"
-            timestampString = "496534646.611133"
+            timestampString = "496537062.991343"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "plusMinusTapped(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Capstone/StandardDeviationVC.swift"
-            timestampString = "496534646.611133"
+            timestampString = "496537062.991343"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "plusMinusTapped(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Capstone/StandardDeviationVC.swift"
-            timestampString = "496534646.611133"
+            timestampString = "496537062.991343"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "plusMinusTapped(_:)"
             landmarkType = "5">
          </BreakpointContent>

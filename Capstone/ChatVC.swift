@@ -47,7 +47,7 @@ class ChatVC: JSQMessagesViewController {
         
         /* Welcome and guide the user */
         
-        FirebaseClient.sharedInstance().createNewMessage("Daniel", messageText: "Thanks for using this app", date: FirebaseClient.sharedInstance().returnCurrentDateAsString())
+        FirebaseClient.sharedInstance().createNewMessage("Daniel", messageText: "What utility should I include in this app next?", date: FirebaseClient.sharedInstance().returnCurrentDateAsString())
     }
     
     // MARK: - Helpers

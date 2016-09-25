@@ -21,9 +21,10 @@ class FirebaseClient: NSObject {
     
     // MARK: - Methods for chat
     
-    func createNewMessage(senderId: String, messageText: String) {
+    func createNewMessage(senderId: String, messageText: String, date: String) {
         
-        let newMessage = JSQMessage(senderId: senderId, senderDisplayName: "", date: returnCurrentDateAsNSDate(), text: messageText)        
+        // let newMessage = JSQMessage(senderId: senderId, senderDisplayName: "", date: returnCurrentDateAsNSDate(), text: messageText)
+        let newMessage = JSQMessage(senderId: senderId, senderDisplayName: "", date: convertStringToNSDate(date), text: messageText)
         
         chatMessages.append(newMessage)
     }
@@ -35,8 +36,8 @@ class FirebaseClient: NSObject {
         let chatMessageItem = [
             
             FirebaseClient.Constants.FirebaseDatabaseParameterKeys.SenderId: senderId,
-            FirebaseClient.Constants.FirebaseDatabaseParameterKeys.MessageText: messageText
-        
+            FirebaseClient.Constants.FirebaseDatabaseParameterKeys.MessageText: messageText,
+            FirebaseClient.Constants.FirebaseDatabaseParameterKeys.TimeStamp: returnCurrentDateAsString()        
         ]
         
         chatItemRef.setValue(chatMessageItem)                        
@@ -54,9 +55,10 @@ class FirebaseClient: NSObject {
             }
             
             let id = snapshot.value![FirebaseClient.Constants.FirebaseDatabaseParameterKeys.SenderId] as! String
-            let text = snapshot.value![FirebaseClient.Constants.FirebaseDatabaseParameterKeys.MessageText] as! String 
+            let text = snapshot.value![FirebaseClient.Constants.FirebaseDatabaseParameterKeys.MessageText] as! String
+            let date = snapshot.value![FirebaseClient.Constants.FirebaseDatabaseParameterKeys.TimeStamp] as! String
             
-            self.createNewMessage(id, messageText: text)
+            self.createNewMessage(id, messageText: text, date: date)
             
             completionHandlerForSetMessageObserver(data: snapshot)
             
@@ -68,6 +70,13 @@ class FirebaseClient: NSObject {
         
         return NSDate()
         
+    }
+    
+    func convertStringToNSDate(dateString: String) -> NSDate {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
+        return dateFormatter.dateFromString(dateString)!
     }
     
     func returnCurrentDateAsString() -> String {

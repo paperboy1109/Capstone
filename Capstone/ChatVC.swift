@@ -44,6 +44,10 @@ class ChatVC: JSQMessagesViewController {
         super.viewDidAppear(animated)
         
         observeForNewMessages()
+        
+        /* Welcome and guide the user */
+        
+        FirebaseClient.sharedInstance().createNewMessage("Daniel", messageText: "Thanks for using this app", date: FirebaseClient.sharedInstance().returnCurrentDateAsString())
     }
     
     // MARK: - Helpers
@@ -136,5 +140,43 @@ extension ChatVC {
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
         return nil
+    }
+    
+    /* Display the date */
+    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
+        
+        let message = FirebaseClient.sharedInstance().chatMessages[indexPath.item]
+        
+        return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.date)
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+        return 21.0
+    }
+    
+    /* Hide the keyboard */
+    override func collectionView(collectionView: JSQMessagesCollectionView!, didTapCellAtIndexPath indexPath: NSIndexPath!, touchLocation: CGPoint) {
+        self.view.endEditing(true)
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, didTapMessageBubbleAtIndexPath indexPath: NSIndexPath!) {
+        self.view.endEditing(true)
+    }
+}
+
+// MARK: - Improve Keyboard behavior
+
+extension ChatVC {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesBegan(touches, withEvent: event)
+        
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
     }
 }

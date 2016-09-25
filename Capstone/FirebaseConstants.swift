@@ -14,9 +14,10 @@ extension FirebaseClient {
     struct Constants {
         
         struct FirebaseDatabaseParameterKeys {
-            static let DatabaseRootRefChildPathString = "message"            
+            static let DatabaseRootRefChildPathString = "messageHistory"
             static let MessageText = "text"
             static let SenderId = "senderId"
+            static let TimeStamp = "timeStamp"
             
         }
         

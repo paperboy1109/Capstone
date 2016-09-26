@@ -32,18 +32,21 @@ class ChatVC: JSQMessagesViewController {
         
         /* Configure the chat bubbles */
         setupBubbles()
+        
+        /* Check Firebase for messages old and new */
+        observeForNewMessages()
     }
     
     override func viewWillAppear(animated: Bool) {
         
         navigationItem.rightBarButtonItem?.title = "Done"
+        inputToolbar.contentView.leftBarButtonItem = nil
+        
         
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        observeForNewMessages()
         
         /* Welcome and guide the user */
         

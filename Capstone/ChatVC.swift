@@ -14,7 +14,7 @@ class ChatVC: JSQMessagesViewController {
     
     // MARK: - Properties
     
-    var chatMessages = [JSQMessage]()
+    //var chatMessages = [JSQMessage]()
     var chatMessagesRef: FIRDatabaseReference!
     
     var outgoingBubbleImageView: JSQMessagesBubbleImage!
@@ -35,13 +35,13 @@ class ChatVC: JSQMessagesViewController {
         
         /* Check Firebase for messages old and new */
         observeForNewMessages()
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         
         navigationItem.rightBarButtonItem?.title = "Done"
         inputToolbar.contentView.leftBarButtonItem = nil
-        
         
     }
     
@@ -51,6 +51,15 @@ class ChatVC: JSQMessagesViewController {
         /* Welcome and guide the user */
         
         FirebaseClient.sharedInstance().createNewMessage("Daniel", messageText: "What utility should I include in this app next?", date: FirebaseClient.sharedInstance().returnCurrentDateAsString())
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        /* Don't show duplicate messages */
+        FirebaseClient.sharedInstance().chatMessages.removeAll()
+        
+        
     }
     
     // MARK: - Helpers

@@ -67,11 +67,6 @@ class UtilitiesVC: UIViewController {
             
             chatController.senderId = FIRAuth.auth()?.currentUser?.uid
             chatController.senderDisplayName = FIRAuth.auth()?.currentUser?.displayName ?? ""
-            if FIRAuth.auth()?.currentUser?.uid == nil {
-                chatController.networkIsAvailable = false
-            } else {
-                chatController.networkIsAvailable = true
-            }
         }
         
     }
@@ -188,7 +183,7 @@ extension UtilitiesVC: UITableViewDelegate, UITableViewDataSource {
                 
                 /* Make sure there is no error */
                 guard error == nil else {
-                                                            
+                    
                     print(error?.localizedDescription)
                     self.showConnectionFailAlert()
                     return
@@ -197,7 +192,7 @@ extension UtilitiesVC: UITableViewDelegate, UITableViewDataSource {
                 self.performSegueWithIdentifier("SegueToChat", sender: nil)
                 
             }
-
+            
         default: break
             
         }

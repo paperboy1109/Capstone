@@ -14,11 +14,8 @@ class ChatVC: JSQMessagesViewController {
     
     // MARK: - Properties
     
-    var networkIsAvailable: Bool!
-    
     var idToken: String?
     
-    //var chatMessages = [JSQMessage]()
     var chatMessagesRef: FIRDatabaseReference!
     
     var outgoingBubbleImageView: JSQMessagesBubbleImage!
@@ -31,43 +28,9 @@ class ChatVC: JSQMessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        FirebaseClient.sharedInstance().databaseRootRef.observeEventType(.Value, withBlock: { snapshot in
-        //
-        //            print("\n * observing .Value events")
-        //            print(snapshot)
-        //
-        //        })
-        //
-        //
-        //
-        //        FIRAuth.auth()?.addAuthStateDidChangeListener() { listener in
-        //
-        //            print("\n\n\n * addAuthStateDidChangeListener :")
-        //            print(listener)
-        //            print(listener.0)
-        //            print(listener.1)
-        //
-        //        }
-        //
-        //
-        //        /* Initialize messagesRef */
+        
+        /* Initialize messagesRef */
         chatMessagesRef = FirebaseClient.sharedInstance().databaseRootRef.child(FirebaseClient.Constants.FirebaseDatabaseParameterKeys.DatabaseRootRefChildPathString)
-        //
-        //        // debugging
-        //        chatMessagesRef.onDisconnectRemoveValueWithCompletionBlock() { error, ref in
-        //
-        //
-        //
-        //
-        //            print("\n\n\n nDisconnectRemoveValueWithCompletionBlock")
-        //            //print(ref)
-        //            //print(error)
-        //
-        //        }
-        
-        //print("Debug description")
-        //print(FIRAuth.auth().debugDescription
-        
         
         /* Configure the chat bubbles */
         setupBubbles()
@@ -78,8 +41,6 @@ class ChatVC: JSQMessagesViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        
-        print("\n\n Is the network available: \(networkIsAvailable)")
         
         navigationItem.rightBarButtonItem?.title = "Done"
         inputToolbar.contentView.leftBarButtonItem = nil
@@ -92,13 +53,7 @@ class ChatVC: JSQMessagesViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        /* Let the user know if the network is unavailable */
-        if !networkIsAvailable {
-            showConnectionFailAlert()
-        }
-        
-        /* Welcome and guide the user */
-        
+        /* Greet and guide the user */
         FirebaseClient.sharedInstance().createNewMessage("Daniel", messageText: "What utility should I include in this app next?", date: FirebaseClient.sharedInstance().returnCurrentDateAsString())
     }
     
@@ -116,9 +71,7 @@ class ChatVC: JSQMessagesViewController {
     
     func observeForNewMessages() {
         
-        FirebaseClient.sharedInstance().setMessageObserver(chatMessagesRef, maxMessagesToReturn: 50) { data in
-            
-            //print("\n\n\n ***observeForNewMessages: \(data)")
+        FirebaseClient.sharedInstance().setMessageObserver(chatMessagesRef, maxMessagesToReturn: 50) { data in                        
             
             guard data != nil else {
                 performUIUpdatesOnMain(){

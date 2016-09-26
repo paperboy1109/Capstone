@@ -44,13 +44,14 @@ class FirebaseClient: NSObject {
         
     }
     
-    func setMessageObserver(chatMessagesRef: FIRDatabaseReference, maxMessagesToReturn: UInt, completionHandlerForSetMessageObserver: (data: FIRDataSnapshot) -> Void ) {
+    func setMessageObserver(chatMessagesRef: FIRDatabaseReference, maxMessagesToReturn: UInt, completionHandlerForSetMessageObserver: (data: FIRDataSnapshot?) -> Void ) {
         
         let chatMessageQuery = chatMessagesRef.queryLimitedToLast(maxMessagesToReturn)
         
         chatMessageQuery.observeEventType(.ChildAdded, withBlock: { snapshot in
             
             guard snapshot.value != nil else {
+                completionHandlerForSetMessageObserver(data: nil)
                 return
             }
             

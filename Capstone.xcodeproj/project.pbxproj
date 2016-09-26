@@ -23,6 +23,7 @@
 		4E29E2B51D98728200293160 /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E29E2B31D98728200293160 /* Data.xcdatamodeld */; };
 		4E29E2B81D98731300293160 /* Datum+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29E2B61D98731300293160 /* Datum+CoreDataProperties.swift */; };
 		4E29E2B91D98731300293160 /* Datum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29E2B71D98731300293160 /* Datum.swift */; };
+		4E29E2BC1D99967E00293160 /* GCDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29E2BB1D99967E00293160 /* GCDHelper.swift */; };
 		4E4472241D83AB4500C87732 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4472231D83AB4500C87732 /* DataTableViewCell.swift */; };
 		4E4472261D84EB3C00C87732 /* DataTableDatum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4472251D84EB3C00C87732 /* DataTableDatum.swift */; };
 		4E6743E81D8F4A3600430C91 /* RandomNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6743E71D8F4A3600430C91 /* RandomNumberVC.swift */; };
@@ -65,6 +66,7 @@
 		4E29E2B41D98728200293160 /* Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Data.xcdatamodel; sourceTree = "<group>"; };
 		4E29E2B61D98731300293160 /* Datum+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Datum+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4E29E2B71D98731300293160 /* Datum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Datum.swift; sourceTree = "<group>"; };
+		4E29E2BB1D99967E00293160 /* GCDHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDHelper.swift; sourceTree = "<group>"; };
 		4E4472231D83AB4500C87732 /* DataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
 		4E4472251D84EB3C00C87732 /* DataTableDatum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableDatum.swift; sourceTree = "<group>"; };
 		4E6743E71D8F4A3600430C91 /* RandomNumberVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomNumberVC.swift; sourceTree = "<group>"; };
@@ -167,6 +169,14 @@
 			name = Firebase;
 			sourceTree = "<group>";
 		};
+		4E29E2BA1D99964F00293160 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4E29E2BB1D99967E00293160 /* GCDHelper.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		4E9D69341D748149002021E3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +207,7 @@
 		4EB1ACA71D66BF7D00742261 /* Capstone */ = {
 			isa = PBXGroup;
 			children = (
+				4E29E2BA1D99964F00293160 /* Utils */,
 				4E9D69341D748149002021E3 /* Services */,
 				4E27EB631D7396E10044B428 /* Model */,
 				4E29E2A81D98141700293160 /* Clients */,
@@ -382,6 +393,7 @@
 				4E6743E81D8F4A3600430C91 /* RandomNumberVC.swift in Sources */,
 				4E8141DD1D93095900F06205 /* CalculatorModel.swift in Sources */,
 				4E8141DB1D92FB4B00F06205 /* DataSummaryLabel.swift in Sources */,
+				4E29E2BC1D99967E00293160 /* GCDHelper.swift in Sources */,
 				4EB1ACAB1D66BF7D00742261 /* ViewController.swift in Sources */,
 				4E27EB651D7397020044B428 /* ErsatzStatTableOptions.swift in Sources */,
 				4E29E2A51D975DC400293160 /* ChatVC.swift in Sources */,

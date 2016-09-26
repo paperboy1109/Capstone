@@ -67,6 +67,11 @@ class UtilitiesVC: UIViewController {
             
             chatController.senderId = FIRAuth.auth()?.currentUser?.uid
             chatController.senderDisplayName = FIRAuth.auth()?.currentUser?.displayName ?? ""
+            if FIRAuth.auth()?.currentUser?.uid == nil {
+                chatController.networkIsAvailable = false
+            } else {
+                chatController.networkIsAvailable = true
+            }
         }
         
     }
@@ -113,6 +118,20 @@ class UtilitiesVC: UIViewController {
         
     }
     
+    // MARK: - Helpers
+    func showConnectionFailAlert() {
+        
+        let alertView = UIAlertController(title: "Error", message: "A network connection is unavailable at this time, or your device may be offline.  No worries, you can check back later -- and the other features of the app are all still available in the meantime. ", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let alertAction = UIAlertAction(title: "OK", style: .Default) { void in
+            
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
+        
+        alertView.addAction(alertAction)
+        
+        self.presentViewController(alertView, animated: true, completion: nil)
+    }
     
     
 }
@@ -169,11 +188,11 @@ extension UtilitiesVC: UITableViewDelegate, UITableViewDataSource {
                 
                 /* Make sure there is no error */
                 guard error == nil else {
+                                                            
                     print(error?.localizedDescription)
+                    self.showConnectionFailAlert()
                     return
                 }
-                
-                print(user)
                 
                 self.performSegueWithIdentifier("SegueToChat", sender: nil)
                 

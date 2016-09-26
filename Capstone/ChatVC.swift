@@ -14,21 +14,60 @@ class ChatVC: JSQMessagesViewController {
     
     // MARK: - Properties
     
+    var networkIsAvailable: Bool!
+    
+    var idToken: String?
+    
     //var chatMessages = [JSQMessage]()
     var chatMessagesRef: FIRDatabaseReference!
     
     var outgoingBubbleImageView: JSQMessagesBubbleImage!
     var incomingBubbleImageView: JSQMessagesBubbleImage!
     
-    let themeColor = UIColor(red: 96.0/255.0, green: 237.0/255.0, blue: 179.0/255.0, alpha: 1.0)        
+    let themeColor = UIColor(red: 96.0/255.0, green: 237.0/255.0, blue: 179.0/255.0, alpha: 1.0)
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /* Initialize messagesRef */
+        //        FirebaseClient.sharedInstance().databaseRootRef.observeEventType(.Value, withBlock: { snapshot in
+        //
+        //            print("\n * observing .Value events")
+        //            print(snapshot)
+        //
+        //        })
+        //
+        //
+        //
+        //        FIRAuth.auth()?.addAuthStateDidChangeListener() { listener in
+        //
+        //            print("\n\n\n * addAuthStateDidChangeListener :")
+        //            print(listener)
+        //            print(listener.0)
+        //            print(listener.1)
+        //
+        //        }
+        //
+        //
+        //        /* Initialize messagesRef */
         chatMessagesRef = FirebaseClient.sharedInstance().databaseRootRef.child(FirebaseClient.Constants.FirebaseDatabaseParameterKeys.DatabaseRootRefChildPathString)
+        //
+        //        // debugging
+        //        chatMessagesRef.onDisconnectRemoveValueWithCompletionBlock() { error, ref in
+        //
+        //
+        //
+        //
+        //            print("\n\n\n nDisconnectRemoveValueWithCompletionBlock")
+        //            //print(ref)
+        //            //print(error)
+        //
+        //        }
+        
+        //print("Debug description")
+        //print(FIRAuth.auth().debugDescription
+        
         
         /* Configure the chat bubbles */
         setupBubbles()
@@ -40,13 +79,23 @@ class ChatVC: JSQMessagesViewController {
     
     override func viewWillAppear(animated: Bool) {
         
+        print("\n\n Is the network available: \(networkIsAvailable)")
+        
         navigationItem.rightBarButtonItem?.title = "Done"
         inputToolbar.contentView.leftBarButtonItem = nil
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        
+        checkNetworkConnection()
         
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        /* Let the user know if the network is unavailable */
+        if !networkIsAvailable {
+            showConnectionFailAlert()
+        }
         
         /* Welcome and guide the user */
         
@@ -56,9 +105,10 @@ class ChatVC: JSQMessagesViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        
         /* Don't show duplicate messages */
         FirebaseClient.sharedInstance().chatMessages.removeAll()
-        
         
     }
     
@@ -68,10 +118,59 @@ class ChatVC: JSQMessagesViewController {
         
         FirebaseClient.sharedInstance().setMessageObserver(chatMessagesRef, maxMessagesToReturn: 50) { data in
             
+            //print("\n\n\n ***observeForNewMessages: \(data)")
+            
+            guard data != nil else {
+                performUIUpdatesOnMain(){
+                    self.showConnectionFailAlert()
+                }
+                return
+            }
+            
             self.finishReceivingMessage()
+            
+            performUIUpdatesOnMain(){
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            }
             
         }
         
+    }
+    
+    func checkNetworkConnection() {
+        
+        let currentUser = FIRAuth.auth()?.currentUser
+        
+        /* Try to obtain an authentication token; if an error is returned this implies the network is not accessible */
+        currentUser?.getTokenForcingRefresh(true) { idToken, error in
+            
+            if let error = error {
+                print(error)
+                
+                performUIUpdatesOnMain() {
+                    self.showConnectionFailAlert()
+                }
+                
+                return
+            }
+            
+            self.idToken = idToken
+            
+        }
+    }
+    
+    func showConnectionFailAlert() {
+        
+        let alertView = UIAlertController(title: "Error", message: "A network connection is unavailable at this time, or your device may be offline.  No worries, you can check back later -- and the other features of the app are all still available in the meantime. ", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let alertAction = UIAlertAction(title: "OK", style: .Default) { void in
+            
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
+        
+        alertView.addAction(alertAction)
+        
+        self.presentViewController(alertView, animated: true, completion: nil)
     }
     
     // MARK: - Actions
@@ -83,11 +182,15 @@ class ChatVC: JSQMessagesViewController {
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
         
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        
         FirebaseClient.sharedInstance().sendMessage(senderId, messageText: text, chatMessagesRef: chatMessagesRef)
         
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
         
         finishSendingMessage()  // clears out the text field after send is tapped
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
     
     

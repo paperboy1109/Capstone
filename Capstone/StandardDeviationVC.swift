@@ -24,8 +24,6 @@ class StandardDeviationVC: UIViewController {
     var upperCellIndex = -100
     var lowerCellIndex = -100
     
-    let themeColor = UIColor(red: 96.0/255.0, green: 237.0/255.0, blue: 179.0/255.0, alpha: 1.0)
-    
     var pullDownGestureActive = false
     
     var sharedContext = CoreDataStack.sharedInstance().managedObjectContext
@@ -43,8 +41,8 @@ class StandardDeviationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dividerView.backgroundColor = themeColor
-        bottomView.backgroundColor = themeColor
+        dividerView.backgroundColor = ThemeColors.themeColor.color()
+        bottomView.backgroundColor = ThemeColors.themeColor.color()
         
         pinchGestureRecognizer.addTarget(self, action: #selector(StandardDeviationVC.userDidPinch(_:)))
         dataTableView.addGestureRecognizer(pinchGestureRecognizer)
@@ -52,6 +50,8 @@ class StandardDeviationVC: UIViewController {
         dataTableView.dataSource = self
         dataTableView.delegate = self
         dataTableView.rowHeight = 64.0
+        
+        dataTableView.backgroundColor = ThemeColors.lightGrey.color()
         
         dataTableEntries = []
         
@@ -382,7 +382,7 @@ extension StandardDeviationVC {
         if dataTableEntries.count <= 2 {
             
             if pullDownGestureActive {
-                placeholderTableCell.backgroundColor = themeColor
+                placeholderTableCell.backgroundColor = ThemeColors.themeColor.color()
                 /* User has pulled downward at the top of the table, add the placeholder cell */
                 dataTableView.insertSubview(placeholderTableCell, atIndex: 0)
             }
@@ -484,7 +484,7 @@ extension StandardDeviationVC {
             let precedingCell = allVisibleCells[upperCellIndex]
             
             placeholderTableCell.frame = CGRectOffset(precedingCell.frame, 0.0, dataTableView.rowHeight / 2.0)
-            placeholderTableCell.backgroundColor = themeColor //precedingCell.backgroundColor
+            placeholderTableCell.backgroundColor = ThemeColors.themeColor.color()
             dataTableView.insertSubview(placeholderTableCell, atIndex: 0)
         }
         

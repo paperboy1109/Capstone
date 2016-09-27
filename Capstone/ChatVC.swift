@@ -21,8 +21,6 @@ class ChatVC: JSQMessagesViewController {
     var outgoingBubbleImageView: JSQMessagesBubbleImage!
     var incomingBubbleImageView: JSQMessagesBubbleImage!
     
-    let themeColor = UIColor(red: 96.0/255.0, green: 237.0/255.0, blue: 179.0/255.0, alpha: 1.0)
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -60,6 +58,8 @@ class ChatVC: JSQMessagesViewController {
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        self.view.endEditing(true)
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         
@@ -191,7 +191,7 @@ extension ChatVC {
         
         let factory = JSQMessagesBubbleImageFactory()
         
-        outgoingBubbleImageView = factory.outgoingMessagesBubbleImageWithColor(themeColor)
+        outgoingBubbleImageView = factory.outgoingMessagesBubbleImageWithColor(ThemeColors.themeColor.color())
         
         incomingBubbleImageView = factory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
     }

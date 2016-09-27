@@ -15,7 +15,6 @@ class DataSummaryVC: UIViewController {
     var dataTableEntries: [DataTableDatum]!
     let numberFormatter = NSNumberFormatter()
     let maxDecimalPlaces = 5
-    let themeColor = UIColor(red: 96.0/255.0, green: 237.0/255.0, blue: 179.0/255.0, alpha: 1.0)
     
     // MARK: - Outlets
     
@@ -43,7 +42,7 @@ class DataSummaryVC: UIViewController {
         super.viewDidLoad()
         
         setFont()
-        dividerView.backgroundColor = themeColor
+        dividerView.backgroundColor = ThemeColors.themeColor.color()
         
         let currentData = StatisticsFunctions.getDataTableDataAsArrayOfDoubles(dataTableEntries)
         

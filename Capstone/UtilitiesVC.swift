@@ -34,7 +34,7 @@ class UtilitiesVC: UIViewController {
         
         dividerView.backgroundColor = UIColor(red: 96.0/255.0, green: 237.0/255.0, blue: 179.0/255.0, alpha: 1.0)
         
-        statUtilityTableView.backgroundColor = UIColor.lightGrayColor()
+        statUtilityTableView.backgroundColor = ThemeColors.lightGrey.color()
         
         /* Have Auto Layout determine the height of the table view cells */
         statUtilityTableView.rowHeight = UITableViewAutomaticDimension

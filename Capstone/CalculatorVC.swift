@@ -43,7 +43,7 @@ class CalculatorVC: UIViewController {
     
     @IBAction func numberTapped(sender: CalculatorNumberButton) {
         
-        enableMathOperations()
+        enableDisableMathOperations(true)
         
         guard displayLabel.text != nil else {return}
         
@@ -205,7 +205,7 @@ class CalculatorVC: UIViewController {
             /* Ignore the button tap if the screen is currently blank */
             guard displayLabel.text != "" else { return }
             
-            disableMathOperations()
+            enableDisableMathOperations(false)
             
             if calculatorData.hasSavedValue {
                 
@@ -264,7 +264,7 @@ class CalculatorVC: UIViewController {
     }
     
     func configureDisplayText() {
-        //displayLabel.font = UIFont(name: "PTSans-Regular", size: 36)
+        
         displayLabel.textColor = UIColor.darkGrayColor()
     }
     
@@ -355,8 +355,7 @@ class CalculatorVC: UIViewController {
         
     }
     
-    
-    func disableMathOperations() {
+    func enableDisableMathOperations(enabled: Bool) {
         clearButton.enabled = false
         sqrtButton.enabled = false
         expButton.enabled = false
@@ -365,17 +364,6 @@ class CalculatorVC: UIViewController {
         subtractButton.enabled = false
         addButton.enabled = false
         equalsButton.enabled = false
-    }
-    
-    func enableMathOperations() {
-        clearButton.enabled = true
-        sqrtButton.enabled = true
-        expButton.enabled = true
-        divideButton.enabled = true
-        multiplyButton.enabled = true
-        subtractButton.enabled = true
-        addButton.enabled = true
-        equalsButton.enabled = true
     }
     
     func showBlockedFromEditing() {

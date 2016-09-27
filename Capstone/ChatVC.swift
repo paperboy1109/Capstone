@@ -41,6 +41,7 @@ class ChatVC: JSQMessagesViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         navigationItem.rightBarButtonItem?.title = "Done"
         inputToolbar.contentView.leftBarButtonItem = nil
@@ -123,7 +124,7 @@ class ChatVC: JSQMessagesViewController {
         
         alertView.addAction(alertAction)
         
-        self.presentViewController(alertView, animated: true, completion: nil)
+        presentViewController(alertView, animated: true, completion: nil)
     }
     
     // MARK: - Actions

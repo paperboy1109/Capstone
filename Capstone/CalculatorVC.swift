@@ -356,14 +356,14 @@ class CalculatorVC: UIViewController {
     }
     
     func enableDisableMathOperations(enabled: Bool) {
-        clearButton.enabled = false
-        sqrtButton.enabled = false
-        expButton.enabled = false
-        divideButton.enabled = false
-        multiplyButton.enabled = false
-        subtractButton.enabled = false
-        addButton.enabled = false
-        equalsButton.enabled = false
+        clearButton.enabled = enabled
+        sqrtButton.enabled = enabled
+        expButton.enabled = enabled
+        divideButton.enabled = enabled
+        multiplyButton.enabled = enabled
+        subtractButton.enabled = enabled
+        addButton.enabled = enabled
+        equalsButton.enabled = enabled
     }
     
     func showBlockedFromEditing() {

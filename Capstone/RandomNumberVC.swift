@@ -51,6 +51,10 @@ class RandomNumberVC: UIViewController {
         randomNumberLabel.font = UIFont(name: "PTSans-Regular", size: 38)
         randomNumberLabel.textColor = UIColor.darkGrayColor()
         randomNumberLabel.textAlignment = NSTextAlignment.Center
+        
+        /* Hightlight the (initially) empty text fields */
+        leftTextField.backgroundColor = ThemeColors.textFieldHighlight.color()
+        rightTextField.backgroundColor = ThemeColors.textFieldHighlight.color()
     }
     
     

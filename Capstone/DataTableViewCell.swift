@@ -60,6 +60,7 @@ class DataTableViewCell: UITableViewCell {
         /* Configure the cell labels */
         datumTextField.delegate = self
         datumTextField.contentVerticalAlignment = .Center
+        datumTextField.backgroundColor = ThemeColors.textFieldHighlight.color()
         
         
         let recognizer = UIPanGestureRecognizer(target: self, action: #selector(DataTableViewCell.panGestureRecognized(_:)))

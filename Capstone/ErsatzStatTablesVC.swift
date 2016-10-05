@@ -67,6 +67,8 @@ class ErsatzStatTablesVC: UIViewController {
         /* Set custom fonts */
         setCustomFonts()
         
+        /* Customize the look of the text fields to draw the user's attention to them */
+        lookupValueTextField.backgroundColor = ThemeColors.textFieldHighlight.color()
     }
     
     

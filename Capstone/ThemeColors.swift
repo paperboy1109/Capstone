@@ -11,7 +11,7 @@ import UIKit
 
 enum ThemeColors {
     
-    case themeColor, lightGrey
+    case themeColor, lightGrey, textFieldHighlight
     
     func color() -> UIColor {
         
@@ -21,6 +21,9 @@ enum ThemeColors {
             
         case .lightGrey:
             return UIColor(red: 238.0/255.0, green: 238.0/255.0, blue: 238.0/255.0, alpha: 1.0)
+            
+        case .textFieldHighlight:
+            return UIColor(red: 250.0/255.0, green: 255.0/255.0, blue: 189.0/255.0, alpha: 1.0)
             
         }
     }

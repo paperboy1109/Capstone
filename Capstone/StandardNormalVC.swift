@@ -121,7 +121,8 @@ class StandardNormalVC: UIViewController {
         plotView.rightAxis.axisMaxValue = plotVerticalLimit
         plotView.setNeedsLayout()
         
-        plotView.animate(yAxisDuration: 1.5, easingOption: .EaseInOutQuart)
+        plotView.animate(xAxisDuration: 2.0, easingOption: .EaseInOutQuad)
+        //plotView.animate(yAxisDuration: 1.5, easingOption: .EaseInOutQuart)
         
     }
     
@@ -330,10 +331,7 @@ extension StandardNormalVC {
         let lineChartDataSet_Layer2 = LineChartDataSet(yVals: completeDataEntriesCollection[1], label: "Line 2")
         let lineChartDataSet_Layer3 = LineChartDataSet(yVals: completeDataEntriesCollection[0], label: "Line 3")
         
-        let lineColor = UIColor.blueColor()
-        
         /* Customize the appearance of line 1 (bottom layer) */
-        lineChartDataSet_Layer1.setColor(lineColor)
         lineChartDataSet_Layer1.fillColor = UIColor.redColor()
         lineChartDataSet_Layer1.drawFilledEnabled = true
         lineChartDataSet_Layer1.drawCirclesEnabled = false
@@ -350,7 +348,6 @@ extension StandardNormalVC {
         lineChartDataSet_Layer2.drawCirclesEnabled = false
         
         /* Customize the appearance of line 3 (top layer)*/
-        lineChartDataSet_Layer3.setColor(lineColor)
         lineChartDataSet_Layer3.drawCirclesEnabled = false
         lineChartDataSet_Layer3.mode = .CubicBezier
         lineChartDataSet_Layer3.cubicIntensity = bezierIntensity
